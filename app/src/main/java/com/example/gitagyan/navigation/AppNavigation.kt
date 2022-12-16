@@ -19,6 +19,5 @@ fun AppNavigation(){
         composable(AppScreens.MainScreen.name){
             MainScreen(navController = navController)
         }
-
     }
 }

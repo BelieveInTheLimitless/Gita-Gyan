@@ -1,6 +1,10 @@
 package com.example.gitagyan.navigation
 
 enum class AppScreens {
+    SplashScreen,
     MainScreen,
-    SplashScreen
+    SearchScreen,
+    SaveScreen,
+    ProfileScreen,
+    SettingsScreen
 }
