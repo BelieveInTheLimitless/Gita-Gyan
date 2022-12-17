@@ -13,20 +13,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
+import androidx.navigation.NavController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
-fun CustomBottomNavigation(
-    currentScreenId:String,
-    onItemSelected:(Screens)->Unit
-) {
-
-    val items=Screens.Items.list
-
+fun BottomNavigationItem(
+    items: List<BottomNavigationItem>,
+    navController: NavController,
+    onItemClick: (BottomNavigationItem) -> Unit
+    ) {
+    val backStackEntry = navController.currentBackStackEntryAsState()
     Row(
-        modifier= Modifier
+        modifier = Modifier
             .background(MaterialTheme.colors.background)
             .padding(8.dp)
             .fillMaxWidth(),
@@ -34,18 +33,20 @@ fun CustomBottomNavigation(
         verticalAlignment = Alignment.CenterVertically
     ) {
 
-        items.forEach { item->
+        items.forEach { item ->
 
-            CustomBottomNavigationItem(item = item, isSelected = item.id==currentScreenId) {
-                onItemSelected(item)
+
+            NavigationItem(item = item,
+                item.route == backStackEntry.value?.destination?.route) {
+                onItemClick(item)
             }
         }
     }
+
 }
 
-
 @Composable
-fun CustomBottomNavigationItem(item:Screens,isSelected:Boolean,onClick:()->Unit){
+fun NavigationItem(item: BottomNavigationItem,isSelected:Boolean,onClick:()->Unit){
 
     val background=if (isSelected) MaterialTheme.colors.primary.copy(alpha = 0.1f) else Color.Transparent
     val contentColor=if (isSelected) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
@@ -71,30 +72,10 @@ fun CustomBottomNavigationItem(item:Screens,isSelected:Boolean,onClick:()->Unit)
 
             AnimatedVisibility(visible = isSelected) {
                 Text(
-                    text = item.title,
+                    text = item.name,
                     color=contentColor
                 )
             }
-
         }
-    }
-
-
-}
-
-
-@Composable
-@Preview
-fun Prev1(){
-    CustomBottomNavigation(currentScreenId = Screens.Home.id) {
-
-    }
-}
-
-@Composable
-@Preview
-fun Prev2() {
-    CustomBottomNavigationItem(item = Screens.Home, isSelected = true) {
-
     }
 }
