@@ -10,6 +10,7 @@ import com.example.gitagyan.screens.search.SearchScreen
 import com.example.gitagyan.screens.save.SaveScreen
 import com.example.gitagyan.screens.profile.ProfileScreen
 import com.example.gitagyan.screens.settings.SettingsScreen
+import com.example.gitagyan.screens.home.HomeScreen
 
 @Composable
 fun AppNavigation(){
@@ -22,6 +23,10 @@ fun AppNavigation(){
 
         composable(AppScreens.MainScreen.name){
             MainScreen(navController = navController)
+        }
+
+        composable(AppScreens.HomeScreen.name){
+            HomeScreen(navController = navController)
         }
 
         composable(AppScreens.SearchScreen.name){
