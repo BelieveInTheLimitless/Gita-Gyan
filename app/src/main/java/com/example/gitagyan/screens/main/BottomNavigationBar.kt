@@ -26,7 +26,7 @@ fun BottomNavigationItem(
     val backStackEntry = navController.currentBackStackEntryAsState()
     Row(
         modifier = Modifier
-            .background(MaterialTheme.colors.background)
+            .background(Color(0xFFFD950E))
             .padding(8.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround,
@@ -34,22 +34,19 @@ fun BottomNavigationItem(
     ) {
 
         items.forEach { item ->
-
-
             NavigationItem(item = item,
                 item.route == backStackEntry.value?.destination?.route) {
                 onItemClick(item)
             }
         }
     }
-
 }
 
 @Composable
 fun NavigationItem(item: BottomNavigationItem,isSelected:Boolean,onClick:()->Unit){
 
-    val background=if (isSelected) MaterialTheme.colors.primary.copy(alpha = 0.1f) else Color.Transparent
-    val contentColor=if (isSelected) MaterialTheme.colors.primary else MaterialTheme.colors.onBackground
+    val background=if (isSelected) Color.White else Color.Transparent
+    val contentColor=if (isSelected) MaterialTheme.colors.surface else Color.Black
 
     Box(
         modifier = Modifier

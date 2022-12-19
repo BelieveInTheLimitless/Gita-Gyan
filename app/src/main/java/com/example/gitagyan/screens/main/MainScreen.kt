@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gitagyan.navigation.AppScreens
 
@@ -22,7 +21,7 @@ fun MainScreen(navController: NavController){
                 items = listOf(
                     BottomNavigationItem(
                         name = "Home",
-                        route = AppScreens.MainScreen.name,
+                        route = AppScreens.HomeScreen.name,
                         icon = Icons.Default.Home
                     ),
                     BottomNavigationItem(
@@ -48,7 +47,6 @@ fun MainScreen(navController: NavController){
             )
         }
     ) {
-        10.dp
     }
 }
 
