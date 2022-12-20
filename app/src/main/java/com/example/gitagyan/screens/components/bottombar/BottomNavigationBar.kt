@@ -1,4 +1,4 @@
-package com.example.gitagyan.screens.main
+package com.example.gitagyan.screens.components.bottombar
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
@@ -43,7 +43,7 @@ fun BottomNavigationItem(
 }
 
 @Composable
-fun NavigationItem(item: BottomNavigationItem,isSelected:Boolean,onClick:()->Unit){
+fun NavigationItem(item: BottomNavigationItem, isSelected:Boolean, onClick:()->Unit){
 
     val background=if (isSelected) Color.White else Color.Transparent
     val contentColor=if (isSelected) MaterialTheme.colors.surface else Color.Black

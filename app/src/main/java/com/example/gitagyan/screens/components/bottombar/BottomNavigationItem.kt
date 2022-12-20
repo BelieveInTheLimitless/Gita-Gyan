@@ -1,4 +1,4 @@
-package com.example.gitagyan.screens.main
+package com.example.gitagyan.screens.components.bottombar
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

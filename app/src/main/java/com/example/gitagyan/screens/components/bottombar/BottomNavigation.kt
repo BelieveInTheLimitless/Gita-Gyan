@@ -1,4 +1,4 @@
-package com.example.gitagyan.screens.main
+package com.example.gitagyan.screens.components.bottombar
 
 import android.annotation.SuppressLint
 import androidx.compose.material.Scaffold
@@ -11,7 +11,7 @@ import com.example.gitagyan.navigation.AppScreens
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen(navController: NavController){
+fun BottomNavigation(navController: NavController){
     Scaffold(
         bottomBar = {
             BottomNavigationItem(
