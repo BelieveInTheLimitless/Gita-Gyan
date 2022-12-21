@@ -76,11 +76,14 @@ fun ChapterRow(chapter : String,
             horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = chapter,
-                    style = MaterialTheme.typography.h6
+                    color = Color(0xFFFFFFFF),
+                    style = MaterialTheme.typography.subtitle2
                 )
-                Text(
-                    text = "Genre",
-                    style = MaterialTheme.typography.caption
+                Text(text = "Chapter Name",
+                    color = Color(0xFFFFFFFF),
+                    fontSize = 20.sp,
+                    style = MaterialTheme.typography.body1,
+                    fontWeight = FontWeight.W600
                 )
 
                 AnimatedVisibility(visible = expanded) {
@@ -94,12 +97,12 @@ fun ChapterRow(chapter : String,
                                 fontSize = 13.sp,
                                 fontWeight = FontWeight.Light
                             )){
-                                append(chapter)
+                                append("47")
                             }
                         }, modifier = Modifier.padding(6.dp))
 
                         Divider(modifier = Modifier.padding(6.dp))
-                        Text(text = "Director",
+                        Text(text = "Chapter Info",
                             modifier = Modifier.padding(start = 5.dp),
                             style = MaterialTheme.typography.subtitle1)
                     }

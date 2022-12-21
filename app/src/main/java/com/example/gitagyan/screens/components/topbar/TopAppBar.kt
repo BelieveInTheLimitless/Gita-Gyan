@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -19,21 +18,21 @@ import androidx.compose.ui.unit.dp
 fun TopAppBar(navController:NavController){
     Scaffold(
         topBar = {
-            TopAppBar(backgroundColor = Color(0xFFFD950E)) {
+            TopAppBar(backgroundColor = Color(0xFFFFFFFF)) {
                 Spacer(modifier = Modifier.padding(start = 145.dp))
                 Text(text = "Gita Gyan",
-                    color = Color.Black,
+                    color = Color(0xFFFD950E),
                     fontSize = 20.sp,
-                    fontStyle = FontStyle.Italic,
                     fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.Serif
+                    fontFamily = FontFamily.Serif,
+                    style = MaterialTheme.typography.caption
                 )
             }
         },
         bottomBar = {
             BottomNavigation(navController = navController)
         },
-        backgroundColor = Color(0xFFFF9100)
+        backgroundColor = Color(0xFFFFFFFF)
     ){
         Box(modifier = Modifier.padding(0.dp))
     }

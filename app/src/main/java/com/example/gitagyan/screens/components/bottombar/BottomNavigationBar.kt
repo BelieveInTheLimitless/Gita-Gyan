@@ -6,7 +6,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,7 +25,7 @@ fun BottomNavigationItem(
     val backStackEntry = navController.currentBackStackEntryAsState()
     Row(
         modifier = Modifier
-            .background(Color(0xFFFD950E))
+            .background(Color.White)
             .padding(8.dp)
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround,
@@ -45,8 +44,8 @@ fun BottomNavigationItem(
 @Composable
 fun NavigationItem(item: BottomNavigationItem, isSelected:Boolean, onClick:()->Unit){
 
-    val background=if (isSelected) Color.White else Color.Transparent
-    val contentColor=if (isSelected) MaterialTheme.colors.surface else Color.Black
+    val background=if (isSelected) Color(0xFFFD950E) else Color.White
+    val contentColor=if (isSelected) Color.White else Color(0xFFFD950E)
 
     Box(
         modifier = Modifier
