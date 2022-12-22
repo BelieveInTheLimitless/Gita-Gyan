@@ -1,4 +1,4 @@
-package com.example.gitagyan.screens.icons
+package com.example.gitagyan.icons
 
 import androidx.annotation.DrawableRes
 import androidx.compose.material.icons.Icons
