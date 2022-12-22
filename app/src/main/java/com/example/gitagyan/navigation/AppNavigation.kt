@@ -21,7 +21,7 @@ fun AppNavigation(){
             SplashScreen(navController = navController)
         }
 
-        composable(AppScreens.MainScreen.name){
+        composable(AppScreens.BottomNavigation.name){
             BottomNavigationBar(navController = navController)
         }
 
