@@ -30,7 +30,7 @@ import com.example.gitagyan.screens.components.topbar.TopAppBar
 @Composable
 fun HomeScreen(navController: NavController){
     TopAppBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 50.dp, bottom = 60.dp)) {
+    Box(modifier = Modifier.padding(top = 45.dp, bottom = 45.dp)) {
         MainContent()
     }
 }
@@ -77,7 +77,8 @@ fun ChapterRow(chapter : String,
                 Text(
                     text = chapter,
                     color = Color(0xFFFFFFFF),
-                    style = MaterialTheme.typography.subtitle2
+                    fontSize = 15.sp,
+                    style = MaterialTheme.typography.caption
                 )
                 Text(text = "Chapter Name",
                     color = Color(0xFFFFFFFF),
