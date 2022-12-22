@@ -118,7 +118,7 @@ fun ChapterRow(chapter : String,
                         .clickable {
                             expanded = !expanded
                         },
-                    tint = Color.DarkGray
+                    tint = Color.White
                 )
 
             }
