@@ -24,6 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.gitagyan.data.Chapter
+import com.example.gitagyan.data.getChapters
 import com.example.gitagyan.screens.components.topbar.TopAppBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -37,9 +39,7 @@ fun HomeScreen(navController: NavController){
 
 @Composable
 fun MainContent(
-    chapterList: List<String> = listOf(
-        "Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5"
-    )){
+    chapterList: List<Chapter> = getChapters()){
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn{
             items(items = chapterList){
@@ -52,7 +52,7 @@ fun MainContent(
 }
 
 @Composable
-fun ChapterRow(chapter : String,
+fun ChapterRow(chapter : Chapter,
              onItemClick: (String) -> Unit = {}){
 
     var expanded by remember{
@@ -61,10 +61,7 @@ fun ChapterRow(chapter : String,
 
     Card(modifier = Modifier
         .padding(3.dp)
-        .fillMaxWidth()
-        .clickable {
-            onItemClick(chapter)
-        },
+        .fillMaxWidth(),
         shape = RoundedCornerShape(corner = CornerSize(17.dp)),
         backgroundColor = Color(0xFFFD950E),
         contentColor = Color.Black,
@@ -75,12 +72,12 @@ fun ChapterRow(chapter : String,
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = chapter,
+                    text = "Chapter "+chapter.chapter_id,
                     color = Color(0xFFFFFFFF),
                     fontSize = 15.sp,
                     style = MaterialTheme.typography.caption
                 )
-                Text(text = "Chapter Name",
+                Text(text = chapter.chapter_name,
                     color = Color(0xFFFFFFFF),
                     fontSize = 20.sp,
                     style = MaterialTheme.typography.body1,
@@ -92,23 +89,16 @@ fun ChapterRow(chapter : String,
                         Text(buildAnnotatedString {
                             withStyle(style = SpanStyle(color = Color.Black,
                                 fontSize = 13.sp)){
-                                append("Total Verses : ")
-                            }
-                            withStyle(style = SpanStyle(color = Color.Black,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Light
-                            )){
-                                append("47")
+                                append("Total Verses : "+chapter.total_verses)
                             }
                         }, modifier = Modifier.padding(6.dp))
 
                         Divider(modifier = Modifier.padding(6.dp))
-                        Text(text = "Chapter Info",
+                        Text(text = chapter.description,
                             modifier = Modifier.padding(start = 5.dp),
                             style = MaterialTheme.typography.subtitle1)
                     }
                 }
-
                 Icon(
                     imageVector = if (expanded) Icons.Filled.KeyboardArrowUp
                     else Icons.Filled.KeyboardArrowDown,
