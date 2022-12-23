@@ -21,12 +21,12 @@ import com.example.gitagyan.screens.components.topbar.TopAppBar
 fun SaveScreen(navController: NavController){
     TopAppBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
-        Search()
+        Save()
     }
 }
 
 @Composable
-fun Search(){
+fun Save(){
     Column() {
         Surface(modifier = Modifier.fillMaxSize(),
             shape = RoundedCornerShape(corner = CornerSize(10.dp)),

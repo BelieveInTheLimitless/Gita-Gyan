@@ -21,12 +21,12 @@ import com.example.gitagyan.screens.components.topbar.TopAppBar
 fun ProfileScreen(navController: NavController){
     TopAppBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
-        Search()
+        Profile()
     }
 }
 
 @Composable
-fun Search(){
+fun Profile(){
     Column() {
         Surface(modifier = Modifier.fillMaxSize(),
             shape = RoundedCornerShape(corner = CornerSize(10.dp)),
