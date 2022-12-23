@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gitagyan.screens.splash.SplashScreen
 import com.example.gitagyan.screens.components.bottombar.BottomNavigationBar
+import com.example.gitagyan.screens.home.DetailsScreen
 import com.example.gitagyan.screens.search.SearchScreen
 import com.example.gitagyan.screens.save.SaveScreen
 import com.example.gitagyan.screens.profile.ProfileScreen
@@ -27,6 +28,10 @@ fun AppNavigation(){
 
         composable(AppScreens.HomeScreen.name){
             HomeScreen(navController = navController)
+        }
+
+        composable(AppScreens.DetailsScreen.name){
+            DetailsScreen(navController = navController)
         }
 
         composable(AppScreens.SearchScreen.name){

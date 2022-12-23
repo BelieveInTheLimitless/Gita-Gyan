@@ -20,12 +20,12 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.getChapters
+import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopAppBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -33,18 +33,18 @@ import com.example.gitagyan.screens.components.topbar.TopAppBar
 fun HomeScreen(navController: NavController){
     TopAppBar(navController = navController)
     Box(modifier = Modifier.padding(top = 45.dp, bottom = 45.dp)) {
-        MainContent()
+        MainContent(navController = navController)
     }
 }
 
 @Composable
-fun MainContent(
+fun MainContent(navController: NavController,
     chapterList: List<Chapter> = getChapters()){
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn{
             items(items = chapterList){
                 ChapterRow(chapter = it){
-//                    Log.d("TAG", "MainContent: $movie")
+                    navController.navigate(route = AppScreens.DetailsScreen.name)
                 }
             }
         }
@@ -52,7 +52,8 @@ fun MainContent(
 }
 
 @Composable
-fun ChapterRow(chapter : Chapter,
+fun ChapterRow(
+               chapter : Chapter,
              onItemClick: (String) -> Unit = {}){
 
     var expanded by remember{
@@ -61,7 +62,10 @@ fun ChapterRow(chapter : Chapter,
 
     Card(modifier = Modifier
         .padding(3.dp)
-        .fillMaxWidth(),
+        .fillMaxWidth().
+        clickable {
+                  onItemClick(chapter.chapter_id)
+        },
         shape = RoundedCornerShape(corner = CornerSize(17.dp)),
         backgroundColor = Color(0xFFFD950E),
         contentColor = Color.Black,
@@ -115,10 +119,4 @@ fun ChapterRow(chapter : Chapter,
 
         }
     }
-}
-
-@Preview
-@Composable
-fun Prev1(){
-    MainContent()
 }
