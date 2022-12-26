@@ -12,11 +12,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.gitagyan.screens.components.topbar.TopAppBar
+import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
 fun SearchScreen(navController: NavController){
-    TopAppBar(navController = navController)
+    TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         Search()
     }

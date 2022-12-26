@@ -26,12 +26,12 @@ import androidx.navigation.NavController
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.getChapters
 import com.example.gitagyan.navigation.AppScreens
-import com.example.gitagyan.screens.components.topbar.TopAppBar
+import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(navController: NavController){
-    TopAppBar(navController = navController)
+    TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 45.dp, bottom = 45.dp)) {
         MainContent(navController = navController)
     }

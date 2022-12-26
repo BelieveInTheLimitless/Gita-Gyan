@@ -15,7 +15,7 @@ import com.example.gitagyan.screens.components.bottombar.BottomNavigationBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun TopAppBar(navController:NavController){
+fun TopBottomBar(navController:NavController){
     Scaffold(
         topBar = {
             TopAppBar(backgroundColor = Color(0xFFFFFFFF)) {
