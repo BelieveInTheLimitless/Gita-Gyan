@@ -14,7 +14,7 @@ import com.example.gitagyan.screens.components.topbar.BasicTopBar
 fun DetailsScreen(navController: NavController, id: String?){
     val chapters = getChapters()
     BasicTopBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 45.dp)) {
+    Box(modifier = Modifier.padding(top = 60.dp)) {
         for (chapter in chapters){
             if(id == chapter.chapter_id){
                 Details(chapter = chapter)
