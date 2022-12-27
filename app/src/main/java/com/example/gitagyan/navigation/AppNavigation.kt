@@ -32,12 +32,12 @@ fun AppNavigation(){
             HomeScreen(navController = navController)
         }
 
-        composable(AppScreens.DetailsScreen.name+"/{chapter}",
-            arguments = listOf(navArgument(name = "chapter") {type = NavType.StringType})
+        composable(AppScreens.DetailsScreen.name+"/{chapter_id}",
+            arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType})
         ){
             backStackEntry ->
 
-            DetailsScreen(navController = navController, backStackEntry.arguments?.getString("chapter"))
+            DetailsScreen(navController = navController, backStackEntry.arguments?.getString("chapter_id"))
         }
 
         composable(AppScreens.SearchScreen.name){

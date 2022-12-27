@@ -43,8 +43,8 @@ fun MainContent(navController: NavController,
     Column(modifier = Modifier.padding(12.dp)) {
         LazyColumn{
             items(items = chapterList){
-                ChapterRow(chapter = it){ chapter ->
-                    navController.navigate(route = AppScreens.DetailsScreen.name + "/$chapter")
+                ChapterRow(chapter = it){ chapter_id ->
+                    navController.navigate(route = AppScreens.DetailsScreen.name + "/$chapter_id")
                 }
             }
         }
