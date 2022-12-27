@@ -6,14 +6,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.gitagyan.data.getChapters
 import com.example.gitagyan.screens.components.details.Details
 import com.example.gitagyan.screens.components.topbar.BasicTopBar
 
 @Composable
-fun DetailsScreen(navController: NavController){
+fun DetailsScreen(navController: NavController, id: String?){
+    val chapters = getChapters()
     BasicTopBar(navController = navController)
     Box(modifier = Modifier.padding(top = 45.dp)) {
-        Details()
+        for (chapter in chapters){
+            if(id == chapter.chapter_id){
+                Details(chapter = chapter)
+            }
+        }
     }
 }
 
