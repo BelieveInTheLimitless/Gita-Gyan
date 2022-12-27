@@ -1,9 +1,11 @@
 package com.example.gitagyan.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.gitagyan.screens.splash.SplashScreen
 import com.example.gitagyan.screens.components.bottombar.BottomNavigationBar
 import com.example.gitagyan.screens.home.DetailsScreen
@@ -30,8 +32,12 @@ fun AppNavigation(){
             HomeScreen(navController = navController)
         }
 
-        composable(AppScreens.DetailsScreen.name){
-            DetailsScreen(navController = navController)
+        composable(AppScreens.DetailsScreen.name+"/{chapter}",
+            arguments = listOf(navArgument(name = "chapter") {type = NavType.StringType})
+        ){
+            backStackEntry ->
+
+            DetailsScreen(navController = navController, backStackEntry.arguments?.getString("chapter"))
         }
 
         composable(AppScreens.SearchScreen.name){
