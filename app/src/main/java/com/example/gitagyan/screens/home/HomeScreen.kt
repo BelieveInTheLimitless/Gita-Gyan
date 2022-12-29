@@ -98,7 +98,7 @@ fun ChapterRow(
                         }, modifier = Modifier.padding(6.dp))
 
                         Divider(modifier = Modifier.padding(6.dp))
-                        Text(text = chapter.chapter_content[0].verse_meaning,
+                        Text(text = chapter.description,
                             modifier = Modifier.padding(start = 5.dp),
                             style = MaterialTheme.typography.subtitle1)
                     }

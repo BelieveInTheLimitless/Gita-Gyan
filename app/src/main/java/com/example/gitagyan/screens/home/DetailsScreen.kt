@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.getChapters
+import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.BasicTopBar
 
 @Composable
@@ -28,14 +29,16 @@ fun DetailsScreen(navController: NavController, id: String?){
     Box(modifier = Modifier.padding(top = 60.dp)) {
         for (chapter in chapters){
             if(id == chapter.chapter_id){
-                Details(chapter = chapter)
+                Details(chapter = chapter){ id ->
+                    navController.navigate(route = AppScreens.VerseScreen.name + "/$id")
+                }
             }
         }
     }
 }
 
 @Composable
-fun Details(chapter: Chapter){
+fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)
     ) {
@@ -79,7 +82,7 @@ fun Details(chapter: Chapter){
 
                         Divider(modifier = Modifier.padding(6.dp))
                         Text(
-                            text = chapter.chapter_content[0].verse_meaning,
+                            text = chapter.description,
                             modifier = Modifier.padding(start = 5.dp),
                             style = MaterialTheme.typography.subtitle1
                         )
@@ -89,6 +92,7 @@ fun Details(chapter: Chapter){
                             .width(100.dp)
                             .height(50.dp)
                             .clickable {
+                                    onItemClick(chapter.chapter_id)
                             },
                             shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                             backgroundColor = Color(0xFFFD950E),
