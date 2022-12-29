@@ -21,12 +21,13 @@ import com.example.gitagyan.data.Chapter
 @Composable
 fun Details(chapter: Chapter){
         Surface(modifier = Modifier.fillMaxSize(),
-            color = Color.White) {
+            color = Color(0xFFFD950E)) {
             Surface(modifier = Modifier
-                .padding(10.dp)
-                .width(1000.dp),
-                shape = RoundedCornerShape(corner = CornerSize(17.dp)),
-                color = Color(0xFFFD950E),
+                .padding(start = 15.dp, top = 20.dp, end = 15.dp, bottom = 20.dp)
+                .width(1000.dp)
+                .height(500.dp),
+                shape = RoundedCornerShape(corner = CornerSize(30.dp)),
+                color = Color.White,
                 contentColor = Color.Black) {
                 Row(
                     horizontalArrangement = Arrangement.Center) {
@@ -35,13 +36,13 @@ fun Details(chapter: Chapter){
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = "Chapter " + chapter.chapter_id,
-                            color = Color(0xFFFFFFFF),
+                            color = Color(0xFFFD950E),
                             fontSize = 15.sp,
                             style = MaterialTheme.typography.caption
                         )
                         Text(
                             text = chapter.chapter_name,
-                            color = Color(0xFFFFFFFF),
+                            color = Color(0xFFFD950E),
                             fontSize = 20.sp,
                             style = MaterialTheme.typography.body1,
                             fontWeight = FontWeight.W600
@@ -72,9 +73,9 @@ fun Details(chapter: Chapter){
                                 .height(50.dp)
                                 .clickable {
                                 },
-                                shape = RoundedCornerShape(corner = CornerSize(10.dp)),
-                                backgroundColor = Color(0xFFFFFFFF),
-                                contentColor = Color.Black) {
+                                shape = RoundedCornerShape(corner = CornerSize(15.dp)),
+                                backgroundColor = Color(0xFFFD950E),
+                                contentColor = Color.White) {
                                 Text(text = "Start Reading",
                                     modifier = Modifier.padding(3.dp),
                                     textAlign = TextAlign.Center
