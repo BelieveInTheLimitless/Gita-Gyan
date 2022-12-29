@@ -14,6 +14,7 @@ import com.example.gitagyan.screens.save.SaveScreen
 import com.example.gitagyan.screens.profile.ProfileScreen
 import com.example.gitagyan.screens.settings.SettingsScreen
 import com.example.gitagyan.screens.home.HomeScreen
+import com.example.gitagyan.screens.home.VerseScreen
 
 @Composable
 fun AppNavigation(){
@@ -36,8 +37,14 @@ fun AppNavigation(){
             arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType})
         ){
             backStackEntry ->
+            DetailsScreen(navController = navController, id = backStackEntry.arguments?.getString("chapter_id"))
+        }
 
-            DetailsScreen(navController = navController, backStackEntry.arguments?.getString("chapter_id"))
+        composable(AppScreens.VerseScreen.name+"/{chapter_id}",
+            arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType})
+        ){
+                backStackEntry ->
+            VerseScreen(navController = navController, id = backStackEntry.arguments?.getString("chapter_id"))
         }
 
         composable(AppScreens.SearchScreen.name){

@@ -5,6 +5,7 @@ enum class AppScreens {
     BottomNavigation,
     HomeScreen,
     DetailsScreen,
+    VerseScreen,
     SearchScreen,
     SaveScreen,
     ProfileScreen,
