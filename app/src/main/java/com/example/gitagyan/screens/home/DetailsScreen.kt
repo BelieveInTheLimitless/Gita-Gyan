@@ -20,13 +20,13 @@ import androidx.navigation.NavController
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.getChapters
 import com.example.gitagyan.navigation.AppScreens
-import com.example.gitagyan.screens.components.topbar.BasicTopBar
+import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
 fun DetailsScreen(navController: NavController, id: String?){
     val chapters = getChapters()
-    BasicTopBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 60.dp)) {
+    TopBottomBar(navController = navController)
+    Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         for (chapter in chapters){
             if(id == chapter.chapter_id){
                 Details(chapter = chapter){ id ->
@@ -46,7 +46,7 @@ fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
             .padding(start = 15.dp, top = 20.dp, end = 15.dp, bottom = 20.dp)
             .width(1000.dp)
             .height(500.dp),
-            shape = RoundedCornerShape(corner = CornerSize(30.dp)),
+            shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black) {
             Row(
@@ -92,7 +92,7 @@ fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
                             .width(100.dp)
                             .height(50.dp)
                             .clickable {
-                                    onItemClick(chapter.chapter_id)
+                                onItemClick(chapter.chapter_id)
                             },
                             shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                             backgroundColor = Color(0xFFFD950E),

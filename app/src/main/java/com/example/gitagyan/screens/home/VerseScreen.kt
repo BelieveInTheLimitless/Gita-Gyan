@@ -14,13 +14,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.getChapters
-import com.example.gitagyan.screens.components.topbar.BasicTopBar
+import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
 fun VerseScreen(navController: NavController, id : String?) {
     val chapters = getChapters()
-    BasicTopBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 60.dp)) {
+    TopBottomBar(navController = navController)
+    Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         for (chapter in chapters) {
             if (id == chapter.chapter_id) {
                 Verses(chapter = chapter)
@@ -35,17 +35,27 @@ fun Verses(chapter: Chapter){
         color = Color(0xFFFD950E)
     ) {
         Surface(modifier = Modifier
-            .padding(start = 15.dp, top = 50.dp, end = 15.dp, bottom = 50.dp)
+            .padding(start = 15.dp, top = 20.dp, end = 15.dp, bottom = 20.dp)
             .width(1000.dp)
             .height(500.dp),
-            shape = RoundedCornerShape(corner = CornerSize(30.dp)),
+            shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black) {
             Row(
                 horizontalArrangement = Arrangement.Center) {
-                Column(modifier = Modifier.padding(5.dp),
+                Column(modifier = Modifier.padding(10.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally) {
+
+                    Text(
+                        text = chapter.chapter_name,
+                        modifier = Modifier.padding(top = 10.dp),
+                        style = MaterialTheme.typography.subtitle1,
+                        textAlign = TextAlign.Center
+                    )
+
+                    Spacer(modifier = Modifier.padding(10.dp))
+
                     Text(
                         text = chapter.chapter_content[0].verse_name,
                         color = Color(0xFFFD950E),
