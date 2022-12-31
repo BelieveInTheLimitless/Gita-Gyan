@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,7 +41,7 @@ fun HomeScreen(navController: NavController){
 @Composable
 fun MainContent(navController: NavController,
     chapterList: List<Chapter> = getChapters()){
-    Column(modifier = Modifier.padding(12.dp)) {
+    Column(modifier = Modifier.padding(10.dp)) {
         LazyColumn{
             items(items = chapterList){
                 ChapterRow(chapter = it){ chapter_id ->
@@ -66,7 +67,7 @@ fun ChapterRow(
         clickable {
                   onItemClick(chapter.chapter_id)
         },
-        shape = RoundedCornerShape(corner = CornerSize(17.dp)),
+        shape = RoundedCornerShape(corner = CornerSize(20.dp)),
         backgroundColor = Color(0xFFFD950E),
         contentColor = Color.Black,
         elevation = 7.dp) {
@@ -91,16 +92,20 @@ fun ChapterRow(
                 AnimatedVisibility(visible = expanded) {
                     Column {
                         Text(buildAnnotatedString {
-                            withStyle(style = SpanStyle(color = Color.Black,
-                                fontSize = 13.sp)){
+                            withStyle(style = SpanStyle(color = Color.White,
+                                fontSize = 15.sp)){
                                 append("Total Verses : "+chapter.total_verses)
                             }
                         }, modifier = Modifier.padding(6.dp))
 
                         Divider(modifier = Modifier.padding(6.dp))
+
                         Text(text = chapter.description,
-                            modifier = Modifier.padding(start = 5.dp),
-                            style = MaterialTheme.typography.subtitle1)
+                            modifier = Modifier.padding(5.dp),
+                            color = Color.White,
+                            fontSize = 15.sp,
+                            style = MaterialTheme.typography.caption,
+                        textAlign = TextAlign.Justify)
                     }
                 }
                 Icon(
@@ -114,9 +119,7 @@ fun ChapterRow(
                         },
                     tint = Color.White
                 )
-
             }
-
         }
     }
 }

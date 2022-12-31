@@ -1,14 +1,19 @@
 package com.example.gitagyan.screens.home
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -17,6 +22,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.gitagyan.R
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.getChapters
 import com.example.gitagyan.navigation.AppScreens
@@ -43,65 +49,75 @@ fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
         color = Color(0xFFFD950E)
     ) {
         Surface(modifier = Modifier
-            .padding(start = 15.dp, top = 20.dp, end = 15.dp, bottom = 20.dp)
+            .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
             .width(1000.dp)
             .height(500.dp),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black) {
-            Row(
+            Row(Modifier.padding(top = 45.dp),
                 horizontalArrangement = Arrangement.Center) {
-                Column(modifier = Modifier.padding(5.dp),
+                Column(modifier = Modifier.padding(10.dp),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally) {
+
+                    Image(painter = painterResource(id = R.drawable.krishna_arjuna),
+                        contentDescription = null,
+                        contentScale = ContentScale.FillBounds)
+                    
+                    Spacer(modifier = Modifier.padding(5.dp))
+
                     Text(
                         text = "Chapter " + chapter.chapter_id,
                         color = Color(0xFFFD950E),
                         fontSize = 15.sp,
+                        fontWeight = FontWeight.SemiBold,
                         style = MaterialTheme.typography.caption
                     )
                     Text(
                         text = chapter.chapter_name,
                         color = Color(0xFFFD950E),
                         fontSize = 20.sp,
-                        style = MaterialTheme.typography.body1,
-                        fontWeight = FontWeight.W600
+                        fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.body1
                     )
+                    Text(buildAnnotatedString {
+                        withStyle(style = SpanStyle(color = Color(0xFFFD950E),
+                            fontSize = 15.sp)){
+                            append("Total Verses : "+chapter.total_verses)
+                        }
+                    }, modifier = Modifier.padding(5.dp))
 
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Text(buildAnnotatedString {
-                            withStyle(
-                                style = SpanStyle(
-                                    color = Color.Black,
-                                    fontSize = 13.sp
-                                )
-                            ) {
-                                append("Total Verses : " + chapter.total_verses)
-                            }
-                        }, modifier = Modifier.padding(6.dp))
+                    Card(modifier = Modifier
+                        .padding(2.dp)
+                        .width(100.dp)
+                        .height(55.dp)
+                        .clickable {
+                            onItemClick(chapter.chapter_id)
+                        },
+                        shape = RoundedCornerShape(corner = CornerSize(15.dp)),
+                        backgroundColor = Color(0xFFFD950E),
+                        contentColor = Color.White) {
+                        Text(text = "Start Reading",
+                            modifier = Modifier.padding(4.dp),
+                            textAlign = TextAlign.Center
+                        )
+                    }
 
-                        Divider(modifier = Modifier.padding(6.dp))
+                    Divider(modifier = Modifier.padding(3.dp),
+                    color = Color.LightGray)
+
+                    Column(modifier = Modifier
+                        .padding(1.dp)
+                        .verticalScroll(state = ScrollState(0)),
+                        horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = chapter.description,
-                            modifier = Modifier.padding(start = 5.dp),
-                            style = MaterialTheme.typography.subtitle1
+                            modifier = Modifier.padding(5.dp),
+                            fontSize = 15.sp,
+                            style = MaterialTheme.typography.caption,
+                            textAlign = TextAlign.Justify
                         )
-                        Divider(modifier = Modifier.padding(10.dp))
-                        Card(modifier = Modifier
-                            .padding(3.dp)
-                            .width(100.dp)
-                            .height(50.dp)
-                            .clickable {
-                                onItemClick(chapter.chapter_id)
-                            },
-                            shape = RoundedCornerShape(corner = CornerSize(15.dp)),
-                            backgroundColor = Color(0xFFFD950E),
-                            contentColor = Color.White) {
-                            Text(text = "Start Reading",
-                                modifier = Modifier.padding(3.dp),
-                                textAlign = TextAlign.Center
-                            )
-                        }
                     }
                 }
             }
