@@ -77,9 +77,9 @@ fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
                     Text(
                         text = chapter.chapter_name,
                         color = Color(0xFFFD950E),
+                        fontWeight = FontWeight.SemiBold,
                         fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.body1
+                        style = MaterialTheme.typography.caption
                     )
                     Text(buildAnnotatedString {
                         withStyle(style = SpanStyle(color = Color(0xFFFD950E),
@@ -104,7 +104,7 @@ fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
                         )
                     }
 
-                    Divider(modifier = Modifier.padding(3.dp),
+                    Divider(modifier = Modifier.padding(5.dp),
                     color = Color.LightGray)
 
                     Column(modifier = Modifier

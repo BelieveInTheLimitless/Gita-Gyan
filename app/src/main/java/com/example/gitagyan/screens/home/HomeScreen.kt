@@ -84,9 +84,9 @@ fun ChapterRow(
                 )
                 Text(text = chapter.chapter_name,
                     color = Color(0xFFFFFFFF),
+                    fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
-                    style = MaterialTheme.typography.body1,
-                    fontWeight = FontWeight.W600
+                    style = MaterialTheme.typography.caption
                 )
 
                 AnimatedVisibility(visible = expanded) {
