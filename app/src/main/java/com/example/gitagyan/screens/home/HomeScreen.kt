@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.data.Chapter
-import com.example.gitagyan.data.getChapters
+import com.example.gitagyan.data.english.getEnglishChapters
 import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
@@ -39,8 +39,10 @@ fun HomeScreen(navController: NavController){
 }
 
 @Composable
-fun MainContent(navController: NavController,
-    chapterList: List<Chapter> = getChapters()){
+fun MainContent(
+    navController: NavController,
+    chapterList: List<Chapter> = getEnglishChapters()
+){
     Column(modifier = Modifier.padding(10.dp)) {
         LazyColumn{
             items(items = chapterList){
@@ -54,8 +56,8 @@ fun MainContent(navController: NavController,
 
 @Composable
 fun ChapterRow(
-               chapter : Chapter,
-             onItemClick: (String) -> Unit = {}){
+    chapter : Chapter,
+    onItemClick: (String) -> Unit = {}){
 
     var expanded by remember{
         mutableStateOf(false)

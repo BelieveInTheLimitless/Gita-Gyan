@@ -24,12 +24,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.R
 import com.example.gitagyan.data.Chapter
-import com.example.gitagyan.data.getChapters
+import com.example.gitagyan.data.english.getEnglishChapters
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
 fun VerseScreen(navController: NavController, id : String?) {
-    val chapters = getChapters()
+    val chapters = getEnglishChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         for (chapter in chapters) {
