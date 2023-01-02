@@ -2,15 +2,11 @@ package com.example.gitagyan.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.alexstyl.swipeablecard.Direction
+import com.alexstyl.swipeablecard.ExperimentalSwipeableCardApi
+import com.alexstyl.swipeablecard.rememberSwipeableCardState
+import com.alexstyl.swipeablecard.swipableCard
 import com.example.gitagyan.R
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.english.getEnglishChapters
@@ -40,15 +40,41 @@ fun VerseScreen(navController: NavController, id : String?) {
     }
 }
 
+
+@OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
 fun Verses(chapter: Chapter){
     Surface(modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFFD950E)
-    ) {
+        color = Color(0xFFFD950E)) {
+        var verseId = 0
+        val state = rememberSwipeableCardState()
         Surface(modifier = Modifier
             .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
-            .width(1000.dp)
-            .height(500.dp),
+            .fillMaxSize()
+            .swipableCard(
+                state = state,
+                onSwiped = { direction ->
+                    if(direction == Direction.Left){
+                        if (verseId == chapter.total_verses.toInt()-1){
+                            println("The swiping was cancelled")
+                        }
+                        else{
+                            verseId += 1
+                        }
+                    }
+                    else if (direction == Direction.Right){
+                        if (verseId == 0){
+                            println("The swiping was cancelled")
+                        }
+                        else{
+                            verseId -= 1
+                        }
+                    }
+                },
+                onSwipeCancel = {
+                    println("The swiping was cancelled")
+                }
+            ),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black) {
@@ -75,38 +101,14 @@ fun Verses(chapter: Chapter){
 
                     Spacer(modifier = Modifier.padding(7.dp))
 
-                    Row(horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically) {
-                        Card(modifier = Modifier
-                            .width(50.dp)
-                            .height(50.dp)
-                            .clickable {
-                            },
-                            shape = RoundedCornerShape(corner = CornerSize(30.dp)),
-                            backgroundColor = Color(0xFFFD950E),
-                            contentColor = Color.White) {
-                            Icon(imageVector = Icons.Default.KeyboardArrowLeft, contentDescription = null)
-                        }
-
-                        Text(
-                            text = chapter.chapter_content[0].verse_name,
-                            modifier = Modifier.padding(start = 90.dp, end = 90.dp),
-                            color = Color(0xFFFD950E),
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 20.sp,
-                            style = MaterialTheme.typography.caption
-                        )
-                        Card(modifier = Modifier
-                            .width(50.dp)
-                            .height(50.dp)
-                            .clickable {
-                            },
-                            shape = RoundedCornerShape(corner = CornerSize(30.dp)),
-                            backgroundColor = Color(0xFFFD950E),
-                            contentColor = Color.White) {
-                            Icon(imageVector = Icons.Default.KeyboardArrowRight, contentDescription = null)
-                        }
-                    }
+                    Text(
+                        text = chapter.chapter_content[verseId].verse_name,
+                        modifier = Modifier.padding(start = 90.dp, end = 90.dp),
+                        color = Color(0xFFFD950E),
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 20.sp,
+                        style = MaterialTheme.typography.caption
+                    )
 
                     Spacer(modifier = Modifier.padding(7.dp))
 
@@ -114,7 +116,7 @@ fun Verses(chapter: Chapter){
                         .verticalScroll(state = ScrollState(0)),
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            text = chapter.chapter_content[0].verse,
+                            text = chapter.chapter_content[verseId].verse,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.W600,
                             style = MaterialTheme.typography.caption,
@@ -122,7 +124,7 @@ fun Verses(chapter: Chapter){
                         )
 
                         Text(
-                            text = chapter.chapter_content[0].verse_meaning,
+                            text = chapter.chapter_content[verseId].verse_meaning,
                             fontSize = 17.sp,
                             fontWeight = FontWeight.W400,
                             style = MaterialTheme.typography.caption,
@@ -134,4 +136,5 @@ fun Verses(chapter: Chapter){
             }
         }
     }
+
 }
