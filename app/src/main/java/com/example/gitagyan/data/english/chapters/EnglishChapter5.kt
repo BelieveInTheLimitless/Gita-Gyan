@@ -2,7 +2,7 @@ package com.example.gitagyan.data.english.chapters
 
 import com.example.gitagyan.data.english.Verse
 
-fun chapter5Verses(): List<Verse>{
+fun getEnglishChapter5(): List<Verse>{
     return listOf(
         Verse(
             verse_id = 1,
