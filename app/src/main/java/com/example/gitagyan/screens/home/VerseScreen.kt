@@ -25,16 +25,21 @@ import com.alexstyl.swipeablecard.swipableCard
 import com.example.gitagyan.R
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.english.getEnglishChapters
+import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
-fun VerseScreen(navController: NavController, id : String?) {
+fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: Int?) {
     val chapters = getEnglishChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         for (chapter in chapters) {
-            if (id == chapter.chapter_id) {
-                Verses(chapter = chapter)
+            if (chapter_id == chapter.chapter_id) {
+                if (verse_id != null) {
+                    Verses(navController = navController,
+                        chapter = chapter,
+                        verseId = verse_id)
+                }
             }
         }
     }
@@ -43,10 +48,11 @@ fun VerseScreen(navController: NavController, id : String?) {
 
 @OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
-fun Verses(chapter: Chapter){
+fun Verses(navController : NavController, chapter: Chapter, verseId : Int){
+    val chapterId = chapter.chapter_id
+    var id = verseId
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)) {
-        var verseId = 0
         val state = rememberSwipeableCardState()
         Surface(modifier = Modifier
             .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
@@ -54,20 +60,20 @@ fun Verses(chapter: Chapter){
             .swipableCard(
                 state = state,
                 onSwiped = { direction ->
-                    if(direction == Direction.Left){
-                        if (verseId == chapter.total_verses.toInt()-1){
+                    if (direction == Direction.Left) {
+                        if (verseId == chapter.total_verses.toInt() - 1) {
                             println("The swiping was cancelled")
+                        } else {
+                            id++
+                            navController.navigate(AppScreens.DetailsScreen.name+"/{$chapterId}")
+//                            navController.navigate(AppScreens.VerseScreen.name+"/{$chapterId}"+"/{$id}")
                         }
-                        else{
-                            verseId += 1
-                        }
-                    }
-                    else if (direction == Direction.Right){
-                        if (verseId == 0){
+                    } else if (direction == Direction.Right) {
+                        if (verseId == 0) {
                             println("The swiping was cancelled")
-                        }
-                        else{
-                            verseId -= 1
+                        } else {
+                            id--
+                            navController.navigate(AppScreens.VerseScreen.name+"/{$chapter}"+"/{$id}")
                         }
                     }
                 },

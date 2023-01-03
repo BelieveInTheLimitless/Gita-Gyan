@@ -37,14 +37,20 @@ fun AppNavigation(){
             arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType})
         ){
             backStackEntry ->
-            DetailsScreen(navController = navController, id = backStackEntry.arguments?.getString("chapter_id"))
+            DetailsScreen(navController = navController, chapterId = backStackEntry.arguments?.getString("chapter_id"))
         }
 
-        composable(AppScreens.VerseScreen.name+"/{chapter_id}",
-            arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType})
+        composable(AppScreens.VerseScreen.name+"/{chapter_id}"+"/{verse_id}",
+            arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType},
+                                navArgument(name = "verse_id") { type = NavType.StringType}
+            )
         ){
                 backStackEntry ->
-            VerseScreen(navController = navController, id = backStackEntry.arguments?.getString("chapter_id"))
+            VerseScreen(
+                navController = navController,
+                chapter_id = backStackEntry.arguments?.getString("chapter_id"),
+                verse_id = backStackEntry.arguments?.getInt("verse_id")
+                )
         }
 
         composable(AppScreens.SearchScreen.name){

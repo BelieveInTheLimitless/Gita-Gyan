@@ -29,14 +29,14 @@ import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
-fun DetailsScreen(navController: NavController, id: String?){
+fun DetailsScreen(navController: NavController, chapterId: String?){
     val chapters = getEnglishChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         for (chapter in chapters){
-            if(id == chapter.chapter_id){
-                Details(chapter = chapter){ id ->
-                    navController.navigate(route = AppScreens.VerseScreen.name + "/$id")
+            if(chapterId == chapter.chapter_id){
+                Details(chapter = chapter){ chapterId, verseId ->
+                    navController.navigate(route = AppScreens.VerseScreen.name + "/$chapterId" + "/$verseId")
                 }
             }
         }
@@ -44,10 +44,9 @@ fun DetailsScreen(navController: NavController, id: String?){
 }
 
 @Composable
-fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
+fun Details(chapter: Chapter, onItemClick: (String, Int) -> Unit){
     Surface(modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFFD950E)
-    ) {
+        color = Color(0xFFFD950E)) {
         Surface(modifier = Modifier
             .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
             .width(1000.dp)
@@ -93,7 +92,7 @@ fun Details(chapter: Chapter, onItemClick: (String) -> Unit = {}){
                         .width(100.dp)
                         .height(55.dp)
                         .clickable {
-                            onItemClick(chapter.chapter_id)
+                            onItemClick(chapter.chapter_id, 5)
                         },
                         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                         backgroundColor = Color(0xFFFD950E),
