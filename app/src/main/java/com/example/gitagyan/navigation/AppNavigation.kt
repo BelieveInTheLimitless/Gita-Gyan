@@ -49,7 +49,7 @@ fun AppNavigation(){
             VerseScreen(
                 navController = navController,
                 chapter_id = backStackEntry.arguments?.getString("chapter_id"),
-                verse_id = backStackEntry.arguments?.getInt("verse_id")
+                verse_id = backStackEntry.arguments?.getString("verse_id")
                 )
         }
 

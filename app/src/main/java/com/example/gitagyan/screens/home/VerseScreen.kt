@@ -29,7 +29,7 @@ import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
-fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: Int?) {
+fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: String?) {
     val chapters = getEnglishChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
@@ -48,9 +48,9 @@ fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: Int
 
 @OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
-fun Verses(navController : NavController, chapter: Chapter, verseId : Int){
+fun Verses(navController : NavController, chapter: Chapter, verseId : String){
     val chapterId = chapter.chapter_id
-    var id = verseId
+    var id = verseId.toInt()
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)) {
         val state = rememberSwipeableCardState()
@@ -61,18 +61,17 @@ fun Verses(navController : NavController, chapter: Chapter, verseId : Int){
                 state = state,
                 onSwiped = { direction ->
                     if (direction == Direction.Left) {
-                        if (verseId == chapter.total_verses.toInt() - 1) {
+                        if (verseId.toInt() == chapter.total_verses.toInt() - 1) {
                             println("The swiping was cancelled")
                         } else {
-                            id++
-                            navController.navigate(AppScreens.DetailsScreen.name+"/{$chapterId}")
-//                            navController.navigate(AppScreens.VerseScreen.name+"/{$chapterId}"+"/{$id}")
+                            id +=1
+                            navController.navigate(AppScreens.VerseScreen.name+"/{$chapterId}"+"/{$id}")
                         }
                     } else if (direction == Direction.Right) {
-                        if (verseId == 0) {
+                        if (verseId.toInt() == 0) {
                             println("The swiping was cancelled")
                         } else {
-                            id--
+                            id -= 1
                             navController.navigate(AppScreens.VerseScreen.name+"/{$chapter}"+"/{$id}")
                         }
                     }
@@ -108,7 +107,7 @@ fun Verses(navController : NavController, chapter: Chapter, verseId : Int){
                     Spacer(modifier = Modifier.padding(7.dp))
 
                     Text(
-                        text = chapter.chapter_content[verseId].verse_name,
+                        text = chapter.chapter_content[id].verse_name,
                         modifier = Modifier.padding(start = 90.dp, end = 90.dp),
                         color = Color(0xFFFD950E),
                         fontWeight = FontWeight.SemiBold,
@@ -122,7 +121,7 @@ fun Verses(navController : NavController, chapter: Chapter, verseId : Int){
                         .verticalScroll(state = ScrollState(0)),
                         horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            text = chapter.chapter_content[verseId].verse,
+                            text = chapter.chapter_content[id].verse,
                             fontSize = 18.sp,
                             fontWeight = FontWeight.W600,
                             style = MaterialTheme.typography.caption,
@@ -130,7 +129,7 @@ fun Verses(navController : NavController, chapter: Chapter, verseId : Int){
                         )
 
                         Text(
-                            text = chapter.chapter_content[verseId].verse_meaning,
+                            text = chapter.chapter_content[id].verse_meaning,
                             fontSize = 17.sp,
                             fontWeight = FontWeight.W400,
                             style = MaterialTheme.typography.caption,

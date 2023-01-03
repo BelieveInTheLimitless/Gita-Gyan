@@ -44,7 +44,7 @@ fun DetailsScreen(navController: NavController, chapterId: String?){
 }
 
 @Composable
-fun Details(chapter: Chapter, onItemClick: (String, Int) -> Unit){
+fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)) {
         Surface(modifier = Modifier
@@ -92,7 +92,7 @@ fun Details(chapter: Chapter, onItemClick: (String, Int) -> Unit){
                         .width(100.dp)
                         .height(55.dp)
                         .clickable {
-                            onItemClick(chapter.chapter_id, 5)
+                            onItemClick(chapter.chapter_id, "0")
                         },
                         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                         backgroundColor = Color(0xFFFD950E),
