@@ -7,7 +7,7 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,14 +18,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.alexstyl.swipeablecard.Direction
-import com.alexstyl.swipeablecard.ExperimentalSwipeableCardApi
 import com.alexstyl.swipeablecard.rememberSwipeableCardState
-import com.alexstyl.swipeablecard.swipableCard
 import com.example.gitagyan.R
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.english.getEnglishChapters
-import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
@@ -36,9 +32,10 @@ fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: Str
         for (chapter in chapters) {
             if (chapter_id == chapter.chapter_id) {
                 if (verse_id != null) {
-                    Verses(navController = navController,
+                    Verses(
                         chapter = chapter,
-                        verseId = verse_id)
+                        verseId = verse_id
+                    )
                 }
             }
         }
@@ -46,40 +43,18 @@ fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: Str
 }
 
 
-@OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
-fun Verses(navController : NavController, chapter: Chapter, verseId : String){
-    val chapterId = chapter.chapter_id
-    var id = verseId.toInt()
+fun Verses(chapter: Chapter, verseId: String){
+    chapter.chapter_id
+    val id by remember {
+        mutableStateOf(verseId.toInt())
+    }
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)) {
-        val state = rememberSwipeableCardState()
+        rememberSwipeableCardState()
         Surface(modifier = Modifier
             .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
-            .fillMaxSize()
-            .swipableCard(
-                state = state,
-                onSwiped = { direction ->
-                    if (direction == Direction.Left) {
-                        if (verseId.toInt() == chapter.total_verses.toInt() - 1) {
-                            println("The swiping was cancelled")
-                        } else {
-                            id +=1
-                            navController.navigate(AppScreens.VerseScreen.name+"/{$chapterId}"+"/{$id}")
-                        }
-                    } else if (direction == Direction.Right) {
-                        if (verseId.toInt() == 0) {
-                            println("The swiping was cancelled")
-                        } else {
-                            id -= 1
-                            navController.navigate(AppScreens.VerseScreen.name+"/{$chapter}"+"/{$id}")
-                        }
-                    }
-                },
-                onSwipeCancel = {
-                    println("The swiping was cancelled")
-                }
-            ),
+            .fillMaxSize(),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black) {
