@@ -7,8 +7,164 @@ fun getEnglishChapter14(): List<Verse>{
         Verse(
             verse_id = 1,
             verse_name = "Verse 1",
-            verse = "श्री भगवानुवाच\n\nपरं भूयः प्रवक्ष्यामि ज्ञानानां ज्ञानमुत्तमम्।\nयज्ज्ञात्वा मुनयः सर्वे परां सिद्धिमितो गताः।।14.1।।\n",
+            verse = "श्री भगवानुवाच\n\nपरं भूयः प्रवक्ष्यामि ज्ञानानां ज्ञानमुत्तमम्।\nयज्ज्ञात्वा मुनयः सर्वे परां सिद्धिमितो गताः।।\n",
             verse_meaning = "Shri Bhagavan said : I shall expound once more the supreme knowledge, the best of all knowledge, acquiring which all sages have attained highest perfection, being liberated from this mundane existence."
+        ),
+        Verse(
+            verse_id = 2,
+            verse_name = "Verse 2",
+            verse = "इदं ज्ञानमुपाश्रित्य मम साधर्म्यमागताः।\nसर्गेऽपि नोपजायन्ते प्रलये न व्यथन्ति च।।\n",
+            verse_meaning = "Those who, by practising this knowledge, have entered into My being, are not born again at the cosmic dawn, nor feel disturbed even during the cosmic dissolution (Pralaya)."
+        ),
+        Verse(
+            verse_id = 3,
+            verse_name = "Verse 3",
+            verse = "मम योनिर्महद्ब्रह्म तस्मिन् गर्भं दधाम्यहम्।\nसंभवः सर्वभूतानां ततो भवति भारत।।\n",
+            verse_meaning = "My primordial Nature, known as the great Brahma, is the womb of all creatures; in that womb I place the seed of all life. The creation of all beings follows from that union of Matter and Spirit, O Arjuna."
+        ),
+        Verse(
+            verse_id = 4,
+            verse_name = "Verse 4",
+            verse = "सर्वयोनिषु कौन्तेय मूर्तयः सम्भवन्ति याः।\nतासां ब्रह्म महद्योनिरहं बीजप्रदः पिता।।\n",
+            verse_meaning = "Of all embodied beings that appear in all the species of various kinds, Arjuna, Prakrti or Nature is the conceiving Mother, while I am the seed-giving Father."
+        ),
+        Verse(
+            verse_id = 5,
+            verse_name = "Verse 5",
+            verse = "सत्त्वं रजस्तम इति गुणाः प्रकृतिसंभवाः।\nनिबध्नन्ति महाबाहो देहे देहिनमव्ययम्।।\n",
+            verse_meaning = "Sattva, Rajas and Tamas - these three Gunas born of Nature tie down the imperishable soul to the body, Arjuna."
+        ),
+        Verse(
+            verse_id = 6,
+            verse_name = "Verse 6",
+            verse = "तत्र सत्त्वं निर्मलत्वात्प्रकाशकमनामयम्।\nसुखसङ्गेन बध्नाति ज्ञानसङ्गेन चानघ।।\n",
+            verse_meaning = "Of these Sattva, being immaculate, is illuminating and flawless, Arjuna; it binds through attachment to happiness and knowledge."
+        ),
+        Verse(
+            verse_id = 7,
+            verse_name = "Verse 7",
+            verse = "रजो रागात्मकं विद्धि तृष्णासङ्गसमुद्भवम्।\nतन्निबध्नाति कौन्तेय कर्मसङ्गेन देहिनम्।।\n",
+            verse_meaning = "Arjuna, know the quality of Rajas, which is of the nature of passion, as born of desire and attachment. It binds the soul through attachment to actions and their fruit."
+        ),
+        Verse(
+            verse_id = 8,
+            verse_name = "Verse 8",
+            verse = "तमस्त्वज्ञानजं विद्धि मोहनं सर्वदेहिनाम्।\nप्रमादालस्यनिद्राभिस्तन्निबध्नाति भारत।।\n",
+            verse_meaning = "And know Tamas, the deluder of all those who look upon the body as their own self, as born of ignorance. It binds the soul through error, sloth and sleep, Arjuna."
+        ),
+        Verse(
+            verse_id = 9,
+            verse_name = "Verse 9",
+            verse = "सत्त्वं सुखे सञ्जयति रजः कर्मणि भारत।\nज्ञानमावृत्य तु तमः प्रमादे सञ्जयत्युत।।\n",
+            verse_meaning = "Sattva draws one to joy and Rajas to action; while Tamas, clouding wisdom, impels one to error, sleep and sloth Arjuna."
+        ),
+        Verse(
+            verse_id = 10,
+            verse_name = "Verse 10",
+            verse = "रजस्तमश्चाभिभूय सत्त्वं भवति भारत।\nरजः सत्त्वं तमश्चैव तमः सत्त्वं रजस्तथा।।\n",
+            verse_meaning = "Overpowering Rajas and Tamas, Arjuna, Sattva prevails; overpowering Sattva and Tamas, Rajas prevails; even so, overpowering Sattva and Rajas, Tamas prevails."
+        ),
+        Verse(
+            verse_id = 11,
+            verse_name = "Verse 11",
+            verse = "सर्वद्वारेषु देहेऽस्मिन्प्रकाश उपजायते।\nज्ञानं यदा तदा विद्याद्विवृद्धं सत्त्वमित्युत।।\n",
+            verse_meaning = "When light and discernment dawn in this body, as well as in the mind and senses, then one should know that Sattva is predominant."
+        ),
+        Verse(
+            verse_id = 12,
+            verse_name = "Verse 12",
+            verse = "लोभः प्रवृत्तिरारम्भः कर्मणामशमः स्पृहा।\nरजस्येतानि जायन्ते विवृद्धे भरतर्षभ।।\n",
+            verse_meaning = "With the preponderance of Rajas, Arjuna, greed, activity, undertaking of action with an interested motive, restlessness and a thirst for enjoyment make their appearance."
+        ),
+        Verse(
+            verse_id = 13,
+            verse_name = "Verse 13",
+            verse = "अप्रकाशोऽप्रवृत्तिश्च प्रमादो मोह एव च।\nतमस्येतानि जायन्ते विवृद्धे कुरुनन्दन।।\n",
+            verse_meaning = "With the growth of Tamas, Arjuna, obtuseness of the mind and senses, disinclination to perform one's obligatory duties, frivolity and stupor - all these appear."
+        ),
+        Verse(
+            verse_id = 14,
+            verse_name = "Verse 14",
+            verse = "यदा सत्त्वे प्रवृद्धे तु प्रलयं याति देहभृत्।\nतदोत्तमविदां लोकानमलान्प्रतिपद्यते।।\n",
+            verse_meaning = "When a man dies during the preponderance of Sattva, he obtains the stainless ethereal worlds (heaven etc.,) attained by men of noble deeds."
+        ),
+        Verse(
+            verse_id = 15,
+            verse_name = "Verse 15",
+            verse = "रजसि प्रलयं गत्वा कर्मसङ्गिषु जायते।\nतथा प्रलीनस्तमसि मूढयोनिषु जायते।।\n",
+            verse_meaning = "Dying when Rajas predominates, he is born among those attached to action; even so, the man who has expired during the preponderance of Tamas is reborn in the species of the deluded creatures such as insects and beasts etc."
+        ),
+        Verse(
+            verse_id = 16,
+            verse_name = "Verse 16",
+            verse = "कर्मणः सुकृतस्याहुः सात्त्विकं निर्मलं फलम्।\nरजसस्तु फलं दुःखमज्ञानं तमसः फलम्।।\n",
+            verse_meaning = "The reward of a righteous act, they say, is Sattvika i.e., faultless in the shape of joy, wisdom and dispassion etc., sorrow is declared to be the fruit of a Rajasika act and ignorance, the fruit of a Tamasika act."
+        ),
+        Verse(
+            verse_id = 17,
+            verse_name = "Verse 17",
+            verse = "सत्त्वात्सञ्जायते ज्ञानं रजसो लोभ एव च।\nप्रमादमोहौ तमसो भवतोऽज्ञानमेव च।।\n",
+            verse_meaning = "Wisdom follows from Sattva, and greed, undoubtedly, from Rajas; likewise obstinate error, stupor and also ignorance follow from Tamas."
+        ),
+        Verse(
+            verse_id = 18,
+            verse_name = "Verse 18",
+            verse = "ऊर्ध्वं गच्छन्ति सत्त्वस्था मध्ये तिष्ठन्ति राजसाः।\nजघन्यगुणवृत्तिस्था अधो गच्छन्ति तामसाः।।\n",
+            verse_meaning = "Those who abide in the quality of Sattva wend their way upwards; while those of a Rajasika disposition stay in the middle. And those of a Tamasika temperament, enveloped as they are in the effects of Tamoguna, sink down."
+        ),
+        Verse(
+            verse_id = 19,
+            verse_name = "Verse 19",
+            verse = "नान्यं गुणेभ्यः कर्तारं यदा द्रष्टानुपश्यति।\nगुणेभ्यश्च परं वेत्ति मद्भावं सोऽधिगच्छति।।\n",
+            verse_meaning = "When the discerning person sees no one as doer other than the three Gunas, and realizes Me, the supreme Spirit standing entirely beyond these Gunas, he enters into My being."
+        ),
+        Verse(
+            verse_id = 20,
+            verse_name = "Verse 20",
+            verse = "गुणानेतानतीत्य त्रीन्देही देहसमुद्भवान्।\nजन्ममृत्युजरादुःखैर्विमुक्तोऽमृतमश्नुते।।\n",
+            verse_meaning = "Having transcended the aforesaid three Gunas, which have caused the body, and freed from birth, death, old age and all kinds of sorrow, the embodied soul attains supreme bliss."
+        ),
+        Verse(
+            verse_id = 21,
+            verse_name = "Verse 21",
+            verse = "अर्जुन उवाच\n\nकैर्लिंगैस्त्रीन्गुणानेतानतीतो भवति प्रभो।\nकिमाचारः कथं चैतांस्त्रीन्गुणानतिवर्तते।।\n",
+            verse_meaning = "Arjuna said : What are the marks of him who has risen above the three Gunas, and what is his conduct ? And how, Lord, does he rise above the three Gunas?"
+        ),
+        Verse(
+            verse_id = 22,
+            verse_name = "Verse 22",
+            verse = "श्री भगवानुवाच\n\nप्रकाशं च प्रवृत्तिं च मोहमेव च पाण्डव।\nन द्वेष्टि सम्प्रवृत्तानि न निवृत्तानि काङ्क्षति।।\n",
+            verse_meaning = "Shri Bhagavan said : Arjuna, he who hates not light (which is born of Sattva) and activity (which is born of Rajas) and even stupor (which is born of Tamas), when prevalent, nor longs for them when they have ceased."
+        ),
+        Verse(
+            verse_id = 23,
+            verse_name = "Verse 23",
+            verse = "उदासीनवदासीनो गुणैर्यो न विचाल्यते।\nगुणा वर्तन्त इत्येव योऽवतिष्ठति नेङ्गते।।\n",
+            verse_meaning = "He who, sitting like a witness, is not disturbed by the Gunas, and who, knowing that the Gunas alone move among the Gunas, remains established in identity with God, and never falls off from that state."
+        ),
+        Verse(
+            verse_id = 24,
+            verse_name = "Verse 24",
+            verse = "समदुःखसुखः स्वस्थः समलोष्टाश्मकाञ्चनः।\nतुल्यप्रियाप्रियो धीरस्तुल्यनिन्दात्मसंस्तुतिः।।\n",
+            verse_meaning = "He who is ever established in the Self, takes pain and pleasure alike, regards a clod of earth, a stone and a piece of gold as equal in value, is possessed of wisdom, accepts the pleasant as well as the unpleasant in the same spirit, and views censure and praise alike."
+        ),
+        Verse(
+            verse_id = 25,
+            verse_name = "Verse 25",
+            verse = "मानापमानयोस्तुल्यस्तुल्यो मित्रारिपक्षयोः।\nसर्वारम्भपरित्यागी गुणातीतः स उच्यते।।\n",
+            verse_meaning = "He who is equipoised in honour or ignominy, is alike towards a friend or an enemy, and has renounced the sense of doership in all undertakings, is said to have risen above the three Gunas."
+        ),
+        Verse(
+            verse_id = 26,
+            verse_name = "Verse 26",
+            verse = "मां च योऽव्यभिचारेण भक्ितयोगेन सेवते।\nस गुणान्समतीत्यैतान् ब्रह्मभूयाय कल्पते।।\n",
+            verse_meaning = "He too who, constantly worships Me through the Yoga of exclusive devotion - transcending these three Gunas, he becomes eligible for attaining Brahma."
+        ),
+        Verse(
+            verse_id = 27,
+            verse_name = "Verse 27",
+            verse = "ब्रह्मणो हि प्रतिष्ठाऽहममृतस्याव्ययस्य च।\nशाश्वतस्य च धर्मस्य सुखस्यैकान्तिकस्य च।।\n",
+            verse_meaning = "For, I am the substratum of the imperishable Brahma, of immortality, of the eternal Dharma and of unending immutable bliss."
         )
     )
 }
