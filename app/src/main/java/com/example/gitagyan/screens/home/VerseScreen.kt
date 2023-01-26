@@ -2,11 +2,15 @@ package com.example.gitagyan.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -78,15 +82,49 @@ fun Verses(chapter: Chapter, verseId: String){
                     )
 
                     Spacer(modifier = Modifier.padding(7.dp))
+                    
+                    Row(modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically) {
+                        if(id != 0){
+                            Card(modifier = Modifier
+                                .size(35.dp)
+                                .clickable(onClick = {
+                                    id -= 1
+                                }),
+                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                                backgroundColor = Color.White,
+                                contentColor = Color.Black,
+                                elevation = 5.dp) {
+                                Icon(imageVector = Icons.Default.KeyboardArrowLeft,
+                                    contentDescription = null)
+                            }
+                        }
 
-                    Text(
-                        text = chapter.chapter_content[id].verse_name,
-                        modifier = Modifier.padding(start = 90.dp, end = 90.dp),
-                        color = Color(0xFFFD950E),
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 20.sp,
-                        style = MaterialTheme.typography.caption
-                    )
+                        Text(
+                            text = chapter.chapter_content[id].verse_name,
+                            modifier = Modifier.padding(start = 90.dp, end = 90.dp),
+                            color = Color(0xFFFD950E),
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 20.sp,
+                            style = MaterialTheme.typography.caption
+                        )
+
+                        if(id != chapter.total_verses.toInt()-1){
+                            Card(modifier = Modifier
+                                .size(35.dp)
+                                .clickable(onClick = {
+                                    id += 1
+                                }),
+                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                                backgroundColor = Color.White,
+                                contentColor = Color.Black,
+                                elevation = 5.dp) {
+                                Icon(imageVector = Icons.Default.KeyboardArrowRight,
+                                    contentDescription = null)
+                            }
+                        }
+                    }
 
                     Spacer(modifier = Modifier.padding(7.dp))
 
