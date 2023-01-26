@@ -18,10 +18,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.alexstyl.swipeablecard.Direction
-import com.alexstyl.swipeablecard.ExperimentalSwipeableCardApi
-import com.alexstyl.swipeablecard.rememberSwipeableCardState
-import com.alexstyl.swipeablecard.swipableCard
 import com.example.gitagyan.R
 import com.example.gitagyan.data.Chapter
 import com.example.gitagyan.data.english.getEnglishChapters
@@ -46,7 +42,6 @@ fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: Str
 }
 
 
-@OptIn(ExperimentalSwipeableCardApi::class)
 @Composable
 fun Verses(chapter: Chapter, verseId: String){
     chapter.chapter_id
@@ -55,35 +50,9 @@ fun Verses(chapter: Chapter, verseId: String){
     }
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)) {
-        rememberSwipeableCardState()
-        val state = rememberSwipeableCardState()
         Surface(modifier = Modifier
             .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
-            .fillMaxSize()
-            .swipableCard(
-                state = state,
-                onSwiped = { direction ->
-                    if(direction == Direction.Left){
-                        if (id == chapter.total_verses.toInt()-1){
-                            println("The swiping was cancelled")
-                        }
-                        else{
-                            id += 1
-                        }
-                    }
-                    else if (direction == Direction.Right){
-                        if (id == 0){
-                            println("The swiping was cancelled")
-                        }
-                        else{
-                            id -= 1
-                        }
-                    }
-                },
-                onSwipeCancel = {
-                    println("The swiping was cancelled")
-                }
-            ),
+            .fillMaxSize(),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black) {
