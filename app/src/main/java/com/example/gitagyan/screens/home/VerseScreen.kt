@@ -86,7 +86,18 @@ fun Verses(chapter: Chapter, verseId: String){
                     Row(modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically) {
-                        if(id != 0){
+                        if(id == 0){
+                            Card(modifier = Modifier
+                                .size(35.dp),
+                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                                backgroundColor = Color.White,
+                                contentColor = Color.LightGray,
+                                elevation = 5.dp) {
+                                Icon(imageVector = Icons.Default.KeyboardArrowLeft,
+                                    contentDescription = null)
+                            }
+                        }
+                        else{
                             Card(modifier = Modifier
                                 .size(35.dp)
                                 .clickable(onClick = {
@@ -110,7 +121,18 @@ fun Verses(chapter: Chapter, verseId: String){
                             style = MaterialTheme.typography.caption
                         )
 
-                        if(id != chapter.total_verses.toInt()-1){
+                        if(id == chapter.total_verses.toInt()-1){
+                            Card(modifier = Modifier
+                                .size(35.dp),
+                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                                backgroundColor = Color.White,
+                                contentColor = Color.LightGray,
+                                elevation = 5.dp) {
+                                Icon(imageVector = Icons.Default.KeyboardArrowRight,
+                                    contentDescription = null)
+                            }
+                        }
+                        else{
                             Card(modifier = Modifier
                                 .size(35.dp)
                                 .clickable(onClick = {
