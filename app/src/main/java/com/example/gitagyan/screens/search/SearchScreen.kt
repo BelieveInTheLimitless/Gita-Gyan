@@ -1,5 +1,6 @@
 package com.example.gitagyan.screens.search
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -13,9 +14,12 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -82,12 +86,22 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
 
                         val keyboardController = LocalSoftwareKeyboardController.current
 
+                        val context = LocalContext.current
+
                         Column(
                             modifier = Modifier
                                 .padding(top = 20.dp)
                                 .fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
+
+                            Text(text = "Search",
+                                modifier = Modifier.padding(10.dp),
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = FontFamily.Serif,
+                                style = MaterialTheme.typography.caption
+                            )
 
                             InputField(valueState = chapterId,
                                 labelId = "Enter Chapter Number",
@@ -100,8 +114,8 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                 }
                             )
 
-                            for (chapter in chapters){
-                                if(chapterId.value == chapter.chapter_id) {
+                            if(chapterId.value.isNotEmpty()){
+                                if(chapterId.value.toInt() > 0 && (chapterId.value.toInt() <= 18)){
                                     InputField(valueState = verseId,
                                         labelId = "Enter Verse Number",
                                         enabled = true,
@@ -112,6 +126,9 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                             keyboardController?.hide()
                                         }
                                     )
+                                }
+                                else{
+                                    Toast.makeText(context, "Enter valid chapter number!", Toast.LENGTH_LONG).show()
                                 }
                             }
 
@@ -133,6 +150,9 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                             textAlign = TextAlign.Center
                                         )
                                     }
+                                }
+                                else{
+                                    Toast.makeText(context, "Enter valid verse number!", Toast.LENGTH_LONG).show()
                                 }
                             }
 
