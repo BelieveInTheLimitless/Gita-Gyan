@@ -84,7 +84,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
 
                         Column(
                             modifier = Modifier
-                                .padding(10.dp)
+                                .padding(top = 20.dp)
                                 .fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
@@ -102,7 +102,6 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
 
                             for (chapter in chapters){
                                 if(chapterId.value == chapter.chapter_id) {
-
                                     InputField(valueState = verseId,
                                         labelId = "Enter Verse Number",
                                         enabled = true,
@@ -116,23 +115,27 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                 }
                             }
 
-
-                            Button(onClick = {
-                                navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value}" + "/${verseId.value.toInt()-1}") },
-                                modifier = Modifier
-                                    .padding(2.dp)
-                                    .width(100.dp)
-                                    .height(55.dp),
-                                shape = RoundedCornerShape(corner = CornerSize(15.dp)),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFFD950E))
-                            ) {
-                                Text(text = "Search",
-                                    color = Color.White,
-                                    fontSize = 15.sp,
-                                    modifier = Modifier.padding(4.dp),
-                                    textAlign = TextAlign.Center
-                                )
+                            if(verseId.value.isNotEmpty()){
+                                if((verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt()-1].total_verses.toInt())){
+                                    Button(onClick = {
+                                        navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value}" + "/${verseId.value.toInt()-1}") },
+                                        modifier = Modifier
+                                            .padding(10.dp)
+                                            .width(100.dp)
+                                            .height(55.dp),
+                                        shape = RoundedCornerShape(corner = CornerSize(15.dp)),
+                                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFFD950E))
+                                    ) {
+                                        Text(text = "Search",
+                                            color = Color.White,
+                                            fontSize = 15.sp,
+                                            modifier = Modifier.padding(4.dp),
+                                            textAlign = TextAlign.Center
+                                        )
+                                    }
+                                }
                             }
+
                         }
                     }
                 }
@@ -149,7 +152,7 @@ fun InputField(
     enabled: Boolean,
     isSingleLine: Boolean = true,
     keyboardType: KeyboardType = KeyboardType.Number,
-    imeAction: ImeAction = ImeAction.Next,
+    imeAction: ImeAction = ImeAction.Go,
     onAction: KeyboardActions = KeyboardActions.Default
 ) {
     OutlinedTextField(
@@ -159,7 +162,7 @@ fun InputField(
         singleLine = isSingleLine,
         textStyle = TextStyle(fontSize = 15.sp, color = Color.Black),
         modifier = modifier
-            .padding(bottom = 10.dp, start = 10.dp, end = 10.dp)
+            .padding(start = 10.dp, end = 10.dp, bottom = 10.dp)
             .fillMaxWidth(),
         enabled = enabled,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
