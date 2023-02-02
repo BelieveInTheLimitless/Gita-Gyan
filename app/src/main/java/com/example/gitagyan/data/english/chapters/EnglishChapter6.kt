@@ -8,8 +8,8 @@ fun getEnglishChapter6(): List<Verse>{
         Verse(
             verse_id = 1,
             verse_name = "Verse 1",
-            verse = "श्री भगवानुवाच\n\nअनाश्रितः कर्मफलं कार्यं कर्म करोति यः।\n\nस संन्यासी च योगी च न निरग्निर्न चाक्रियः।।\n",
-            verse_meaning = "Shri Bhagavan said : He who does his duty without expecting the fruit of actions is a Sannyasi (Sankhyayogi) and a Yog∂ (Karmayog∂) both. He is no Sannyasi (renouncer) who has merely renounced the sacred fire; even so, he is no Yogi who has merely given up all activity."
+            verse = "श्री भगवानुवाच\n\nअनाश्रितः कर्मफलं कार्यं कर्म करोति यः।\nस संन्यासी च योगी च न निरग्निर्न चाक्रियः।।\n",
+            verse_meaning = "Shri Bhagavan said : He who does his duty without expecting the fruit of actions is a Sannyasi (Sankhyayogi) and a Yogi (Karmayogi) both. He is no Sannyasi (renouncer) who has merely renounced the sacred fire; even so, he is no Yogi who has merely given up all activity."
         ),
         Verse(
             verse_id = 2,
@@ -32,13 +32,13 @@ fun getEnglishChapter6(): List<Verse>{
         Verse(
             verse_id = 5,
             verse_name = "Verse 5",
-            verse = "उद्धरेदात्मनाऽऽत्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः।।\n",
+            verse = "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्।\nआत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः।।\n",
             verse_meaning = "One should lift oneself by one's own effort and should not degrade oneself; for one's own self is one's friend, and one's own self is one's enemy."
         ),
         Verse(
             verse_id = 6,
             verse_name = "Verse 6",
-            verse = "बन्धुरात्माऽऽत्मनस्तस्य येनात्मैवात्मना जितः।\nअनात्मनस्तु शत्रुत्वे वर्तेतात्मैव शत्रुवत्।।\n",
+            verse = "बन्धुरात्मात्मनस्तस्य येनात्मैवात्मना जितः।\nअनात्मनस्तु शत्रुत्वे वर्तेतात्मैव शत्रुवत्।।\n",
             verse_meaning = "One's own self is the friend of the soul by whom the lower self (consisting of the mind, senses and body) has been conquered; even so, the very self of him, who has not conquered his lower self, behaves antagonistically like an enemy."
         ),
         Verse(
@@ -69,7 +69,7 @@ fun getEnglishChapter6(): List<Verse>{
             verse_id = 11,
             verse_name = "Verse 11",
             verse = "शुचौ देशे प्रतिष्ठाप्य स्थिरमासनमात्मनः।\nनात्युच्छ्रितं नातिनीचं चैलाजिनकुशोत्तरम्।।\n",
-            verse_meaning = "Having firmly set his seat in a spot which is free from dirt and other impurities with the sacred Kusa grass, a deerskin and a cloth spread thereon, one upon the other, (Ku‹a below, deerskin in the middle and cloth uppermost), neither very high nor very low."
+            verse_meaning = "Having firmly set his seat in a spot which is free from dirt and other impurities with the sacred Kusha grass, a deerskin and a cloth spread thereon, one upon the other, (Kusha below, deerskin in the middle and cloth uppermost), neither very high nor very low."
         ),
         Verse(
             verse_id = 12,
@@ -86,8 +86,8 @@ fun getEnglishChapter6(): List<Verse>{
         Verse(
             verse_id = 14,
             verse_name = "Verse 14",
-            verse = "प्रशान्तात्मा विगतभीर्ब्रह्मचारिव्रते स्थितः।\\n\\nमनः संयम्य मच्चित्तो युक्त आसीत मत्परः।।\n",
-            verse_meaning = "Firm in the vow of complete chastity and fearless, keeping himself perfectly calm and with the mind held in restraint and fixed on Me, the vigilant Yog∂ should sit absorbed in Me."
+            verse = "प्रशान्तात्मा विगतभीर्ब्रह्मचारिव्रते स्थितः।\nमनः संयम्य मच्चित्तो युक्त आसीत मत्परः।।\n",
+            verse_meaning = "Firm in the vow of complete chastity and fearless, keeping himself perfectly calm and with the mind held in restraint and fixed on Me, the vigilant Yogi should sit absorbed in Me."
         ),
         Verse(
             verse_id = 15,
@@ -117,12 +117,12 @@ fun getEnglishChapter6(): List<Verse>{
             verse_id = 19,
             verse_name = "Verse 19",
             verse = "यथा दीपो निवातस्थो नेङ्गते सोपमा स्मृता।\nयोगिनो यतचित्तस्य युञ्जतो योगमात्मनः।।\n",
-            verse_meaning = "As a flame does not flicker in a windless place, such is stated to be the picture of the disciplined mind of the Yog∂ practising meditation on God."
+            verse_meaning = "As a flame does not flicker in a windless place, such is stated to be the picture of the disciplined mind of the Yogi practising meditation on God."
         ),
         Verse(
             verse_id = 20,
             verse_name = "Verse 20",
-            verse = "यत्रोपरमते चित्तं निरुद्धं योगसेवया।\nयत्र चैवात्मनाऽऽत्मानं पश्यन्नात्मनि तुष्यति।।\n",
+            verse = "यत्रोपरमते चित्तं निरुद्धं योगसेवया।\nयत्र चैवात्मनात्मानं पश्यन्नात्मनि तुष्यति।।\n",
             verse_meaning = "The state in which, the Chitta (mind-stuff) subdued through the practice of Yoga, becomes passive, and in which realizing God through subtle reasoning purified by meditation on God; the soul rejoices only in God;"
         ),
         Verse(
@@ -165,7 +165,7 @@ fun getEnglishChapter6(): List<Verse>{
             verse_id = 27,
             verse_name = "Verse 27",
             verse = "प्रशान्तमनसं ह्येनं योगिनं सुखमुत्तमम्।\nउपैति शान्तरजसं ब्रह्मभूतमकल्मषम्।।\n",
-            verse_meaning = "For, to the Yog∂ whose mind is perfectly serene, who is sinless, whose passion is subdued, and who is identified with Brahma, the embodiment of Truth, Knowledge and Bliss, supreme happiness comes as a matter of course."
+            verse_meaning = "For, to the Yogi whose mind is perfectly serene, who is sinless, whose passion is subdued, and who is identified with Brahma, the embodiment of Truth, Knowledge and Bliss, supreme happiness comes as a matter of course."
         ),
         Verse(
             verse_id = 28,
@@ -255,7 +255,7 @@ fun getEnglishChapter6(): List<Verse>{
             verse_id = 42,
             verse_name = "Verse 42",
             verse = "अथवा योगिनामेव कुले भवति धीमताम्।\nएतद्धि दुर्लभतरं लोके जन्म यदीदृशम्।।\n",
-            verse_meaning = "Or (if he is possessed of dispassion) then not attaining to those regions he is born in the family of enlightened Yog∂s; but such a birth in this world is very difficult to obtain."
+            verse_meaning = "Or (if he is possessed of dispassion) then not attaining to those regions he is born in the family of enlightened Yogis; but such a birth in this world is very difficult to obtain."
         ),
         Verse(
             verse_id = 43,
@@ -285,7 +285,7 @@ fun getEnglishChapter6(): List<Verse>{
             verse_id = 47,
             verse_name = "Verse 47",
             verse = "योगिनामपि सर्वेषां मद्गतेनान्तरात्मना।\nश्रद्धावान्भजते यो मां स मे युक्ततमो मतः।।\n",
-            verse_meaning = "Of all Yog∂s, again, he who devoutly worships Me with his mind focussed on Me is considered by Me to be the best Yogi."
+            verse_meaning = "Of all Yogis, again, he who devoutly worships Me with his mind focussed on Me is considered by Me to be the best Yogi."
         )
     )
 }
