@@ -128,7 +128,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                     )
                                 }
                                 else{
-                                    Toast.makeText(context, "Enter valid chapter number!", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(context, "Enter valid chapter number!", Toast.LENGTH_SHORT).show()
                                 }
                             }
 
@@ -152,7 +152,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                     }
                                 }
                                 else{
-                                    Toast.makeText(context, "Enter valid verse number!", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(context, "Enter valid verse number!", Toast.LENGTH_SHORT).show()
                                 }
                             }
 
