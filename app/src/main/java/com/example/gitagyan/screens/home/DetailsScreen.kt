@@ -48,9 +48,8 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)) {
         Surface(modifier = Modifier
-            .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
-            .width(1000.dp)
-            .height(500.dp),
+            .padding(15.dp)
+            .fillMaxSize(),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black) {

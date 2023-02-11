@@ -55,7 +55,7 @@ fun Verses(chapter: Chapter, verseId: String){
     Surface(modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)) {
         Surface(modifier = Modifier
-            .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
+            .padding(15.dp)
             .fillMaxSize(),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
