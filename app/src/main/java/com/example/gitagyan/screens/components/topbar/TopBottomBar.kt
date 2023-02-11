@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
@@ -19,14 +20,17 @@ fun TopBottomBar(navController:NavController){
     Scaffold(
         topBar = {
             TopAppBar(backgroundColor = Color(0xFFFFFFFF)) {
-                Spacer(modifier = Modifier.padding(start = 145.dp))
-                Text(text = "Gita Gyan",
-                    color = Color(0xFF000000),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    fontFamily = FontFamily.Serif,
-                    style = MaterialTheme.typography.caption
-                )
+                Row(modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = "Gita Gyan",
+                        color = Color(0xFF000000),
+                        fontSize = 20.sp,
+                        fontWeight = FontWeight.Bold,
+                        fontFamily = FontFamily.Serif,
+                        style = MaterialTheme.typography.caption
+                    )
+                }
             }
         },
         bottomBar = {
