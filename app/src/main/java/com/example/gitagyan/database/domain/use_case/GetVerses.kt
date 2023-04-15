@@ -17,15 +17,15 @@ class GetVerses (
             when(verseOrder.orderType){
                 is OrderType.Ascending -> {
                     when(verseOrder){
-                        is VerseOrder.Chapter -> verses.sortedBy { it.chapterId }
-                        is VerseOrder.Verse -> verses.sortedBy { it.verseId }
+                        is VerseOrder.ChapterId -> verses.sortedBy { it.chapterId }
+                        is VerseOrder.VerseId -> verses.sortedBy { it.verseId }
                         is VerseOrder.Date -> verses.sortedBy { it.timestamp }
                     }
                 }
                 is OrderType.Descending -> {
                     when(verseOrder){
-                        is VerseOrder.Chapter -> verses.sortedByDescending { it.chapterId }
-                        is VerseOrder.Verse -> verses.sortedByDescending { it.verseId }
+                        is VerseOrder.ChapterId -> verses.sortedByDescending { it.chapterId }
+                        is VerseOrder.VerseId -> verses.sortedByDescending { it.verseId }
                         is VerseOrder.Date -> verses.sortedByDescending { it.timestamp }
                     }
                 }
