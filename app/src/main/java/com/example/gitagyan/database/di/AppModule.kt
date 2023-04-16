@@ -5,10 +5,7 @@ import androidx.room.Room
 import com.example.gitagyan.database.data.data_source.VerseDatabase
 import com.example.gitagyan.database.data.repository.VerseRepositoryImplementation
 import com.example.gitagyan.database.domain.repository.VerseRepository
-import com.example.gitagyan.database.domain.use_case.AddVerse
-import com.example.gitagyan.database.domain.use_case.DeleteVerse
-import com.example.gitagyan.database.domain.use_case.GetVerses
-import com.example.gitagyan.database.domain.use_case.VerseUseCases
+import com.example.gitagyan.database.domain.use_case.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
