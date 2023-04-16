@@ -48,7 +48,6 @@ fun VerseScreen(navController: NavController, chapter_id: String?, verse_id: Str
 
 @Composable
 fun Verses(chapter: Chapter, verseId: String){
-    chapter.chapter_id
     var id by remember {
         mutableStateOf(verseId.toInt())
     }
