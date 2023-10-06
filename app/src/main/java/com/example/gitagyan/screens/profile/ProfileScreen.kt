@@ -27,7 +27,7 @@ fun ProfileScreen(navController: NavController){
 
 @Composable
 fun Profile(){
-    Column() {
+    Column{
         Surface(modifier = Modifier.fillMaxSize(),
             shape = RoundedCornerShape(corner = CornerSize(10.dp)),
             color = Color.White) {

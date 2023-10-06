@@ -23,21 +23,20 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.R
-import com.example.gitagyan.data.Chapter
+import com.example.gitagyan.data.english.Chapter
 import com.example.gitagyan.data.english.getEnglishChapters
 import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
+
 
 @Composable
 fun DetailsScreen(navController: NavController, chapterId: String?){
     val chapters = getEnglishChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
-        for (chapter in chapters){
-            if(chapterId == chapter.chapter_id){
-                Details(chapter = chapter){ chapterId, verseId ->
-                    navController.navigate(route = AppScreens.VerseScreen.name + "/$chapterId" + "/$verseId")
-                }
+        if (chapterId != null) {
+            Details(chapter = chapters[chapterId.toInt()-1]){ chapterId, verseId ->
+                navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.toInt()-1}" + "/$verseId")
             }
         }
     }
@@ -62,18 +61,18 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                     Image(painter = painterResource(id = R.drawable.krishna_arjuna),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds)
-                    
+
                     Spacer(modifier = Modifier.padding(5.dp))
 
                     Text(
-                        text = "Chapter " + chapter.chapter_id,
+                        text = "Chapter " + chapter.chapterId,
                         color = Color(0xFFFD950E),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.SemiBold,
                         style = MaterialTheme.typography.caption
                     )
                     Text(
-                        text = chapter.chapter_name,
+                        text = chapter.chapterName,
                         color = Color(0xFFFD950E),
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 20.sp,
@@ -82,7 +81,7 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                     Text(buildAnnotatedString {
                         withStyle(style = SpanStyle(color = Color(0xFFFD950E),
                             fontSize = 15.sp)){
-                            append("Total Verses : "+chapter.total_verses)
+                            append("Total Verses : "+chapter.totalVerses)
                         }
                     }, modifier = Modifier.padding(5.dp))
 
@@ -91,7 +90,7 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                         .width(100.dp)
                         .height(55.dp)
                         .clickable {
-                            onItemClick(chapter.chapter_id, "0")
+                            onItemClick(chapter.chapterId, "0")
                         },
                         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                         backgroundColor = Color(0xFFFD950E),
@@ -103,7 +102,7 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                     }
 
                     Divider(modifier = Modifier.padding(5.dp),
-                    color = Color.LightGray)
+                        color = Color.LightGray)
 
                     Column(modifier = Modifier
                         .padding(1.dp)
