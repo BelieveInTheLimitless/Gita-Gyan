@@ -1,8 +1,8 @@
 package com.example.gitagyan.data.english
 
 data class Verse(
-    val verse_id : Int,
-    val verse_name : String,
+    val verseId : Int,
+    val verseName : String,
     val verse : String,
-    val verse_meaning : String
+    val verseMeaning : String
 )

@@ -5,148 +5,148 @@ import com.example.gitagyan.data.english.Verse
 fun getEnglishChapter16(): List<Verse>{
     return listOf(
         Verse(
-            verse_id = 1,
-            verse_name = "Verse 1",
+            verseId = 1,
+            verseName = "Verse 1",
             verse = "श्री भगवानुवाच\n\nअभयं सत्त्वसंशुद्धिः ज्ञानयोगव्यवस्थितिः।\nदानं दमश्च यज्ञश्च स्वाध्यायस्तप आर्जवम्।।\n",
-            verse_meaning = "Absolute fearlessness, perfect purity of mind, constant fixity in the Yoga of meditation for the sake of Self-realization, and even so, charity in its Sattvika form, control of the senses, worship of God and other deities as well as of one's elders including the performance of Agnihotra (pouring oblations into the sacred fire) and other sacred duties, study and teaching of the Vedas and other sacred books as well as the chanting of God's names and glories, suffering hardships for the discharge of one's sacred obligations and uprightness of mind as well as of the body and senses."
+            verseMeaning = "Absolute fearlessness, perfect purity of mind, constant fixity in the Yoga of meditation for the sake of Self-realization, and even so, charity in its Sattvika form, control of the senses, worship of God and other deities as well as of one's elders including the performance of Agnihotra (pouring oblations into the sacred fire) and other sacred duties, study and teaching of the Vedas and other sacred books as well as the chanting of God's names and glories, suffering hardships for the discharge of one's sacred obligations and uprightness of mind as well as of the body and senses."
         ),
         Verse(
-            verse_id = 2,
-            verse_name = "Verse 2",
+            verseId = 2,
+            verseName = "Verse 2",
             verse = "अहिंसा सत्यमक्रोधस्त्यागः शान्तिरपैशुनम्।\nदया भूतेष्वलोलुप्त्वं मार्दवं ह्रीरचापलम्।।\n",
-            verse_meaning = "Non-violence in thought, word and deed, truthfulness and geniality of speech, absence of anger even on provocation, disclaiming doership in respect of actions, quietude or composure of mind, abstaining from slander, compassion towards all creatures, absence of attachment to the objects of senses even during their contact with the senses, mildness, a sense of shame in transgressing the scriptures or social conventions, and abstaining from frivolous pursuits;"
+            verseMeaning = "Non-violence in thought, word and deed, truthfulness and geniality of speech, absence of anger even on provocation, disclaiming doership in respect of actions, quietude or composure of mind, abstaining from slander, compassion towards all creatures, absence of attachment to the objects of senses even during their contact with the senses, mildness, a sense of shame in transgressing the scriptures or social conventions, and abstaining from frivolous pursuits;"
         ),
         Verse(
-            verse_id = 3,
-            verse_name = "Verse 3",
+            verseId = 3,
+            verseName = "Verse 3",
             verse = "तेजः क्षमा धृतिः शौचमद्रोहो नातिमानिता।\nभवन्ति सम्पदं दैवीमभिजातस्य भारत।।\n",
-            verse_meaning = "Sublimity, forbearance, fortitude, external purity, bearing enmity to none and absence of self-esteem - these are the marks of him, who is born with the divine endowments, Arjuna."
+            verseMeaning = "Sublimity, forbearance, fortitude, external purity, bearing enmity to none and absence of self-esteem - these are the marks of him, who is born with the divine endowments, Arjuna."
         ),
         Verse(
-            verse_id = 4,
-            verse_name = "Verse 4",
+            verseId = 4,
+            verseName = "Verse 4",
             verse = "दम्भो दर्पोऽभिमानश्च क्रोधः पारुष्यमेव च।\nअज्ञानं चाभिजातस्य पार्थ सम्पदमासुरीम्।।\n",
-            verse_meaning = "Hypocrisy, arrogance pride and anger, sternness and ignorance too ó these are the marks of him, who is born with demoniac properties."
+            verseMeaning = "Hypocrisy, arrogance pride and anger, sternness and ignorance too ó these are the marks of him, who is born with demoniac properties."
         ),
         Verse(
-            verse_id = 5,
-            verse_name = "Verse 5",
+            verseId = 5,
+            verseName = "Verse 5",
             verse = "दैवी सम्पद्विमोक्षाय निबन्धायासुरी मता।\nमा शुचः सम्पदं दैवीमभिजातोऽसि पाण्डव।।\n",
-            verse_meaning = "The divine endowment has been recognized as conducive to liberation, and the demoniac one as leading to bondage. Grieve not, Arjuna, for you are born with the divine propensities."
+            verseMeaning = "The divine endowment has been recognized as conducive to liberation, and the demoniac one as leading to bondage. Grieve not, Arjuna, for you are born with the divine propensities."
         ),
         Verse(
-            verse_id = 6,
-            verse_name = "Verse 6",
+            verseId = 6,
+            verseName = "Verse 6",
             verse = "द्वौ भूतसर्गौ लोकेऽस्मिन् दैव आसुर एव च।\nदैवो विस्तरशः प्रोक्त आसुरं पार्थ मे श्रृणु।।\n",
-            verse_meaning = "There are only two types of men in this world, Arjuna, the one possessing a divine nature and the other possessing a demoniac disposition. Of these, the type possessing divine nature has been dealt with at length; now hear in detail from Me about the type possessing demoniac disposition."
+            verseMeaning = "There are only two types of men in this world, Arjuna, the one possessing a divine nature and the other possessing a demoniac disposition. Of these, the type possessing divine nature has been dealt with at length; now hear in detail from Me about the type possessing demoniac disposition."
         ),
         Verse(
-            verse_id = 7,
-            verse_name = "Verse 7",
+            verseId = 7,
+            verseName = "Verse 7",
             verse = "प्रवृत्तिं च निवृत्तिं च जना न विदुरासुराः।\nन शौचं नापि चाचारो न सत्यं तेषु विद्यते।।\n",
-            verse_meaning = "Men possessing a demoniac disposition know not what is right activity and what is right abstinence from activity. Hence they possess neither purity (external or internal) nor good conduct nor even truthfulness."
+            verseMeaning = "Men possessing a demoniac disposition know not what is right activity and what is right abstinence from activity. Hence they possess neither purity (external or internal) nor good conduct nor even truthfulness."
         ),
         Verse(
-            verse_id = 8,
-            verse_name = "Verse 8",
+            verseId = 8,
+            verseName = "Verse 8",
             verse = "असत्यमप्रतिष्ठं ते जगदाहुरनीश्वरम्।\nअपरस्परसम्भूतं किमन्यत्कामहैतुकम्।।\n",
-            verse_meaning = "Men of demoniac disposition say this world is without any foundation, absolutely unreal and godless, brought forth by mutual union of the male and female and hence conceived in lust; what else than this?"
+            verseMeaning = "Men of demoniac disposition say this world is without any foundation, absolutely unreal and godless, brought forth by mutual union of the male and female and hence conceived in lust; what else than this?"
         ),
         Verse(
-            verse_id = 9,
-            verse_name = "Verse 9",
+            verseId = 9,
+            verseName = "Verse 9",
             verse = "एतां दृष्टिमवष्टभ्य नष्टात्मानोऽल्पबुद्धयः।\nप्रभवन्त्युग्रकर्माणः क्षयाय जगतोऽहिताः।।\n",
-            verse_meaning = "Clinging to this false view these slow-witted men of vile disposition and terrible deeds, are wrong doers to mankind for the destruction of the world."
+            verseMeaning = "Clinging to this false view these slow-witted men of vile disposition and terrible deeds, are wrong doers to mankind for the destruction of the world."
         ),
         Verse(
-            verse_id = 10,
-            verse_name = "Verse 10",
+            verseId = 10,
+            verseName = "Verse 10",
             verse = "काममाश्रित्य दुष्पूरं दम्भमानमदान्विताः।\nमोहाद्गृहीत्वासद्ग्राहान्प्रवर्तन्तेऽशुचिव्रताः।।\n",
-            verse_meaning = "Cherishing insatiable desires and embracing false doctrines through ignorance, these men of impure conduct move in this world, full of hypocrisy, pride and arrogance."
+            verseMeaning = "Cherishing insatiable desires and embracing false doctrines through ignorance, these men of impure conduct move in this world, full of hypocrisy, pride and arrogance."
         ),
         Verse(
-            verse_id = 11,
-            verse_name = "Verse 11",
+            verseId = 11,
+            verseName = "Verse 11",
             verse = "चिन्तामपरिमेयां च प्रलयान्तामुपाश्रिताः।\nकामोपभोगपरमा एतावदिति निश्िचताः।।\n",
-            verse_meaning = "Giving themselves up to innumerable cares ending only with death, they remain devoted to the enjoyment of sensuous pleasures and are firm in their belief that this is the highest limit of joy."
+            verseMeaning = "Giving themselves up to innumerable cares ending only with death, they remain devoted to the enjoyment of sensuous pleasures and are firm in their belief that this is the highest limit of joy."
         ),
         Verse(
-            verse_id = 12,
-            verse_name = "Verse 12",
+            verseId = 12,
+            verseName = "Verse 12",
             verse = "आशापाशशतैर्बद्धाः कामक्रोधपरायणाः।\nईहन्ते कामभोगार्थमन्यायेनार्थसञ्चयान्।।\n",
-            verse_meaning = "Held in bondage by hundreds of ties of expectation and wholly giving themselves up to lust and anger, they strive to amass by unfair means hoards of money and other objects for the enjoyment of sensuous pleasures."
+            verseMeaning = "Held in bondage by hundreds of ties of expectation and wholly giving themselves up to lust and anger, they strive to amass by unfair means hoards of money and other objects for the enjoyment of sensuous pleasures."
         ),
         Verse(
-            verse_id = 13,
-            verse_name = "Verse 13",
+            verseId = 13,
+            verseName = "Verse 13",
             verse = "इदमद्य मया लब्धमिमं प्राप्स्ये मनोरथम्।\nइदमस्तीदमपि मे भविष्यति पुनर्धनम्।।\n",
-            verse_meaning = "They say to themselves, ìThis much has been secured by me today and now I shall realize this ambition. So much wealth is already with me and yet again this shall be mine."
+            verseMeaning = "They say to themselves, ìThis much has been secured by me today and now I shall realize this ambition. So much wealth is already with me and yet again this shall be mine."
         ),
         Verse(
-            verse_id = 14,
-            verse_name = "Verse 14",
+            verseId = 14,
+            verseName = "Verse 14",
             verse = "असौ मया हतः शत्रुर्हनिष्ये चापरानपि।\nईश्वरोऽहमहं भोगी सिद्धोऽहं बलवान्सुखी।।\n",
-            verse_meaning = "That enemy has been slain by me and I shall kill those others too. I am the lord of all, the enjoyer of all power, I am endowed with all occult powers, and am mighty and happy."
+            verseMeaning = "That enemy has been slain by me and I shall kill those others too. I am the lord of all, the enjoyer of all power, I am endowed with all occult powers, and am mighty and happy."
         ),
         Verse(
-            verse_id = 15,
-            verse_name = "Verse 15",
+            verseId = 15,
+            verseName = "Verse 15",
             verse = "आढ्योऽभिजनवानस्मि कोऽन्योऽस्ति सदृशो मया।\nयक्ष्ये दास्यामि मोदिष्य इत्यज्ञानविमोहिताः।।\n",
-            verse_meaning = "Continued on Verse 16"
+            verseMeaning = "Continued on Verse 16"
         ),
         Verse(
-            verse_id = 16,
-            verse_name = "Verse 16",
+            verseId = 16,
+            verseName = "Verse 16",
             verse = "अनेकचित्तविभ्रान्ता मोहजालसमावृताः।\nप्रसक्ताः कामभोगेषु पतन्ति नरकेऽशुचौ।।\n",
-            verse_meaning = "\"I am wealthy and own a large family; who else is equal to me? I will sacrifice to gods, will give alms, I will make merry,\" Thus deluded by ignorance, enveloped in the mesh of delusion and addicted to the enjoyment of sensuous pleasures, their minds bewildered by numerous thoughts, these men of devilish disposition fall into the foulest hell. (15 and 16)"
+            verseMeaning = "\"I am wealthy and own a large family; who else is equal to me? I will sacrifice to gods, will give alms, I will make merry,\" Thus deluded by ignorance, enveloped in the mesh of delusion and addicted to the enjoyment of sensuous pleasures, their minds bewildered by numerous thoughts, these men of devilish disposition fall into the foulest hell. (15 and 16)"
         ),
         Verse(
-            verse_id = 17,
-            verse_name = "Verse 17",
+            verseId = 17,
+            verseName = "Verse 17",
             verse = "आत्मसम्भाविताः स्तब्धा धनमानमदान्विताः।\nयजन्ते नामयज्ञैस्ते दम्भेनाविधिपूर्वकम्।।\n",
-            verse_meaning = "Intoxicated by wealth and honour, those self-conceited and haughty men perform sacrifices only in name for ostentation, without following the sacred rituals."
+            verseMeaning = "Intoxicated by wealth and honour, those self-conceited and haughty men perform sacrifices only in name for ostentation, without following the sacred rituals."
         ),
         Verse(
-            verse_id = 18,
-            verse_name = "Verse 18",
+            verseId = 18,
+            verseName = "Verse 18",
             verse = "अहङ्कारं बलं दर्पं कामं क्रोधं च संश्रिताः।\nमामात्मपरदेहेषु प्रद्विषन्तोऽभ्यसूयकाः।।\n",
-            verse_meaning = "Given over to egotism, brute force, arrogance, lust and anger etc., and calumniating others, they despise Me (the in-dweller), dwelling in their own bodies as well as in those of others."
+            verseMeaning = "Given over to egotism, brute force, arrogance, lust and anger etc., and calumniating others, they despise Me (the in-dweller), dwelling in their own bodies as well as in those of others."
         ),
         Verse(
-            verse_id = 19,
-            verse_name = "Verse 19",
+            verseId = 19,
+            verseName = "Verse 19",
             verse = "तानहं द्विषतः क्रूरान्संसारेषु नराधमान्।\nक्षिपाम्यजस्रमशुभानासुरीष्वेव योनिषु।।\n",
-            verse_meaning = "Those haters, sinful, cruel and vilest among men, I cast again and again into demoniacal wombs in this world."
+            verseMeaning = "Those haters, sinful, cruel and vilest among men, I cast again and again into demoniacal wombs in this world."
         ),
         Verse(
-            verse_id = 20,
-            verse_name = "Verse 20",
+            verseId = 20,
+            verseName = "Verse 20",
             verse = "असुरीं योनिमापन्ना मूढा जन्मनि जन्मनि।\nमामप्राप्यैव कौन्तेय ततो यान्त्यधमां गतिम्।।\n",
-            verse_meaning = "Failing to reach Me, Arjuna, those stupid souls are born life after life in demoniac wombs and then verily sink down to a still lower plane."
+            verseMeaning = "Failing to reach Me, Arjuna, those stupid souls are born life after life in demoniac wombs and then verily sink down to a still lower plane."
         ),
         Verse(
-            verse_id = 21,
-            verse_name = "Verse 21",
+            verseId = 21,
+            verseName = "Verse 21",
             verse = "त्रिविधं नरकस्येदं द्वारं नाशनमात्मनः।\nकामः क्रोधस्तथा लोभस्तस्मादेतत्त्रयं त्यजेत्।।\n",
-            verse_meaning = "Desire, anger and greed - these triple gates of hell, bring about the downfall of the soul. Therefore, one should shun all these three."
+            verseMeaning = "Desire, anger and greed - these triple gates of hell, bring about the downfall of the soul. Therefore, one should shun all these three."
         ),
         Verse(
-            verse_id = 22,
-            verse_name = "Verse 22",
+            verseId = 22,
+            verseName = "Verse 22",
             verse = "एतैर्विमुक्तः कौन्तेय तमोद्वारैस्त्रिभिर्नरः।\nआचरत्यात्मनः श्रेयस्ततो याति परां गतिम्।।\n",
-            verse_meaning = "Freed from these three gates of hell, man works for his own salvation and thereby attains the supreme goal, i.e., God."
+            verseMeaning = "Freed from these three gates of hell, man works for his own salvation and thereby attains the supreme goal, i.e., God."
         ),
         Verse(
-            verse_id = 23,
-            verse_name = "Verse 23",
+            verseId = 23,
+            verseName = "Verse 23",
             verse = "यः शास्त्रविधिमुत्सृज्य वर्तते कामकारतः।\nन स सिद्धिमवाप्नोति न सुखं न परां गतिम्।।\n",
-            verse_meaning = "Discarding the injunctions of the scriptures, he who acts in an arbitrary way according to his own sweet will, such a person neither attains perfection, nor the supreme goal, nor even happiness."
+            verseMeaning = "Discarding the injunctions of the scriptures, he who acts in an arbitrary way according to his own sweet will, such a person neither attains perfection, nor the supreme goal, nor even happiness."
         ),
         Verse(
-            verse_id = 24,
-            verse_name = "Verse 24",
+            verseId = 24,
+            verseName = "Verse 24",
             verse = "तस्माच्छास्त्रं प्रमाणं ते कार्याकार्यव्यवस्थितौ।\nज्ञात्वा शास्त्रविधानोक्तं कर्म कर्तुमिहार्हसि।।\n",
-            verse_meaning = "Therefore, the scripture alone is your guide in determining what should be done and what should not be done. Knowing this, you ought to perform only such action as is ordained by the scriptures."
+            verseMeaning = "Therefore, the scripture alone is your guide in determining what should be done and what should not be done. Knowing this, you ought to perform only such action as is ordained by the scriptures."
         )
     )
 }
