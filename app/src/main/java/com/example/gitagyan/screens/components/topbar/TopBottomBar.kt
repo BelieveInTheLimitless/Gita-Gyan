@@ -3,6 +3,8 @@ package com.example.gitagyan.screens.components.topbar
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,20 +18,42 @@ import com.example.gitagyan.screens.components.bottombar.BottomNavigationBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun TopBottomBar(navController:NavController){
+fun TopBottomBar(navController:NavController,
+                 isMainScreen: Boolean = false){
     Scaffold(
         topBar = {
             TopAppBar(backgroundColor = Color(0xFFFFFFFF)) {
+
                 Row(modifier = Modifier.fillMaxSize(),
-                    horizontalArrangement = Arrangement.Center,
+                    horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = "Gita Gyan",
-                        color = Color(0xFF000000),
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontFamily = FontFamily.Serif,
-                        style = MaterialTheme.typography.caption
-                    )
+                    if (!isMainScreen){
+                        IconButton(onClick = {
+                            navController.popBackStack()
+                        }) {
+                            Icon(imageVector = Icons.Default.ArrowBack,
+                                contentDescription = "Back Arrow")
+                        }
+
+                        Text(text = "Gita Gyan",
+                            modifier = Modifier.padding(start = 90.dp),
+                            color = Color(0xFF000000),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Serif,
+                            style = MaterialTheme.typography.caption
+                        )
+                    }
+                    else{
+                        Text(text = "Gita Gyan",
+                            modifier = Modifier.padding(start = 138.dp),
+                            color = Color(0xFF000000),
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = FontFamily.Serif,
+                            style = MaterialTheme.typography.caption
+                        )
+                    }
                 }
             }
         },

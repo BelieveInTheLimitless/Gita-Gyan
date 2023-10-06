@@ -32,7 +32,7 @@ import com.example.gitagyan.screens.components.topbar.TopBottomBar
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(navController: NavController){
-    TopBottomBar(navController = navController)
+    TopBottomBar(navController = navController, isMainScreen = true)
     Box(modifier = Modifier.padding(top = 45.dp, bottom = 45.dp)) {
         MainContent(navController = navController)
     }
