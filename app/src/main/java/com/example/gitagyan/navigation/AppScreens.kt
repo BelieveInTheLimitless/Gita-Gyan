@@ -7,7 +7,6 @@ enum class AppScreens {
     DetailsScreen,
     VerseScreen,
     SearchScreen,
-    SaveScreen,
+    FavouriteScreen,
     ProfileScreen,
-    SettingsScreen
 }

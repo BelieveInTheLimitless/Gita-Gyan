@@ -27,8 +27,8 @@ fun BottomNavigationBar(navController: NavController){
                     icon = Icons.Default.Search
                 ),
                 BottomNavigationItem(
-                    name = "Saved",
-                    route = AppScreens.SaveScreen.name,
+                    name = "Favourite",
+                    route = AppScreens.FavouriteScreen.name,
                     icon = Icons.Default.Favorite
                 ),
                 BottomNavigationItem(
@@ -43,6 +43,5 @@ fun BottomNavigationBar(navController: NavController){
             }
         )
     }
-
 }
 
