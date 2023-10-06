@@ -8,6 +8,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -42,17 +45,23 @@ fun SearchScreen(navController: NavController){
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
-    Surface(modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFFD950E)) {
-        Surface(modifier = Modifier
-            .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
-            .width(1000.dp)
-            .height(500.dp),
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color(0xFFFD950E)
+    ) {
+        Surface(
+            modifier = Modifier
+                .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
+                .width(1000.dp)
+                .height(500.dp),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
-            contentColor = Color.Black) {
-            Row(Modifier.padding(top = 45.dp),
-                horizontalArrangement = Arrangement.Center) {
+            contentColor = Color.Black
+        ) {
+            Row(
+                Modifier.padding(top = 45.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
                 Box {
                     Column(
                         modifier = Modifier.padding(10.dp),
@@ -95,12 +104,13 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
 
-                            Text(text = "Search",
+                            Text(
+                                text = "Search",
                                 modifier = Modifier.padding(10.dp),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
                                 fontFamily = FontFamily.Serif,
-                                style = MaterialTheme.typography.caption
+                                style = MaterialTheme.typography.titleMedium
                             )
 
                             InputField(valueState = chapterId,
@@ -114,8 +124,8 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                 }
                             )
 
-                            if(chapterId.value.isNotEmpty()){
-                                if(chapterId.value.toInt() > 0 && (chapterId.value.toInt() <= 18)){
+                            if (chapterId.value.isNotEmpty()) {
+                                if (chapterId.value.toInt() > 0 && (chapterId.value.toInt() <= 18)) {
                                     InputField(valueState = verseId,
                                         labelId = "Enter Verse Number",
                                         enabled = true,
@@ -126,33 +136,45 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                             keyboardController?.hide()
                                         }
                                     )
-                                }
-                                else{
-                                    Toast.makeText(context, "Enter valid chapter number!", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "Enter valid chapter number!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                             }
 
-                            if(verseId.value.isNotEmpty()){
-                                if((verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt()-1].total_verses.toInt())){
-                                    Button(onClick = {
-                                        navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value}" + "/${verseId.value.toInt()-1}") },
+                            if (verseId.value.isNotEmpty()) {
+                                if ((verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt() - 1].totalVerses.toInt())) {
+                                    Button(
+                                        onClick = {
+                                            navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value.toInt() - 1}" + "/${verseId.value.toInt() - 1}")
+                                        },
                                         modifier = Modifier
-                                            .padding(10.dp)
-                                            .width(100.dp)
+                                            .padding(7.dp)
+                                            .width(120.dp)
                                             .height(55.dp),
                                         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
-                                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFFD950E))
+                                        colors = ButtonDefaults.buttonColors(
+                                            containerColor = Color(
+                                                0xFFFD950E
+                                            )
+                                        )
                                     ) {
-                                        Text(text = "Search",
+                                        Text(
+                                            text = "Search",
                                             color = Color.White,
-                                            fontSize = 15.sp,
-                                            modifier = Modifier.padding(4.dp),
+                                            fontSize = 18.sp,
                                             textAlign = TextAlign.Center
                                         )
                                     }
-                                }
-                                else{
-                                    Toast.makeText(context, "Enter valid verse number!", Toast.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(
+                                        context,
+                                        "Enter valid verse number!",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                 }
                             }
 
@@ -178,7 +200,7 @@ fun InputField(
     OutlinedTextField(
         value = valueState.value,
         onValueChange = { valueState.value = it },
-        label = { Text(text =  labelId) },
+        label = { Text(text = labelId) },
         singleLine = isSingleLine,
         textStyle = TextStyle(fontSize = 15.sp, color = Color.Black),
         modifier = modifier
@@ -199,6 +221,3 @@ fun InputField(
             disabledPlaceholderColor = Color.Black)
     )
 }
-
-
-
