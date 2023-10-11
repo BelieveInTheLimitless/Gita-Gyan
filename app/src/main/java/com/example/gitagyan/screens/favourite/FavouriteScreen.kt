@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
@@ -27,11 +28,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.gitagyan.data.english.getEnglishChapters
+import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.data.content.english.getEnglishChapters
+import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.model.Favourite
 import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
@@ -69,7 +73,7 @@ fun VerseItem(
     favouriteViewModel: FavouriteViewModel,
     onItemClick: (String, String) -> Unit){
 
-    val chapters = getEnglishChapters()
+    val chapters = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
 
     val context = LocalContext.current
 
@@ -89,7 +93,8 @@ fun VerseItem(
             verticalAlignment = Alignment.CenterVertically) {
             Column(
                 modifier = Modifier
-                    .padding(5.dp),
+                    .padding(5.dp)
+                    .width(300.dp),
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
@@ -97,17 +102,19 @@ fun VerseItem(
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.caption,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
                 )
                 Text(
-                    text = "Chapter ${favourite.chapterId}",
+                    text = chapters[favourite.chapterId.toInt()-1].chapter,
                     color = Color.White,
                     fontWeight = FontWeight.W400,
                     fontSize = 15.sp,
                     style = MaterialTheme.typography.caption
                 )
                 Text(
-                    text = "Verse ${favourite.verseId}",
+                    text = chapters[favourite.chapterId.toInt()-1].chapterContent[favourite.verseId.toInt()-1].verseName,
                     fontWeight = FontWeight.W400,
                     fontSize = 15.sp,
                     style = MaterialTheme.typography.caption,
