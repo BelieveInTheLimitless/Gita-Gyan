@@ -1,6 +1,6 @@
-package com.example.gitagyan.data.english.chapters
+package com.example.gitagyan.data.content.english.chapters
 
-import com.example.gitagyan.data.english.Verse
+import com.example.gitagyan.data.content.Verse
 
 fun getEnglishChapter14(): List<Verse>{
     return listOf(

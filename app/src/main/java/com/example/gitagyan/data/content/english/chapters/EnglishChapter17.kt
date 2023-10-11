@@ -1,6 +1,6 @@
-package com.example.gitagyan.data.english.chapters
+package com.example.gitagyan.data.content.english.chapters
 
-import com.example.gitagyan.data.english.Verse
+import com.example.gitagyan.data.content.Verse
 
 fun getEnglishChapter17(): List<Verse>{
     return listOf(
@@ -15,7 +15,7 @@ fun getEnglishChapter17(): List<Verse>{
             verseName = "Verse 2",
             verse = "श्री भगवानुवाच\n\nत्रिविधा भवति श्रद्धा देहिनां सा स्वभावजा।\nसात्त्विकी राजसी चैव तामसी चेति तां श्रृणु।।\n",
             verseMeaning = "Shri Bhagavan said: That untutored innate faith of men is of three kinds - Sattvika, Rajasika and Tamasika. Hear of it from Me.",
-            ),
+        ),
         Verse(
             verseId = 3,
             verseName = "Verse 3",

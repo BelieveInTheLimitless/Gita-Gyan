@@ -1,8 +1,8 @@
-package com.example.gitagyan.data.english
+package com.example.gitagyan.data.content
 
 data class Chapter(
-    val chapterLanguage : String,
     val chapterId : String,
+    val chapter: String,
     val chapterName : String,
     val description : String,
     val chapterContent : List<Verse>,
