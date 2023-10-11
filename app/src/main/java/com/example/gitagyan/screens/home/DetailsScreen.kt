@@ -23,15 +23,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.R
-import com.example.gitagyan.data.english.Chapter
-import com.example.gitagyan.data.english.getEnglishChapters
+import com.example.gitagyan.data.content.Chapter
+import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.data.content.english.getEnglishChapters
+import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 
 @Composable
 fun DetailsScreen(navController: NavController, chapterId: String?){
-    val chapters = getEnglishChapters()
+    val chapters = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         if (chapterId != null) {
@@ -65,7 +67,7 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                     Spacer(modifier = Modifier.padding(5.dp))
 
                     Text(
-                        text = "Chapter " + chapter.chapterId,
+                        text = chapter.chapter,
                         color = Color(0xFFFD950E),
                         fontSize = 15.sp,
                         fontWeight = FontWeight.SemiBold,
@@ -76,27 +78,30 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                         color = Color(0xFFFD950E),
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 20.sp,
-                        style = MaterialTheme.typography.caption
+                        style = MaterialTheme.typography.caption,
+                        textAlign = TextAlign.Center
                     )
                     Text(buildAnnotatedString {
                         withStyle(style = SpanStyle(color = Color(0xFFFD950E),
                             fontSize = 15.sp)){
-                            append("Total Verses : "+chapter.totalVerses)
+                            append(chapter.totalVerses)
                         }
                     }, modifier = Modifier.padding(5.dp))
 
                     Card(modifier = Modifier
-                        .padding(2.dp)
-                        .width(100.dp)
-                        .height(55.dp)
+                        .padding(5.dp)
                         .clickable {
                             onItemClick(chapter.chapterId, "0")
                         },
                         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                         backgroundColor = Color(0xFFFD950E),
                         contentColor = Color.White) {
-                        Text(text = "Start Reading",
-                            modifier = Modifier.padding(4.dp),
+
+                        val readingLanguage = if (Language.selectedLanguage == "English") "Start Reading" else "पढ़ना शुरू करें"
+
+                        Text(text = readingLanguage,
+                            modifier = Modifier.padding(10.dp),
+                            fontWeight = FontWeight.SemiBold,
                             textAlign = TextAlign.Center
                         )
                     }

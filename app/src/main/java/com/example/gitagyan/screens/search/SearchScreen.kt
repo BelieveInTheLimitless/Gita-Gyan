@@ -30,7 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.R
-import com.example.gitagyan.data.english.getEnglishChapters
+import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.data.content.english.getEnglishChapters
+import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
@@ -75,7 +77,8 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                             contentScale = ContentScale.FillBounds
                         )
 
-                        val chapters = getEnglishChapters()
+                        val chapters =
+                            if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
 
                         val chapterId = remember {
                             mutableStateOf("")
@@ -104,8 +107,15 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
 
+                            val searchLanguage = if (Language.selectedLanguage == "English") "Search" else "खोजे"
+                            val enterChapterLanguage = if (Language.selectedLanguage == "English") "Enter Chapter Number" else "अध्याय क्रमांक"
+                            val enterVerseLanguage = if (Language.selectedLanguage == "English") "Enter Verse Number" else "श्लोक क्रमांक"
+                            val proceedLanguage = if (Language.selectedLanguage == "English") "Proceed" else "आगे बढे"
+                            val chapterErrorMessage = if (Language.selectedLanguage == "English") "Enter Valid Chapter Number" else "सही अध्याय का चयन करे!"
+                            val verseErrorMessage = if (Language.selectedLanguage == "English") "Enter Valid Verse Number" else "सही श्लोक का चयन करे!"
+
                             Text(
-                                text = "Search",
+                                text = searchLanguage,
                                 modifier = Modifier.padding(10.dp),
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
@@ -114,7 +124,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                             )
 
                             InputField(valueState = chapterId,
-                                labelId = "Enter Chapter Number",
+                                labelId = enterChapterLanguage,
                                 enabled = true,
                                 isSingleLine = true,
                                 onAction = KeyboardActions {
@@ -127,7 +137,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                             if (chapterId.value.isNotEmpty()) {
                                 if (chapterId.value.toInt() > 0 && (chapterId.value.toInt() <= 18)) {
                                     InputField(valueState = verseId,
-                                        labelId = "Enter Verse Number",
+                                        labelId = enterVerseLanguage,
                                         enabled = true,
                                         isSingleLine = true,
                                         onAction = KeyboardActions {
@@ -139,22 +149,18 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                 } else {
                                     Toast.makeText(
                                         context,
-                                        "Enter valid chapter number!",
+                                        chapterErrorMessage,
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
                             }
 
                             if (verseId.value.isNotEmpty()) {
-                                if ((verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt() - 1].totalVerses.toInt())) {
+                                if ((verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt() - 1].chapterContent.size)) {
                                     Button(
                                         onClick = {
                                             navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value.toInt() - 1}" + "/${verseId.value.toInt() - 1}")
                                         },
-                                        modifier = Modifier
-                                            .padding(7.dp)
-                                            .width(120.dp)
-                                            .height(55.dp),
                                         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                                         colors = ButtonDefaults.buttonColors(
                                             containerColor = Color(
@@ -163,21 +169,21 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                         )
                                     ) {
                                         Text(
-                                            text = "Search",
+                                            text = proceedLanguage,
+                                            modifier = Modifier.padding(3.dp),
                                             color = Color.White,
-                                            fontSize = 18.sp,
+                                            fontWeight = FontWeight.SemiBold,
                                             textAlign = TextAlign.Center
                                         )
                                     }
                                 } else {
                                     Toast.makeText(
                                         context,
-                                        "Enter valid verse number!",
+                                        verseErrorMessage,
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
                             }
-
                         }
                     }
                 }

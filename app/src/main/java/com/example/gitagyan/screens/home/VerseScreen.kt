@@ -29,15 +29,17 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gitagyan.R
-import com.example.gitagyan.data.english.Chapter
-import com.example.gitagyan.data.english.getEnglishChapters
+import com.example.gitagyan.data.content.Chapter
+import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.data.content.english.getEnglishChapters
+import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.model.Favourite
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 import com.example.gitagyan.screens.favourite.FavouriteViewModel
 
 @Composable
 fun VerseScreen(navController: NavController, favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapterId: String?, verseId: String?) {
-    val chapters = getEnglishChapters()
+    val chapters = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         if (chapterId != null) {
@@ -151,7 +153,7 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                             style = MaterialTheme.typography.caption
                         )
 
-                        if (id == chapter.totalVerses.toInt() - 1) {
+                        if (id == chapter.chapterContent.size - 1) {
                             Card(
                                 modifier = Modifier
                                     .size(35.dp),

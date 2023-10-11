@@ -20,12 +20,15 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.gitagyan.data.english.Chapter
-import com.example.gitagyan.data.english.getEnglishChapters
+import com.example.gitagyan.data.content.Chapter
+import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.data.content.english.getEnglishChapters
+import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
@@ -41,7 +44,7 @@ fun HomeScreen(navController: NavController){
 @Composable
 fun MainContent(
     navController: NavController,
-    chapterList: List<Chapter> = getEnglishChapters()
+    chapterList: List<Chapter> = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
 ){
     Column(modifier = Modifier.padding(10.dp)) {
         LazyColumn{
@@ -79,7 +82,7 @@ fun ChapterRow(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
-                    text = "Chapter "+chapter.chapterId,
+                    text = chapter.chapter,
                     color = Color(0xFFFFFFFF),
                     fontSize = 15.sp,
                     style = MaterialTheme.typography.caption
@@ -88,7 +91,9 @@ fun ChapterRow(
                     color = Color(0xFFFFFFFF),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.caption,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
                 )
 
                 AnimatedVisibility(visible = expanded) {
@@ -96,7 +101,7 @@ fun ChapterRow(
                         Text(buildAnnotatedString {
                             withStyle(style = SpanStyle(color = Color.White,
                                 fontSize = 15.sp)){
-                                append("Total Verses : "+chapter.totalVerses)
+                                append(chapter.totalVerses)
                             }
                         }, modifier = Modifier.padding(6.dp))
 
