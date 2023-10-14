@@ -1,12 +1,28 @@
 # Gita-Gyan
 Gita Gyan is an android app built using Kotlin and Jetpack Compose to spread the knowledge of Shrimad Bhagavad Gita, an ancient heritage of India.
 
-## How it works?
-Main | Details | Verses | Search | Favourite | Profile 
---- | --- | --- |--- |--- |---
-![](https://i.imgur.com/hVPxv73.jpg) | ![](https://i.imgur.com/Rgf8uDN.jpg) | ![](https://i.imgur.com/HhDFAt4.jpg) | ![](https://i.imgur.com/oZe1VTe.jpg) | ![](https://i.imgur.com/A5ASUKz.jpg) |![](https://i.imgur.com/BIuG38q.jpg) 
+## ⚙️ Features
+* List all the chapters present in the Gita and their details
+* Search for a specific verse using chapter & verse number
+* Save favourite verses
+* Available in English & Hindi language currently
 
-## Built With 🛠
+## 🚀 Technology Used
+
+* Programming Language: Kotlin
+* UI & Design: Jetpack Compose (Material UI)
+* Database: ROOM (SQLite under the hood)
+* Data is stored locally using data classes instead of API calls
+
+
+## 📸 Screenshots
+
+||||
+|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
+| ![](https://i.imgur.com/hVPxv73.jpg) | ![](https://i.imgur.com/Rgf8uDN.jpg) | ![](https://i.imgur.com/HhDFAt4.jpg) |
+| ![](https://i.imgur.com/oZe1VTe.jpg) | ![](https://i.imgur.com/A5ASUKz.jpg) | ![](https://i.imgur.com/BIuG38q.jpg) |
+
+## 🛠 Built With 
 
 - [Kotlin](https://developer.android.com/kotlin) - It is a modern statically typed programming language used by over 60% of professional Android developers that helps boost productivity, developer satisfaction, and code safety.
 - [Jetpack Compose](https://developer.android.com/jetpack/compose) - Android’s recommended modern toolkit for building native UI. It simplifies and accelerates UI development on Android. Quickly bring your app to life with less code, powerful tools, and intuitive Kotlin APIs.
