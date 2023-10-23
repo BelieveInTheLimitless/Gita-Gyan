@@ -18,9 +18,10 @@ Gita Gyan is an android app built using Kotlin and Jetpack Compose to spread the
 ## 📸 Screenshots
 
 ||||
-|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------: |
+|:----------------------------------------:|:-----------------------------------------:|:-----------------------------------------:|
 | ![](https://i.imgur.com/hVPxv73.jpg) | ![](https://i.imgur.com/Rgf8uDN.jpg) | ![](https://i.imgur.com/HhDFAt4.jpg) |
 | ![](https://i.imgur.com/oZe1VTe.jpg) | ![](https://i.imgur.com/A5ASUKz.jpg) | ![](https://i.imgur.com/BIuG38q.jpg) |
+| ![](https://i.imgur.com/5ITqERw.jpg) | ![](https://i.imgur.com/BB3ToB1.jpg) | ![](https://i.imgur.com/SSNlYF6.jpg) |
 
 ## 🛠 Built With 
 
