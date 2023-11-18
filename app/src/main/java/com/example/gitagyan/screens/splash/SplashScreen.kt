@@ -11,6 +11,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,13 +22,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gitagyan.R
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.profile.LanguageViewModel
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController){
+fun SplashScreen(navController: NavController, languageViewModel: LanguageViewModel = hiltViewModel()){
+
+    val languageFromDB = languageViewModel.languageList.collectAsState().value
+    Languages.selectedLanguage = if(languageFromDB.isEmpty()) Languages.selectedLanguage else languageFromDB[0].language
+
     val scale = remember {
         Animatable(1f)
     }

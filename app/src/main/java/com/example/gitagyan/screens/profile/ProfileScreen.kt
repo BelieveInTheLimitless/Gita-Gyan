@@ -3,6 +3,7 @@ package com.example.gitagyan.screens.profile
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -41,9 +42,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gitagyan.R
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
@@ -56,7 +59,7 @@ fun ProfileScreen(navController: NavController){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Profile(){
+fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = Color(0xFFFD950E)
@@ -87,9 +90,9 @@ fun Profile(){
                         )
 
                         val context = LocalContext.current
-                        val languages = arrayOf("English", "Hindi")
+                        val languages = arrayOf("English", "हिंदी")
                         var expanded by remember { mutableStateOf(false) }
-                        val selectionLanguage = if (Language.selectedLanguage == "English") "Select a language" else "भाषा चुनें"
+                        val selectionLanguage = if (Languages.selectedLanguage == "English") "Select a language" else "भाषा चुनें"
 
                         Text(
                             text = selectionLanguage,
@@ -107,9 +110,9 @@ fun Profile(){
                             }
                         ) {
                             OutlinedTextField(
-                                value = Language.selectedLanguage,
+                                value = Languages.selectedLanguage,
                                 onValueChange = {
-                                                Language.selectedLanguage = it
+                                                Languages.selectedLanguage = it
                                 },
                                 modifier = Modifier.menuAnchor(),
                                 readOnly = true,
@@ -125,14 +128,22 @@ fun Profile(){
 
                             ExposedDropdownMenu(
                                 expanded = expanded,
-                                onDismissRequest = { expanded = false }
+                                onDismissRequest = { expanded = false },
+                                modifier = Modifier
+                                    .background(
+                                        Color(0xFF071335)
+                                    )
                             ) {
                                 languages.forEach { item ->
                                     DropdownMenuItem(
-                                        text = { Text(text = item) },
+                                        text = { Text(text = item, color = Color(0xFFE0C61A), fontSize = 15.sp) },
                                         onClick = {
-                                            Language.selectedLanguage = item
+                                            Languages.selectedLanguage = item
                                             expanded = false
+
+                                            languageViewModel.deleteAllLanguages()
+                                            languageViewModel.insertLanguage(Language(language = item))
+
                                             Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
                                         }
                                     )
@@ -147,13 +158,13 @@ fun Profile(){
                             .padding(5.dp)
                             .verticalScroll(state = ScrollState(0)),
                             horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = if(Language.selectedLanguage == "English") "About Gita Gyan" else "गीता ज्ञान के बारे में",
+                            Text(text = if(Languages.selectedLanguage == "English") "About Gita Gyan" else "गीता ज्ञान के बारे में",
                                 modifier = Modifier.padding(5.dp),
                                 fontSize = 20.sp,
                                 style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Center)
                             Text(
-                                text = if (Language.selectedLanguage == "English"){"The Shrimad Bhagavad Gita, often referred to as the Gita, is a 700-verse scripture. It encapsulates the essence of the Vedas. Its language is so sweet and simple that humans can easily understand it with a little practice. However, the thoughts within it are so profound that one cannot grasp their depths even after constant study throughout a lifetime.\n"+
+                                text = if (Languages.selectedLanguage == "English"){"The Shrimad Bhagavad Gita, often referred to as the Gita, is a 700-verse scripture. It encapsulates the essence of the Vedas. Its language is so sweet and simple that humans can easily understand it with a little practice. However, the thoughts within it are so profound that one cannot grasp their depths even after constant study throughout a lifetime.\n"+
                                         "As the creator of this application, I am thankful that I had the opportunity to read the Bhagavad Gita at the age of 18, a time when life seemed to be full of chaos. The Gita guided me through these challenging paths, providing me with an attitude and perspective that have since become the foundation of my life's thoughts.\n"+
                                         "I would also like to express my heartfelt gratitude to all my friends who, in some way or another, were a part of building this application. Happy reading!"}
                                         else{
