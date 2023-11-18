@@ -7,11 +7,12 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.gitagyan.model.Favourite
+import com.example.gitagyan.model.Language
 import kotlinx.coroutines.flow.Flow
 
 
 @Dao
-interface FavouriteDao {
+interface GitaDao {
     @Query("SELECT * from favourite_table")
     fun getFavourites(): Flow<List<Favourite>>
 
@@ -29,5 +30,21 @@ interface FavouriteDao {
 
     @Delete
     suspend fun deleteFavourite(favourite: Favourite)
+
+    //Language
+    @Query("SELECT * from language_table")
+    fun getLanguages(): Flow<List<Language>>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertLanguage(language: Language)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun updateLanguage(language: Language)
+
+    @Query("DELETE from language_table")
+    suspend fun deleteAllLanguages()
+
+    @Delete
+    suspend fun deleteLanguage(language: Language)
 }
 
