@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -33,7 +34,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.model.Favourite
@@ -45,7 +46,7 @@ import com.example.gitagyan.screens.components.topbar.TopBottomBar
 @Composable
 fun FavouriteScreen(navController: NavController){
     TopBottomBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 45.dp, bottom = 45.dp)) {
+    Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         FavouriteVerseContent(navController = navController)
     }
 }
@@ -55,12 +56,31 @@ fun FavouriteVerseContent(navController: NavController,
                           favouriteViewModel: FavouriteViewModel = hiltViewModel()
 ){
 
-    Column(modifier = Modifier.padding(10.dp)) {
+    Column(modifier = Modifier
+        .padding(5.dp)
+        .fillMaxWidth()
+        .fillMaxHeight()) {
         val favouriteList = favouriteViewModel.favList.collectAsState().value
-        LazyColumn{
-            items(items = favouriteList){
-                VerseItem(favourite = it, favouriteViewModel = favouriteViewModel){ chapterId, verseId ->
-                    navController.navigate(AppScreens.VerseScreen.name+"/${chapterId}"+"/${verseId}")
+        if(favouriteList.isEmpty()){
+            Column(modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = if (Languages.selectedLanguage == "English") "Favourites list empty" else "पसंदीदा सूची खाली",
+                    fontWeight = FontWeight.W400,
+                    fontSize = 20.sp,
+                    style = MaterialTheme.typography.caption,
+                )
+            }
+        }
+        else{
+            LazyColumn{
+                items(items = favouriteList){
+                    VerseItem(favourite = it, favouriteViewModel = favouriteViewModel){ chapterId, verseId ->
+                        navController.navigate(AppScreens.VerseScreen.name+"/${chapterId}"+"/${verseId}")
+                    }
                 }
             }
         }
@@ -73,7 +93,7 @@ fun VerseItem(
     favouriteViewModel: FavouriteViewModel,
     onItemClick: (String, String) -> Unit){
 
-    val chapters = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
+    val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
 
     val context = LocalContext.current
 
@@ -81,13 +101,17 @@ fun VerseItem(
         .padding(3.dp)
         .fillMaxWidth()
         .clickable {
-            onItemClick((favourite.chapterId.toInt()-1).toString(), (favourite.verseId.toInt()-1).toString())
+            onItemClick(
+                (favourite.chapterId.toInt() - 1).toString(),
+                (favourite.verseId.toInt() - 1).toString()
+            )
         },
         shape = RoundedCornerShape(corner = CornerSize(20.dp)),
         backgroundColor = Color(0xFFFD950E),
         contentColor = Color.Black,
         elevation = 7.dp) {
-        Row(modifier = Modifier.padding(top = 6.dp, bottom = 6.dp, start = 16.dp, end = 16.dp)
+        Row(modifier = Modifier
+            .padding(top = 6.dp, bottom = 6.dp, start = 16.dp, end = 16.dp)
             .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically) {
@@ -126,7 +150,7 @@ fun VerseItem(
                     favouriteViewModel
                         .deleteFavourite(favourite)
                     Toast.makeText(
-                        context, "Deleted from Favourites",
+                        context, if (Languages.selectedLanguage == "English") "Deleted from Favourites" else "पसंदीदा से हटा दिया गया",
                         Toast.LENGTH_SHORT
                     ).show()
                 },
