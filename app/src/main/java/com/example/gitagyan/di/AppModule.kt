@@ -2,8 +2,8 @@ package com.example.gitagyan.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.gitagyan.data.dao.FavouriteDao
-import com.example.gitagyan.data.dao.FavouriteDatabase
+import com.example.gitagyan.data.dao.GitaDao
+import com.example.gitagyan.data.dao.GitaDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,16 +18,16 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideFavouriteDao(favouriteDatabase: FavouriteDatabase): FavouriteDao =
-        favouriteDatabase.favouriteDao()
+    fun provideGitaDao(gitaDatabase: GitaDatabase): GitaDao =
+        gitaDatabase.gitaDao()
 
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context): FavouriteDatabase =
+    fun provideAppDatabase(@ApplicationContext context: Context): GitaDatabase =
         Room.databaseBuilder(
             context,
-            FavouriteDatabase::class.java,
-            "favourite_database"
+            GitaDatabase::class.java,
+            "gita_database"
         ).fallbackToDestructiveMigration()
             .build()
 }
