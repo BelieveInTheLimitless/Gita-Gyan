@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.R
 import com.example.gitagyan.data.content.Chapter
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
@@ -33,7 +33,7 @@ import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
 fun DetailsScreen(navController: NavController, chapterId: String?){
-    val chapters = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
+    val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         if (chapterId != null) {
@@ -97,7 +97,7 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                         backgroundColor = Color(0xFFFD950E),
                         contentColor = Color.White) {
 
-                        val readingLanguage = if (Language.selectedLanguage == "English") "Start Reading" else "पढ़ना शुरू करें"
+                        val readingLanguage = if (Languages.selectedLanguage == "English") "Start Reading" else "पढ़ना शुरू करें"
 
                         Text(text = readingLanguage,
                             modifier = Modifier.padding(10.dp),

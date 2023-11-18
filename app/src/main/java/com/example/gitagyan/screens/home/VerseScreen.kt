@@ -30,7 +30,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.gitagyan.R
 import com.example.gitagyan.data.content.Chapter
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.model.Favourite
@@ -39,7 +39,7 @@ import com.example.gitagyan.screens.favourite.FavouriteViewModel
 
 @Composable
 fun VerseScreen(navController: NavController, favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapterId: String?, verseId: String?) {
-    val chapters = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
+    val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         if (chapterId != null) {
@@ -197,7 +197,7 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                                     )
                                 )
                                 Toast.makeText(
-                                    context, "Deleted from Favourites",
+                                    context, if (Languages.selectedLanguage == "English") "Deleted from Favourites" else "पसंदीदा से हटा दिया गया",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
@@ -218,7 +218,7 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                                     )
                                 )
                                 Toast.makeText(
-                                    context, "Added to Favourites",
+                                    context, if (Languages.selectedLanguage == "English") "Added to Favourites" else "पसंदीदा में जोड़ा गया",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }

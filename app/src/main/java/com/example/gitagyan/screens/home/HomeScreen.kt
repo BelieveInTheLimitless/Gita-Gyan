@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.data.content.Chapter
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
@@ -36,7 +36,7 @@ import com.example.gitagyan.screens.components.topbar.TopBottomBar
 @Composable
 fun HomeScreen(navController: NavController){
     TopBottomBar(navController = navController, isMainScreen = true)
-    Box(modifier = Modifier.padding(top = 45.dp, bottom = 45.dp)) {
+    Box(modifier = Modifier.padding(top = 50.dp, bottom = 50.dp)) {
         MainContent(navController = navController)
     }
 }
@@ -44,7 +44,7 @@ fun HomeScreen(navController: NavController){
 @Composable
 fun MainContent(
     navController: NavController,
-    chapterList: List<Chapter> = if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
+    chapterList: List<Chapter> = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
 ){
     Column(modifier = Modifier.padding(10.dp)) {
         LazyColumn{

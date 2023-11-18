@@ -14,7 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.compose.ui.unit.dp
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.screens.components.bottombar.BottomNavigationBar
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -28,7 +28,7 @@ fun TopBottomBar(navController:NavController,
                 Row(modifier = Modifier.fillMaxSize(),
                     horizontalArrangement = Arrangement.Start,
                     verticalAlignment = Alignment.CenterVertically) {
-                    val appName = if (Language.selectedLanguage == "English") "Gita Gyan" else "   गीता ज्ञान"
+                    val appName = if (Languages.selectedLanguage == "English") "Gita Gyan" else "   गीता ज्ञान"
                     if (!isMainScreen){
                         IconButton(onClick = {
                             navController.popBackStack()

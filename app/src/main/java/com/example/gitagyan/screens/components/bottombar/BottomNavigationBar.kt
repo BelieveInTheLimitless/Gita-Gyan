@@ -7,17 +7,17 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.navigation.AppScreens
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun BottomNavigationBar(navController: NavController){
-    val homeScreenLanguage = if (Language.selectedLanguage == "English") "Home" else "मुख्य"
-    val searchScreenLanguage = if (Language.selectedLanguage == "English") "Search" else "खोज"
-    val favouriteScreenLanguage = if (Language.selectedLanguage == "English") "Favourite" else "पसंदीदा"
-    val profileScreenLanguage = if (Language.selectedLanguage == "English") "Profile" else "प्रोफाइल"
+    val homeScreenLanguage = if (Languages.selectedLanguage == "English") "Home" else "मुख्य"
+    val searchScreenLanguage = if (Languages.selectedLanguage == "English") "Search" else "खोज"
+    val favouriteScreenLanguage = if (Languages.selectedLanguage == "English") "Favourite" else "पसंदीदा"
+    val profileScreenLanguage = if (Languages.selectedLanguage == "English") "Profile" else "प्रोफाइल"
     BottomNavigation(elevation = 10.dp) {
         BottomNavigationItem(
             items = listOf(

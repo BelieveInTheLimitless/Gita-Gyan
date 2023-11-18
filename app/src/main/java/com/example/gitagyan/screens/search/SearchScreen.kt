@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.gitagyan.R
-import com.example.gitagyan.data.content.Language
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
@@ -48,14 +48,16 @@ fun SearchScreen(navController: NavController){
 @Composable
 fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
     Surface(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(),
         color = Color(0xFFFD950E)
     ) {
         Surface(
             modifier = Modifier
-                .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
-                .width(1000.dp)
-                .height(500.dp),
+                .padding(15.dp)
+                .fillMaxWidth()
+                .fillMaxHeight(),
             shape = RoundedCornerShape(corner = CornerSize(40.dp)),
             color = Color.White,
             contentColor = Color.Black
@@ -78,7 +80,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                         )
 
                         val chapters =
-                            if (Language.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
+                            if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
 
                         val chapterId = remember {
                             mutableStateOf("")
@@ -107,12 +109,12 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                             horizontalAlignment = Alignment.CenterHorizontally,
                         ) {
 
-                            val searchLanguage = if (Language.selectedLanguage == "English") "Search" else "खोजे"
-                            val enterChapterLanguage = if (Language.selectedLanguage == "English") "Enter Chapter Number" else "अध्याय क्रमांक"
-                            val enterVerseLanguage = if (Language.selectedLanguage == "English") "Enter Verse Number" else "श्लोक क्रमांक"
-                            val proceedLanguage = if (Language.selectedLanguage == "English") "Proceed" else "आगे बढे"
-                            val chapterErrorMessage = if (Language.selectedLanguage == "English") "Enter Valid Chapter Number" else "सही अध्याय का चयन करे!"
-                            val verseErrorMessage = if (Language.selectedLanguage == "English") "Enter Valid Verse Number" else "सही श्लोक का चयन करे!"
+                            val searchLanguage = if (Languages.selectedLanguage == "English") "Search" else "खोजे"
+                            val enterChapterLanguage = if (Languages.selectedLanguage == "English") "Enter Chapter Number" else "अध्याय क्रमांक"
+                            val enterVerseLanguage = if (Languages.selectedLanguage == "English") "Enter Verse Number" else "श्लोक क्रमांक"
+                            val proceedLanguage = if (Languages.selectedLanguage == "English") "Proceed" else "आगे बढे"
+                            val chapterErrorMessage = if (Languages.selectedLanguage == "English") "Enter Valid Chapter Number" else "सही अध्याय का चयन करे!"
+                            val verseErrorMessage = if (Languages.selectedLanguage == "English") "Enter Valid Verse Number" else "सही श्लोक का चयन करे!"
 
                             Text(
                                 text = searchLanguage,
