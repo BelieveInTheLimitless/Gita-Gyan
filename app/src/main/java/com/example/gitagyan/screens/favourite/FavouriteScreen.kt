@@ -102,8 +102,8 @@ fun VerseItem(
         .fillMaxWidth()
         .clickable {
             onItemClick(
-                (favourite.chapterId.toInt() - 1).toString(),
-                (favourite.verseId.toInt() - 1).toString()
+                (favourite.chapterId - 1).toString(),
+                (favourite.verseId - 1).toString()
             )
         },
         shape = RoundedCornerShape(corner = CornerSize(20.dp)),
@@ -122,7 +122,7 @@ fun VerseItem(
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
-                    text = chapters[favourite.chapterId.toInt()-1].chapterName,
+                    text = chapters[favourite.chapterId-1].chapterName,
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
@@ -131,14 +131,14 @@ fun VerseItem(
                     maxLines = 1
                 )
                 Text(
-                    text = chapters[favourite.chapterId.toInt()-1].chapter,
+                    text = chapters[favourite.chapterId-1].chapter,
                     color = Color.White,
                     fontWeight = FontWeight.W400,
                     fontSize = 15.sp,
                     style = MaterialTheme.typography.caption
                 )
                 Text(
-                    text = chapters[favourite.chapterId.toInt()-1].chapterContent[favourite.verseId.toInt()-1].verseName,
+                    text = chapters[favourite.chapterId-1].chapterContent[favourite.verseId-1].verseName,
                     fontWeight = FontWeight.W400,
                     fontSize = 15.sp,
                     style = MaterialTheme.typography.caption,

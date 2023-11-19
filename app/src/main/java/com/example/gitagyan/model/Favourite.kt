@@ -10,9 +10,9 @@ data class Favourite(
 
     @NonNull
     @ColumnInfo(name = "chapter")
-    val chapterId: String,
+    val chapterId: Int,
 
     @NonNull
     @ColumnInfo(name = "verse")
-    val verseId: String
+    val verseId: Int
 )

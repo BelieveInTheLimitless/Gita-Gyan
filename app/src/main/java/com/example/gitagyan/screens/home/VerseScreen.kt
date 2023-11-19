@@ -62,7 +62,7 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
     }
 
     val isAlreadyFavourite = favouriteViewModel.favList.collectAsState().value.filter { item ->
-        (item.chapterId == chapter.chapterId) && ((item.verseId.toInt() - 1) == id)
+        (item.chapterId.toString() == chapter.chapterId) && ((item.verseId - 1) == id)
     }
 
     val context = LocalContext.current
@@ -192,8 +192,8 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                             onClick = {
                                 favouriteViewModel.deleteFavourite(
                                     Favourite(
-                                        chapterId = chapter.chapterId,
-                                        verseId = (id + 1).toString()
+                                        chapterId = chapter.chapterId.toInt(),
+                                        verseId = id + 1
                                     )
                                 )
                                 Toast.makeText(
@@ -213,8 +213,8 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                             onClick = {
                                 favouriteViewModel.insertFavourite(
                                     Favourite(
-                                        chapterId = chapter.chapterId,
-                                        verseId = (id + 1).toString()
+                                        chapterId = chapter.chapterId.toInt(),
+                                        verseId = id + 1
                                     )
                                 )
                                 Toast.makeText(
