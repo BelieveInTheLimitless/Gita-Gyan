@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GitaDao {
-    @Query("SELECT * from favourite_table")
+    @Query("SELECT * from favourite_table ORDER BY chapter, verse ASC")
     fun getFavourites(): Flow<List<Favourite>>
 
 //    @Query("SELECT * from favourite_table where chapter =:chapterId")
