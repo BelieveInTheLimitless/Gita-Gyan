@@ -100,10 +100,10 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                     Text(
                         text = chapter.chapterName,
                         modifier = Modifier.padding(top = 10.dp),
+                        color = Color(0xFFFD950E),
                         fontSize = 20.sp,
                         fontWeight = FontWeight.W600,
-                        style = MaterialTheme.typography.h4,
-                        textAlign = TextAlign.Center
+                        style = MaterialTheme.typography.h4
                     )
 
                     Row(
@@ -204,7 +204,8 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                         ) {
                             Icon(
                                 imageVector = Icons.Outlined.Favorite,
-                                contentDescription = "Favourites Icon"
+                                contentDescription = "Favourites Icon",
+                                tint = Color(0xFFFD950E)
                             )
                         }
                     }

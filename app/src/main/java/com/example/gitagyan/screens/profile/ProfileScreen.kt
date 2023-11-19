@@ -131,12 +131,12 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                                 onDismissRequest = { expanded = false },
                                 modifier = Modifier
                                     .background(
-                                        Color(0xFF071335)
+                                        Color(0xFFFFFFFF)
                                     )
                             ) {
                                 languages.forEach { item ->
                                     DropdownMenuItem(
-                                        text = { Text(text = item, color = Color(0xFFE0C61A), fontSize = 15.sp) },
+                                        text = { Text(text = item, color = Color.Black, fontSize = 15.sp) },
                                         onClick = {
                                             Languages.selectedLanguage = item
                                             expanded = false
