@@ -1,5 +1,5 @@
 # Gita-Gyan
-Gita Gyan is an android app built using Kotlin and Jetpack Compose to spread the knowledge of Shrimad Bhagavad Gita, an ancient heritage of India.
+"Gita Gyan" is an Android app built using Kotlin and Jetpack Compose, a UI toolkit for building native Android applications with modern design principles. The purpose of this project is to portray The Shrimad Bhagavad Gita in an application format, whiich consists of 700 verses divided into 18 chapters.
 
 ## ⚙️ Features
 * List all the chapters present in the Gita and their details
