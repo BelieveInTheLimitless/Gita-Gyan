@@ -1,6 +1,7 @@
 package com.example.gitagyan.repository
 
 import com.example.gitagyan.data.dao.GitaDao
+import com.example.gitagyan.model.CurrentVerse
 import com.example.gitagyan.model.Favourite
 import com.example.gitagyan.model.Language
 import kotlinx.coroutines.flow.Flow
@@ -30,5 +31,16 @@ class GitaDbRepository @Inject constructor(private val gitaDao: GitaDao) {
     suspend fun deleteAllLanguages() = gitaDao.deleteAllLanguages()
 
     suspend fun deleteLanguage(language: Language) = gitaDao.deleteLanguage(language)
+
+//    Current Verse
+    fun getCurrentVerse(): Flow<List<CurrentVerse>> = gitaDao.getCurrentVerse()
+
+    suspend fun insertCurrentVerse(currentVerse: CurrentVerse) = gitaDao.insertCurrentVerse(currentVerse)
+
+    suspend fun updateCurrentVerse(currentVerse: CurrentVerse) = gitaDao.updateCurrentVerse(currentVerse)
+
+    suspend fun deleteAllCurrentVerses() = gitaDao.deleteAllCurrentVerses()
+
+    suspend fun deleteCurrentVerse(currentVerse: CurrentVerse) = gitaDao.deleteCurrentVerse(currentVerse)
 
 }
