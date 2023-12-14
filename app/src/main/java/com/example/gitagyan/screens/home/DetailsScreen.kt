@@ -38,7 +38,7 @@ fun DetailsScreen(navController: NavController, chapterId: String?){
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         if (chapterId != null) {
             Details(chapter = chapters[chapterId.toInt()-1]){ chapterId, verseId ->
-                navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.toInt()-1}" + "/$verseId")
+                navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.toInt()-1}" + "/$verseId" + "/${true}")
             }
         }
     }
