@@ -79,7 +79,7 @@ fun FavouriteVerseContent(navController: NavController,
             LazyColumn{
                 items(items = favouriteList){
                     VerseItem(favourite = it, favouriteViewModel = favouriteViewModel){ chapterId, verseId ->
-                        navController.navigate(AppScreens.VerseScreen.name+"/${chapterId}"+"/${verseId}")
+                        navController.navigate(AppScreens.VerseScreen.name+"/${chapterId}"+"/${verseId}"+"/${false}")
                     }
                 }
             }

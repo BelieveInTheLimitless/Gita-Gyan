@@ -161,7 +161,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                                 if ((verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt() - 1].chapterContent.size)) {
                                     Button(
                                         onClick = {
-                                            navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value.toInt() - 1}" + "/${verseId.value.toInt() - 1}")
+                                            navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value.toInt() - 1}" + "/${verseId.value.toInt() - 1}" + "/${false}")
                                         },
                                         shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                                         colors = ButtonDefaults.buttonColors(
