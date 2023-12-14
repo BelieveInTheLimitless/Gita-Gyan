@@ -1,12 +1,14 @@
 package com.example.gitagyan.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.gitagyan.model.Languages
 import com.example.gitagyan.screens.splash.SplashScreen
 import com.example.gitagyan.screens.components.bottombar.BottomNavigationBar
 import com.example.gitagyan.screens.favourite.FavouriteScreen
@@ -16,9 +18,14 @@ import com.example.gitagyan.screens.search.SearchScreen
 import com.example.gitagyan.screens.profile.ProfileScreen
 import com.example.gitagyan.screens.home.HomeScreen
 import com.example.gitagyan.screens.home.VerseScreen
+import com.example.gitagyan.screens.profile.LanguageViewModel
 
 @Composable
-fun AppNavigation(){
+fun AppNavigation(languageViewModel: LanguageViewModel = hiltViewModel()){
+
+    val languageFromDB = languageViewModel.languageList.collectAsState().value
+    Languages.selectedLanguage = if(languageFromDB.isEmpty()) Languages.selectedLanguage else languageFromDB[0].language
+
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = AppScreens.SplashScreen.name){
 
@@ -43,9 +50,11 @@ fun AppNavigation(){
         }
 
         composable(
-            AppScreens.VerseScreen.name+"/{chapter_id}"+"/{verse_id}",
-            arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType},
-                navArgument(name = "verse_id") { type = NavType.StringType}
+            AppScreens.VerseScreen.name+"/{chapter_id}"+"/{verse_id}"+"/{isMainScreen}",
+            arguments = listOf(
+                navArgument(name = "chapter_id") {type = NavType.StringType},
+                navArgument(name = "verse_id") { type = NavType.StringType},
+                navArgument(name = "isMainScreen") { type = NavType.BoolType}
             )
         ){
                 backStackEntry ->
@@ -56,7 +65,8 @@ fun AppNavigation(){
                 navController = navController,
                 favouriteViewModel = favouriteViewModel,
                 chapterId = backStackEntry.arguments?.getString("chapter_id"),
-                verseId = backStackEntry.arguments?.getString("verse_id")
+                verseId = backStackEntry.arguments?.getString("verse_id"),
+                isMainScreen = backStackEntry.arguments?.getBoolean("isMainScreen")
             )
         }
 
