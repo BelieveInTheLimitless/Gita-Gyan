@@ -33,19 +33,25 @@ import com.example.gitagyan.data.content.Chapter
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
+import com.example.gitagyan.model.CurrentVerse
 import com.example.gitagyan.model.Favourite
 import com.example.gitagyan.screens.components.topbar.TopBottomBar
 import com.example.gitagyan.screens.favourite.FavouriteViewModel
 
 @Composable
-fun VerseScreen(navController: NavController, favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapterId: String?, verseId: String?) {
+fun VerseScreen(navController: NavController,
+                favouriteViewModel: FavouriteViewModel = hiltViewModel(),
+                chapterId: String?,
+                verseId: String?,
+                isMainScreen: Boolean?) {
     val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
     TopBottomBar(navController = navController)
     Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
         if (chapterId != null) {
             if (verseId != null) {
                 Verses(favouriteViewModel, chapter = chapters[chapterId.toInt()],
-                    verseId = verseId
+                    verseId = verseId,
+                    isMainScreen = isMainScreen
                 )
             }
         }
@@ -55,10 +61,35 @@ fun VerseScreen(navController: NavController, favouriteViewModel: FavouriteViewM
 
 @SuppressLint("UnrememberedMutableState")
 @Composable
-fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Chapter, verseId: String) {
+fun Verses(
+    favouriteViewModel: FavouriteViewModel = hiltViewModel(),
+    currentVerseViewModel: CurrentVerseViewModel = hiltViewModel(),
+    chapter: Chapter,
+    verseId: String,
+    isMainScreen: Boolean?) {
 
     var id by remember {
         mutableIntStateOf(verseId.toInt())
+    }
+
+    val currentVerseList = currentVerseViewModel.currentVerseList.collectAsState().value
+
+    if (isMainScreen == true){
+        if (currentVerseList.isNotEmpty()){
+            currentVerseViewModel.deleteAllCurrentVerses()
+            currentVerseViewModel.insertCurrentVerse(
+                CurrentVerse(
+                    chapterId = chapter.chapterId.toInt(),
+                verseId = id + 1)
+            )
+        }
+        else{
+            currentVerseViewModel.insertCurrentVerse(
+                CurrentVerse(
+                    chapterId = chapter.chapterId.toInt(),
+                    verseId = id + 1)
+            )
+        }
     }
 
     val isAlreadyFavourite = favouriteViewModel.favList.collectAsState().value.filter { item ->
@@ -98,12 +129,19 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                     Spacer(modifier = Modifier.padding(5.dp))
 
                     Text(
-                        text = chapter.chapterName,
-                        modifier = Modifier.padding(top = 10.dp),
+                        text = chapter.chapter,
                         color = Color(0xFFFD950E),
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight.SemiBold,
+                        style = MaterialTheme.typography.caption
+                    )
+                    Text(
+                        text = chapter.chapterName,
+                        color = Color(0xFFFD950E),
+                        fontWeight = FontWeight.SemiBold,
                         fontSize = 20.sp,
-                        fontWeight = FontWeight.W600,
-                        style = MaterialTheme.typography.h4
+                        style = MaterialTheme.typography.caption,
+                        textAlign = TextAlign.Center
                     )
 
                     Row(
@@ -131,6 +169,16 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                                     .size(35.dp)
                                     .clickable(onClick = {
                                         id -= 1
+                                        if (isMainScreen == true){
+                                            if (currentVerseList.isEmpty()){
+                                                currentVerseViewModel.deleteAllCurrentVerses()
+                                                currentVerseViewModel.insertCurrentVerse(
+                                                    CurrentVerse(
+                                                        chapterId = chapter.chapterId.toInt(),
+                                                        verseId = id + 1)
+                                                )
+                                            }
+                                        }
                                     }),
                                 shape = RoundedCornerShape(corner = CornerSize(35.dp)),
                                 backgroundColor = Color.White,
@@ -173,6 +221,16 @@ fun Verses(favouriteViewModel: FavouriteViewModel = hiltViewModel(), chapter: Ch
                                     .size(35.dp)
                                     .clickable(onClick = {
                                         id += 1
+                                        if (isMainScreen == true){
+                                            if (currentVerseList.isEmpty()){
+                                                currentVerseViewModel.deleteAllCurrentVerses()
+                                                currentVerseViewModel.insertCurrentVerse(
+                                                    CurrentVerse(
+                                                        chapterId = chapter.chapterId.toInt(),
+                                                        verseId = id + 1)
+                                                )
+                                            }
+                                        }
                                     }),
                                 shape = RoundedCornerShape(corner = CornerSize(35.dp)),
                                 backgroundColor = Color.White,
