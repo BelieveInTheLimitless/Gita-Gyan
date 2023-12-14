@@ -96,7 +96,7 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
 
                         Text(
                             text = selectionLanguage,
-                            modifier = Modifier.padding(top = 20.dp, bottom = 20.dp),
+                            modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Medium,
                             fontFamily = FontFamily.Serif,
@@ -158,20 +158,13 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                             .padding(5.dp)
                             .verticalScroll(state = ScrollState(0)),
                             horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = if(Languages.selectedLanguage == "English") "About Gita Gyan" else "गीता ज्ञान के बारे में",
+                            Text(text = if(Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishTitle else TheGreatnessOfTheGIta.hindiTitle,
                                 modifier = Modifier.padding(5.dp),
                                 fontSize = 20.sp,
                                 style = MaterialTheme.typography.titleMedium,
                                 textAlign = TextAlign.Center)
                             Text(
-                                text = if (Languages.selectedLanguage == "English"){"The Shrimad Bhagavad Gita, often referred to as the Gita, is a 700-verse scripture. It encapsulates the essence of the Vedas. Its language is so sweet and simple that humans can easily understand it with a little practice. However, the thoughts within it are so profound that one cannot grasp their depths even after constant study throughout a lifetime.\n"+
-                                        "As the creator of this application, I am thankful that I had the opportunity to read the Bhagavad Gita at the age of 18, a time when life seemed to be full of chaos. The Gita guided me through these challenging paths, providing me with an attitude and perspective that have since become the foundation of my life's thoughts.\n"+
-                                        "I would also like to express my heartfelt gratitude to all my friends who, in some way or another, were a part of building this application. Happy reading!"}
-                                        else{
-                                    "श्रीमद्भगवद्गीता, जिसे अक्सर गीता भी कहा जाता है, 700 श्लोकों वाला ग्रंथ है। इसमें वेदों का सार समाहित है। इसकी भाषा इतनी मधुर और सरल है कि थोड़े से अभ्यास से मनुष्य इसे आसानी से समझ सकता है। हालांकि, विचार इसके भीतर इतनी गहराई है कि जीवन भर निरंतर अध्ययन के बाद भी कोई उनकी गहराई को समझ नहीं सकता है।\n"+
-                                            "इस एप्लिकेशन के निर्माता के रूप में, मैं आभारी हूं कि मुझे 18 साल की उम्र में भगवद गीता पढ़ने का अवसर मिला, जब जीवन अराजकता से भरा हुआ लग रहा था। गीता ने मुझे इन चुनौतीपूर्ण रास्तों के माध्यम से मार्गदर्शन किया, मुझे प्रदान किया एक दृष्टिकोण और परिप्रेक्ष्य जो तब से मेरे जीवन के विचारों की नींव बन गया है।\n"+
-                                            "मैं अपने सभी दोस्तों के प्रति भी हार्दिक आभार व्यक्त करना चाहता हूं, जो किसी न किसी तरह से इस एप्लिकेशन के निर्माण का हिस्सा थे। आपको शुभकामनाएं!"
-                                            },
+                                text = if (Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishContent else TheGreatnessOfTheGIta.hindiContent,
                                 modifier = Modifier.padding(5.dp),
                                 fontSize = 15.sp,
                                 style = androidx.compose.material.MaterialTheme.typography.caption,
