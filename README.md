@@ -3,6 +3,7 @@
 
 ## ⚙️ Features
 * List all the chapters present in the Gita and their details
+* Continue reading from last visited verse
 * Search for a specific verse using chapter & verse number
 * Save favourite verses
 * Available in English & Hindi language currently
