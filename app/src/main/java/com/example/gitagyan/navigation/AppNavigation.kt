@@ -10,7 +10,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.screens.splash.SplashScreen
-import com.example.gitagyan.screens.components.bottombar.BottomNavigationBar
 import com.example.gitagyan.screens.favourite.FavouriteScreen
 import com.example.gitagyan.screens.favourite.FavouriteViewModel
 import com.example.gitagyan.screens.home.DetailsScreen
@@ -31,10 +30,6 @@ fun AppNavigation(languageViewModel: LanguageViewModel = hiltViewModel()){
 
         composable(AppScreens.SplashScreen.name){
             SplashScreen(navController = navController)
-        }
-
-        composable(AppScreens.BottomNavigation.name){
-            BottomNavigationBar(navController = navController)
         }
 
         composable(AppScreens.HomeScreen.name){

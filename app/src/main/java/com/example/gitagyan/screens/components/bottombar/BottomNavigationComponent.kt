@@ -62,7 +62,7 @@ fun NavigationItem(item: BottomNavigationItem, isSelected:Boolean, onClick:()->U
 
             Icon(
                 imageVector = item.icon,
-                contentDescription =null,
+                contentDescription = null,
                 tint = contentColor
             )
 
