@@ -41,8 +41,7 @@ import com.example.gitagyan.screens.components.topbar.TopBottomBar
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeScreen(navController: NavController){
-    TopBottomBar(navController = navController, isMainScreen = true)
-    Box(modifier = Modifier.padding(top = 50.dp, bottom = 50.dp)) {
+    TopBottomBar(navController = navController, isMainScreen = true, backgroundColor = Color.White){
         MainContent(navController = navController)
     }
 }
@@ -53,7 +52,11 @@ fun MainContent(
     chapterList: List<Chapter> = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters(),
     currentVerseViewModel: CurrentVerseViewModel = hiltViewModel()
 ){
-    Column(modifier = Modifier.padding(10.dp)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(3.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally) {
         val currentVerseList = currentVerseViewModel.currentVerseList.collectAsState().value
         if(currentVerseList.isNotEmpty()){
             Card(modifier = Modifier
@@ -68,8 +71,7 @@ fun MainContent(
                 backgroundColor = Color(0xFFFD950E),
                 contentColor = Color.Black,
                 elevation = 7.dp) {
-                Row(
-                ) {
+                Row {
                     Column(
                         modifier = Modifier.padding(15.dp),
                         verticalArrangement = Arrangement.Center,
@@ -143,58 +145,58 @@ fun ChapterRow(
         shape = RoundedCornerShape(corner = CornerSize(20.dp)),
         backgroundColor = Color(0xFFFD950E),
         contentColor = Color.Black,
-        elevation = 7.dp) {
-        Row(verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center) {
-            Column(modifier = Modifier.padding(5.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = chapter.chapter,
-                    color = Color(0xFFFFFFFF),
-                    fontSize = 15.sp,
-                    style = MaterialTheme.typography.caption
-                )
-                Text(text = chapter.chapterName,
-                    color = Color(0xFFFFFFFF),
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 20.sp,
-                    style = MaterialTheme.typography.caption,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
-                )
+        elevation = 5.dp) {
+        Column(modifier = Modifier.padding(10.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = chapter.chapter,
+                color = Color(0xFFFFFFFF),
+                fontSize = 15.sp,
+                style = MaterialTheme.typography.caption
+            )
+            Text(text = chapter.chapterName,
+                color = Color(0xFFFFFFFF),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp,
+                style = MaterialTheme.typography.caption,
+                textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = if(expanded) 3 else 1
+            )
 
-                AnimatedVisibility(visible = expanded) {
-                    Column {
-                        Text(buildAnnotatedString {
-                            withStyle(style = SpanStyle(color = Color.White,
-                                fontSize = 15.sp)){
-                                append(chapter.totalVerses)
-                            }
-                        }, modifier = Modifier.padding(6.dp))
+            AnimatedVisibility(visible = expanded) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(buildAnnotatedString {
+                        withStyle(style = SpanStyle(color = Color.White,
+                            fontSize = 15.sp)){
+                            append(chapter.totalVerses)
+                        }
+                    },
+                        modifier = Modifier.padding(5.dp),
+                        textAlign = TextAlign.Center)
 
-                        Divider(modifier = Modifier.padding(6.dp))
+                    Divider(modifier = Modifier.padding(5.dp), color = Color.White)
 
-                        Text(text = chapter.description,
-                            modifier = Modifier.padding(5.dp),
-                            color = Color.White,
-                            fontSize = 15.sp,
-                            style = MaterialTheme.typography.caption,
-                            textAlign = TextAlign.Justify)
-                    }
+                    Text(text = chapter.description,
+                        modifier = Modifier.padding(5.dp),
+                        color = Color.White,
+                        fontSize = 15.sp,
+                        style = MaterialTheme.typography.caption,
+                        textAlign = TextAlign.Justify)
                 }
-                Icon(
-                    imageVector = if (expanded) Icons.Filled.KeyboardArrowUp
-                    else Icons.Filled.KeyboardArrowDown,
-                    contentDescription = "Down Arrow",
-                    modifier = Modifier
-                        .size(25.dp)
-                        .clickable {
-                            expanded = !expanded
-                        },
-                    tint = Color.White
-                )
             }
+            Icon(
+                imageVector = if (expanded) Icons.Filled.KeyboardArrowUp
+                else Icons.Filled.KeyboardArrowDown,
+                contentDescription = "Down Arrow",
+                modifier = Modifier
+                    .size(25.dp)
+                    .clickable {
+                        expanded = !expanded
+                    },
+                tint = Color.White
+            )
         }
     }
 }
