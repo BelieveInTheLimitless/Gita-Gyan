@@ -2,16 +2,15 @@ package com.example.gitagyan.screens.favourite
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
@@ -45,8 +44,7 @@ import com.example.gitagyan.screens.components.topbar.TopBottomBar
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun FavouriteScreen(navController: NavController){
-    TopBottomBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
+    TopBottomBar(navController = navController, backgroundColor = Color.White){
         FavouriteVerseContent(navController = navController)
     }
 }
@@ -55,38 +53,36 @@ fun FavouriteScreen(navController: NavController){
 fun FavouriteVerseContent(navController: NavController,
                           favouriteViewModel: FavouriteViewModel = hiltViewModel()
 ){
-
-    Column(modifier = Modifier
-        .padding(5.dp)
-        .fillMaxWidth()
-        .fillMaxHeight()) {
-        val favouriteList = favouriteViewModel.favList.collectAsState().value
-        if(favouriteList.isEmpty()){
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = if (Languages.selectedLanguage == "English") "Favourites list empty" else "पसंदीदा सूची खाली",
-                    fontWeight = FontWeight.W400,
-                    fontSize = 20.sp,
-                    style = MaterialTheme.typography.caption,
-                )
-            }
+    val favouriteList = favouriteViewModel.favList.collectAsState().value
+    if(favouriteList.isEmpty()){
+        Column(modifier = Modifier
+            .fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(
+                text = if (Languages.selectedLanguage == "English") "Favourites list empty" else "पसंदीदा सूची खाली",
+                fontWeight = FontWeight.W400,
+                fontSize = 20.sp,
+                style = MaterialTheme.typography.caption,
+            )
         }
-        else{
-            LazyColumn{
-                items(items = favouriteList){
-                    VerseItem(favourite = it, favouriteViewModel = favouriteViewModel){ chapterId, verseId ->
-                        navController.navigate(AppScreens.VerseScreen.name+"/${chapterId}"+"/${verseId}"+"/${false}")
-                    }
+    }
+    else{
+        LazyColumn(modifier = Modifier
+            .padding(3.dp)
+            .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Top){
+            items(items = favouriteList){
+                VerseItem(favourite = it, favouriteViewModel = favouriteViewModel){ chapterId, verseId ->
+                    navController.navigate(AppScreens.VerseScreen.name+"/${chapterId}"+"/${verseId}"+"/${false}")
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun VerseItem(
     favourite: Favourite,
@@ -109,20 +105,22 @@ fun VerseItem(
         shape = RoundedCornerShape(corner = CornerSize(20.dp)),
         backgroundColor = Color(0xFFFD950E),
         contentColor = Color.Black,
-        elevation = 7.dp) {
+        elevation = 5.dp) {
         Row(modifier = Modifier
-            .padding(top = 6.dp, bottom = 6.dp, start = 16.dp, end = 16.dp)
+            .padding(10.dp)
             .fillMaxSize(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically) {
             Column(
                 modifier = Modifier
                     .padding(5.dp)
-                    .width(300.dp),
+                    .fillMaxWidth()
+                    .weight(0.9F),
                 horizontalAlignment = Alignment.Start
             ) {
                 Text(
                     text = chapters[favourite.chapterId-1].chapterName,
+                    modifier = Modifier.basicMarquee(),
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
