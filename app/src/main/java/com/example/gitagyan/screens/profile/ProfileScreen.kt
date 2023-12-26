@@ -5,19 +5,15 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.DropdownMenuItem
@@ -51,8 +47,7 @@ import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 @Composable
 fun ProfileScreen(navController: NavController){
-    TopBottomBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
+    TopBottomBar(navController = navController, Color(0xFFFD950E)){
         Profile()
     }
 }
@@ -60,119 +55,106 @@ fun ProfileScreen(navController: NavController){
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFFD950E)
-    ) {
-        Surface(
-            modifier = Modifier
-                .padding(start = 15.dp, top = 15.dp, end = 15.dp, bottom = 15.dp)
-                .width(1000.dp)
-                .height(500.dp),
-            shape = RoundedCornerShape(corner = CornerSize(40.dp)),
-            color = Color.White,
-            contentColor = Color.Black
+    Column(modifier = Modifier
+        .padding(15.dp)
+        .fillMaxSize()
+        .background(color = Color.White, shape = RoundedCornerShape(corner = CornerSize(40.dp))),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.padding(10.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row(
-                Modifier.padding(top = 45.dp),
-                horizontalArrangement = Arrangement.Center
+            Image(
+                painter = painterResource(id = R.drawable.krishna_arjuna),
+                contentDescription = "Main Image",
+                modifier = Modifier
+                    .padding(top = 50.dp, start = 50.dp, end = 50.dp)
+                    .aspectRatio(640.dp/640.dp),
+                contentScale = ContentScale.FillWidth
+            )
+
+            val context = LocalContext.current
+            val languages = arrayOf("English", "हिंदी")
+            var expanded by remember { mutableStateOf(false) }
+            val selectionLanguage = if (Languages.selectedLanguage == "English") "Selected language" else "भाषा चुनें"
+
+            Text(
+                text = selectionLanguage,
+                modifier = Modifier.padding(10.dp),
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Medium,
+                fontFamily = FontFamily.Serif,
+                style = MaterialTheme.typography.titleMedium
+            )
+
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = {
+                    expanded = !expanded
+                }
             ) {
-                Box {
-                    Column(
-                        modifier = Modifier.padding(10.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.krishna_arjuna),
-                            contentDescription = null,
-                            contentScale = ContentScale.FillBounds
+                OutlinedTextField(
+                    value = Languages.selectedLanguage,
+                    onValueChange = {
+                        Languages.selectedLanguage = it
+                    },
+                    modifier = Modifier.menuAnchor(),
+                    readOnly = true,
+                    trailingIcon = {
+                        ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
+                    },
+                    colors = TextFieldDefaults.colors(
+                        focusedContainerColor = containerColor,
+                        unfocusedContainerColor = containerColor,
+                        disabledContainerColor = containerColor,
+                    )
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier
+                        .background(
+                            Color(0xFFFFFFFF)
                         )
+                ) {
+                    languages.forEach { item ->
+                        DropdownMenuItem(
+                            text = { Text(text = item, color = Color.Black, fontSize = 15.sp) },
+                            onClick = {
+                                Languages.selectedLanguage = item
+                                expanded = false
 
-                        val context = LocalContext.current
-                        val languages = arrayOf("English", "हिंदी")
-                        var expanded by remember { mutableStateOf(false) }
-                        val selectionLanguage = if (Languages.selectedLanguage == "English") "Select a language" else "भाषा चुनें"
+                                languageViewModel.deleteAllLanguages()
+                                languageViewModel.insertLanguage(Language(language = item))
 
-                        Text(
-                            text = selectionLanguage,
-                            modifier = Modifier.padding(top = 10.dp, bottom = 10.dp),
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Medium,
-                            fontFamily = FontFamily.Serif,
-                            style = MaterialTheme.typography.titleMedium
+                                Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
+                            }
                         )
-
-                        ExposedDropdownMenuBox(
-                            expanded = expanded,
-                            onExpandedChange = {
-                                expanded = !expanded
-                            }
-                        ) {
-                            OutlinedTextField(
-                                value = Languages.selectedLanguage,
-                                onValueChange = {
-                                                Languages.selectedLanguage = it
-                                },
-                                modifier = Modifier.menuAnchor(),
-                                readOnly = true,
-                                trailingIcon = {
-                                    ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                                },
-                                colors = TextFieldDefaults.colors(
-                                    focusedContainerColor = containerColor,
-                                    unfocusedContainerColor = containerColor,
-                                    disabledContainerColor = containerColor,
-                                )
-                            )
-
-                            ExposedDropdownMenu(
-                                expanded = expanded,
-                                onDismissRequest = { expanded = false },
-                                modifier = Modifier
-                                    .background(
-                                        Color(0xFFFFFFFF)
-                                    )
-                            ) {
-                                languages.forEach { item ->
-                                    DropdownMenuItem(
-                                        text = { Text(text = item, color = Color.Black, fontSize = 15.sp) },
-                                        onClick = {
-                                            Languages.selectedLanguage = item
-                                            expanded = false
-
-                                            languageViewModel.deleteAllLanguages()
-                                            languageViewModel.insertLanguage(Language(language = item))
-
-                                            Toast.makeText(context, item, Toast.LENGTH_SHORT).show()
-                                        }
-                                    )
-                                }
-                            }
-                        }
-
-                        Divider(modifier = Modifier.padding(15.dp),
-                            color = Color.LightGray)
-
-                        Column(modifier = Modifier
-                            .padding(5.dp)
-                            .verticalScroll(state = ScrollState(0)),
-                            horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = if(Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishTitle else TheGreatnessOfTheGIta.hindiTitle,
-                                modifier = Modifier.padding(5.dp),
-                                fontSize = 20.sp,
-                                style = MaterialTheme.typography.titleMedium,
-                                textAlign = TextAlign.Center)
-                            Text(
-                                text = if (Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishContent else TheGreatnessOfTheGIta.hindiContent,
-                                modifier = Modifier.padding(5.dp),
-                                fontSize = 15.sp,
-                                style = androidx.compose.material.MaterialTheme.typography.caption,
-                                textAlign = TextAlign.Justify
-                            )
-                        }
                     }
                 }
+            }
+
+            Divider(modifier = Modifier.padding(15.dp),
+                color = Color.LightGray)
+
+            Column(modifier = Modifier
+                .padding(5.dp)
+                .verticalScroll(state = ScrollState(0)),
+                horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = if(Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishTitle else TheGreatnessOfTheGIta.hindiTitle,
+                    fontSize = 20.sp,
+                    style = MaterialTheme.typography.titleMedium,
+                    textAlign = TextAlign.Center)
+                Text(
+                    text = if (Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishContent else TheGreatnessOfTheGIta.hindiContent,
+                    modifier = Modifier.padding(5.dp),
+                    fontSize = 15.sp,
+                    style = androidx.compose.material.MaterialTheme.typography.caption,
+                    textAlign = TextAlign.Justify
+                )
             }
         }
     }
