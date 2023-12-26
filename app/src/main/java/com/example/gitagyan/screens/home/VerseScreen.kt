@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -45,8 +46,7 @@ fun VerseScreen(navController: NavController,
                 verseId: String?,
                 isMainScreen: Boolean?) {
     val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
-    TopBottomBar(navController = navController)
-    Box(modifier = Modifier.padding(top = 60.dp, bottom = 60.dp)) {
+    TopBottomBar(navController = navController, Color(0xFFFD950E)){
         if (chapterId != null) {
             if (verseId != null) {
                 Verses(favouriteViewModel, chapter = chapters[chapterId.toInt()],
@@ -98,222 +98,215 @@ fun Verses(
 
     val context = LocalContext.current
 
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color(0xFFFD950E)
-    ) {
-        Surface(
+    Column(modifier = Modifier
+        .padding(15.dp)
+        .fillMaxSize()
+        .background(color = Color.White, shape = RoundedCornerShape(corner = CornerSize(40.dp))),
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
             modifier = Modifier
-                .padding(15.dp)
-                .fillMaxSize(),
-            shape = RoundedCornerShape(corner = CornerSize(40.dp)),
-            color = Color.White,
-            contentColor = Color.Black
+                .fillMaxSize()
+                .padding(10.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Image(
+                painter = painterResource(id = R.drawable.krishna_arjuna),
+                contentDescription = "Main Image",
+                modifier = Modifier
+                    .padding(top = 50.dp, start = 50.dp, end = 50.dp)
+                    .aspectRatio(640.dp/640.dp),
+                contentScale = ContentScale.FillWidth
+            )
+
+            Spacer(modifier = Modifier.padding(5.dp))
+
+            Text(
+                text = chapter.chapter,
+                color = Color(0xFFFD950E),
+                fontSize = 15.sp,
+                fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.caption
+            )
+            Text(
+                text = chapter.chapterName,
+                color = Color(0xFFFD950E),
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp,
+                style = MaterialTheme.typography.caption,
+                textAlign = TextAlign.Center
+            )
+
             Row(
-                Modifier.padding(top = 45.dp, bottom = 45.dp),
-                horizontalArrangement = Arrangement.Center
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(5.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(
-                    modifier = Modifier.padding(10.dp),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-
-                    Image(
-                        painter = painterResource(id = R.drawable.krishna_arjuna),
-                        contentDescription = null,
-                        contentScale = ContentScale.FillBounds
-                    )
-
-                    Spacer(modifier = Modifier.padding(5.dp))
-
-                    Text(
-                        text = chapter.chapter,
-                        color = Color(0xFFFD950E),
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.SemiBold,
-                        style = MaterialTheme.typography.caption
-                    )
-                    Text(
-                        text = chapter.chapterName,
-                        color = Color(0xFFFD950E),
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 20.sp,
-                        style = MaterialTheme.typography.caption,
-                        textAlign = TextAlign.Center
-                    )
-
-                    Row(
-                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp),
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        if (id == 0) {
-                            Card(
-                                modifier = Modifier
-                                    .size(35.dp),
-                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                                backgroundColor = Color.White,
-                                contentColor = Color.LightGray,
-                                elevation = 5.dp
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowLeft,
-                                    contentDescription = null
-                                )
-                            }
-                        } else {
-                            Card(
-                                modifier = Modifier
-                                    .size(35.dp)
-                                    .clickable(onClick = {
-                                        id -= 1
-                                        if (isMainScreen == true){
-                                            if (currentVerseList.isEmpty()){
-                                                currentVerseViewModel.deleteAllCurrentVerses()
-                                                currentVerseViewModel.insertCurrentVerse(
-                                                    CurrentVerse(
-                                                        chapterId = chapter.chapterId.toInt(),
-                                                        verseId = id + 1)
-                                                )
-                                            }
-                                        }
-                                    }),
-                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                                backgroundColor = Color.White,
-                                contentColor = Color.Black,
-                                elevation = 5.dp
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowLeft,
-                                    contentDescription = null
-                                )
-                            }
-                        }
-
-                        Text(
-                            text = chapter.chapterContent[id].verseName,
-                            modifier = Modifier.padding(start = 90.dp, end = 90.dp),
-                            color = Color(0xFFFD950E),
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 20.sp,
-                            style = MaterialTheme.typography.caption
-                        )
-
-                        if (id == chapter.chapterContent.size - 1) {
-                            Card(
-                                modifier = Modifier
-                                    .size(35.dp),
-                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                                backgroundColor = Color.White,
-                                contentColor = Color.LightGray,
-                                elevation = 5.dp
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowRight,
-                                    contentDescription = null
-                                )
-                            }
-                        } else {
-                            Card(
-                                modifier = Modifier
-                                    .size(35.dp)
-                                    .clickable(onClick = {
-                                        id += 1
-                                        if (isMainScreen == true){
-                                            if (currentVerseList.isEmpty()){
-                                                currentVerseViewModel.deleteAllCurrentVerses()
-                                                currentVerseViewModel.insertCurrentVerse(
-                                                    CurrentVerse(
-                                                        chapterId = chapter.chapterId.toInt(),
-                                                        verseId = id + 1)
-                                                )
-                                            }
-                                        }
-                                    }),
-                                shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                                backgroundColor = Color.White,
-                                contentColor = Color.Black,
-                                elevation = 5.dp
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowRight,
-                                    contentDescription = null
-                                )
-                            }
-                        }
-                    }
-
-                    if (isAlreadyFavourite.isNotEmpty()) {
-                        IconButton(
-                            onClick = {
-                                favouriteViewModel.deleteFavourite(
-                                    Favourite(
-                                        chapterId = chapter.chapterId.toInt(),
-                                        verseId = id + 1
-                                    )
-                                )
-                                Toast.makeText(
-                                    context, if (Languages.selectedLanguage == "English") "Deleted from Favourites" else "पसंदीदा से हटा दिया गया",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Favorite,
-                                contentDescription = "Favourites Icon",
-                                tint = Color(0xFFFD950E)
-                            )
-                        }
-                    }
-                    else{
-                        IconButton(
-                            onClick = {
-                                favouriteViewModel.insertFavourite(
-                                    Favourite(
-                                        chapterId = chapter.chapterId.toInt(),
-                                        verseId = id + 1
-                                    )
-                                )
-                                Toast.makeText(
-                                    context, if (Languages.selectedLanguage == "English") "Added to Favourites" else "पसंदीदा में जोड़ा गया",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.FavoriteBorder,
-                                contentDescription = "Favourites Icon"
-                            )
-                        }
-                    }
-
-                    Spacer(modifier = Modifier.padding(5.dp))
-
-                    Column(
+                if (id == 0) {
+                    Card(
                         modifier = Modifier
-                            .verticalScroll(state = ScrollState(0)),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                            .size(35.dp),
+                        shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                        backgroundColor = Color.White,
+                        contentColor = Color.LightGray,
+                        elevation = 5.dp
                     ) {
-
-                        Text(
-                            text = chapter.chapterContent[id].verse,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight.W600,
-                            style = MaterialTheme.typography.caption,
-                            textAlign = TextAlign.Center
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowLeft,
+                            contentDescription = null
                         )
-
-                        Text(
-                            text = chapter.chapterContent[id].verseMeaning,
-                            fontSize = 17.sp,
-                            fontWeight = FontWeight.W400,
-                            style = MaterialTheme.typography.caption,
-                            textAlign = TextAlign.Center
+                    }
+                } else {
+                    Card(
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable(onClick = {
+                                id -= 1
+                                if (isMainScreen == true){
+                                    if (currentVerseList.isEmpty()){
+                                        currentVerseViewModel.deleteAllCurrentVerses()
+                                        currentVerseViewModel.insertCurrentVerse(
+                                            CurrentVerse(
+                                                chapterId = chapter.chapterId.toInt(),
+                                                verseId = id + 1)
+                                        )
+                                    }
+                                }
+                            }),
+                        shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                        backgroundColor = Color.White,
+                        contentColor = Color.Black,
+                        elevation = 5.dp
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowLeft,
+                            contentDescription = null
                         )
                     }
                 }
+
+                Text(
+                    text = chapter.chapterContent[id].verseName,
+                    color = Color(0xFFFD950E),
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 20.sp,
+                    style = MaterialTheme.typography.caption
+                )
+
+                if (id == chapter.chapterContent.size - 1) {
+                    Card(
+                        modifier = Modifier
+                            .size(35.dp),
+                        shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                        backgroundColor = Color.White,
+                        contentColor = Color.LightGray,
+                        elevation = 5.dp
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowRight,
+                            contentDescription = null
+                        )
+                    }
+                } else {
+                    Card(
+                        modifier = Modifier
+                            .size(35.dp)
+                            .clickable(onClick = {
+                                id += 1
+                                if (isMainScreen == true){
+                                    if (currentVerseList.isEmpty()){
+                                        currentVerseViewModel.deleteAllCurrentVerses()
+                                        currentVerseViewModel.insertCurrentVerse(
+                                            CurrentVerse(
+                                                chapterId = chapter.chapterId.toInt(),
+                                                verseId = id + 1)
+                                        )
+                                    }
+                                }
+                            }),
+                        shape = RoundedCornerShape(corner = CornerSize(35.dp)),
+                        backgroundColor = Color.White,
+                        contentColor = Color.Black,
+                        elevation = 5.dp
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.KeyboardArrowRight,
+                            contentDescription = null
+                        )
+                    }
+                }
+            }
+
+            if (isAlreadyFavourite.isNotEmpty()) {
+                IconButton(
+                    onClick = {
+                        favouriteViewModel.deleteFavourite(
+                            Favourite(
+                                chapterId = chapter.chapterId.toInt(),
+                                verseId = id + 1
+                            )
+                        )
+                        Toast.makeText(
+                            context, if (Languages.selectedLanguage == "English") "Deleted from Favourites" else "पसंदीदा से हटा दिया गया",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Favorite,
+                        contentDescription = "Favourites Icon",
+                        tint = Color(0xFFFD950E)
+                    )
+                }
+            }
+            else{
+                IconButton(
+                    onClick = {
+                        favouriteViewModel.insertFavourite(
+                            Favourite(
+                                chapterId = chapter.chapterId.toInt(),
+                                verseId = id + 1
+                            )
+                        )
+                        Toast.makeText(
+                            context, if (Languages.selectedLanguage == "English") "Added to Favourites" else "पसंदीदा में जोड़ा गया",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.FavoriteBorder,
+                        contentDescription = "Favourites Icon"
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.padding(5.dp))
+
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .verticalScroll(state = ScrollState(0)),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = chapter.chapterContent[id].verse,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.W600,
+                    style = MaterialTheme.typography.caption,
+                    textAlign = TextAlign.Center
+                )
+
+                Text(
+                    text = chapter.chapterContent[id].verseMeaning,
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.W400,
+                    style = MaterialTheme.typography.caption,
+                    textAlign = TextAlign.Center
+                )
             }
         }
     }
