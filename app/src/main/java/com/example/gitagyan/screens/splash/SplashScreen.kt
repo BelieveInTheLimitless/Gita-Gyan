@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -16,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -38,26 +38,23 @@ fun SplashScreen(navController: NavController){
         scale.animateTo(targetValue = 2f,
             animationSpec = tween(durationMillis = 1000,
                 easing = {
-                    OvershootInterpolator(3f)
+                    OvershootInterpolator(2f)
                         .getInterpolation(it)
                 })
         )
         delay(1500L)
-
         navController.navigate(AppScreens.HomeScreen.name)
-    }
-    )
+    })
 
     Surface(
         modifier = Modifier
-            .size(1000.dp)
-            .scale(scale.value),
+            .fillMaxSize(),
         color = Color(0xFFFD950E)
     ) {
-        Column(horizontalAlignment = Alignment.CenterHorizontally,
+        Column(modifier = Modifier.scale(scale.value),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center) {
             Image(painter = painterResource(id = R.drawable.photo3), contentDescription = "sunny icon",
-                contentScale = ContentScale.FillBounds,
                 modifier = Modifier.size(125.dp)
             )
             Text(

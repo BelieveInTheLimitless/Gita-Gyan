@@ -55,23 +55,23 @@ fun MainContent(
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(3.dp),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
-        val currentVerseList = currentVerseViewModel.currentVerseList.collectAsState().value
-        if(currentVerseList.isNotEmpty()){
+        val currentVerse = currentVerseViewModel.currentVerseList.collectAsState().value
+        if(currentVerse.isNotEmpty()){
             Card(modifier = Modifier
                 .padding(3.dp)
                 .fillMaxWidth()
                 .clickable(
                     onClick = {
-                        navController.navigate(AppScreens.VerseScreen.name + "/${currentVerseList[0].chapterId - 1}" + "/${currentVerseList[0].verseId - 1}" + "/${true}")
+                        navController.navigate(AppScreens.VerseScreen.name + "/${currentVerse[0].chapterId - 1}" + "/${currentVerse[0].verseId - 1}" + "/${true}")
                     }
                 ),
                 shape = RoundedCornerShape(corner = CornerSize(20.dp)),
                 backgroundColor = Color(0xFFFD950E),
                 contentColor = Color.Black,
-                elevation = 7.dp) {
-                Row {
+                elevation = 5.dp) {
+                Row{
                     Column(
                         modifier = Modifier.padding(15.dp),
                         verticalArrangement = Arrangement.Center,
@@ -82,11 +82,11 @@ fun MainContent(
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .size(100.dp)
-                                .clip(RoundedCornerShape(16.dp))
+                                .clip(RoundedCornerShape(20.dp))
                             )
                     }
                     Column(
-                        modifier = Modifier.padding(10.dp),
+                        modifier = Modifier.padding(15.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.Start
                     ) {
@@ -100,14 +100,14 @@ fun MainContent(
                         )
 
                         Text(
-                            text = chapterList[currentVerseList[0].chapterId - 1].chapter,
+                            text = chapterList[currentVerse[0].chapterId - 1].chapter,
                             color = Color(0xFFFFFFFF),
                             fontSize = 18.sp,
                             fontWeight = FontWeight.SemiBold,
                             style = MaterialTheme.typography.caption
                         )
                         Text(
-                            text = chapterList[currentVerseList[0].chapterId - 1].chapterContent[currentVerseList[0].verseId - 1].verseName,
+                            text = chapterList[currentVerse[0].chapterId - 1].chapterContent[currentVerse[0].verseId - 1].verseName,
                             color = Color(0xFFFFFFFF),
                             fontSize = 15.sp,
                             fontWeight = FontWeight.W400,
