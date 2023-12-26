@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,10 +39,9 @@ fun TopBottomBar(
                 if (!isMainScreen) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Start,
+                        horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-
                         IconButton(onClick = {
                             navController.popBackStack()
                         }) {
@@ -53,13 +53,18 @@ fun TopBottomBar(
 
                         Text(
                             text = appName,
-                            modifier = Modifier.padding(start = 90.dp),
                             color = Color.Black,
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             fontFamily = FontFamily.Serif,
                             style = MaterialTheme.typography.caption
                         )
+
+                        IconButton(onClick = { /*TODO*/ }) {
+                            Icon(imageVector = Icons.Default.Settings,
+                                contentDescription = "Settings",
+                                tint = Color.Transparent)
+                        }
                     }
                 }
                 else{
