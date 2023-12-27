@@ -106,7 +106,6 @@ fun Verses(
         horizontalAlignment = Alignment.CenterHorizontally) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
                 .padding(10.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally

@@ -18,7 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -71,22 +70,27 @@ fun MainContent(
                 backgroundColor = Color(0xFFFD950E),
                 contentColor = Color.Black,
                 elevation = 5.dp) {
-                Row{
+                Row(horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically){
                     Column(
-                        modifier = Modifier.padding(15.dp),
+                        modifier = Modifier
+                            .weight(0.3F)
+                            .padding(15.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.Start
                     ) {
                         Image(painter = painterResource(id = R.drawable.krishna_arjuna),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
+                            contentDescription = "Home Screen Image ",
                             modifier = Modifier
-                                .size(100.dp)
-                                .clip(RoundedCornerShape(20.dp))
+                                .aspectRatio(640.dp/640.dp)
+                                .clip(RoundedCornerShape(20.dp)),
+                            alignment = Alignment.CenterStart
                             )
                     }
                     Column(
-                        modifier = Modifier.padding(15.dp),
+                        modifier = Modifier
+                            .weight(0.7F)
+                            .padding(15.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.Start
                     ) {
