@@ -2,9 +2,11 @@ package com.example.gitagyan.screens.home
 
 import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -28,7 +30,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import com.example.gitagyan.R
 import com.example.gitagyan.data.content.Chapter
 import com.example.gitagyan.model.Languages
@@ -36,29 +37,28 @@ import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.model.CurrentVerse
 import com.example.gitagyan.model.Favourite
-import com.example.gitagyan.screens.components.topbar.TopBottomBar
 import com.example.gitagyan.screens.favourite.FavouriteViewModel
 
 @Composable
-fun VerseScreen(navController: NavController,
-                favouriteViewModel: FavouriteViewModel = hiltViewModel(),
+fun VerseScreen(favouriteViewModel: FavouriteViewModel = hiltViewModel(),
                 chapterId: String?,
                 verseId: String?,
                 isMainScreen: Boolean?) {
+
     val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
-    TopBottomBar(navController = navController, Color(0xFFFD950E)){
-        if (chapterId != null) {
-            if (verseId != null) {
-                Verses(favouriteViewModel, chapter = chapters[chapterId.toInt()],
-                    verseId = verseId,
-                    isMainScreen = isMainScreen
-                )
-            }
+
+    if (chapterId != null) {
+        if (verseId != null) {
+            Verses(favouriteViewModel, chapter = chapters[chapterId.toInt()],
+                verseId = verseId,
+                isMainScreen = isMainScreen
+            )
         }
     }
 }
 
 
+@OptIn(ExperimentalFoundationApi::class)
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun Verses(
@@ -106,8 +106,8 @@ fun Verses(
         horizontalAlignment = Alignment.CenterHorizontally) {
         Column(
             modifier = Modifier
+                .fillMaxWidth()
                 .padding(10.dp),
-            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
@@ -130,19 +130,20 @@ fun Verses(
             )
             Text(
                 text = chapter.chapterName,
+                modifier = Modifier.basicMarquee(velocity = 10.dp),
                 color = Color(0xFFFD950E),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
-                style = MaterialTheme.typography.caption,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                style = MaterialTheme.typography.caption
             )
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(5.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 if (id == 0) {
                     Card(
@@ -293,6 +294,7 @@ fun Verses(
             ) {
                 Text(
                     text = chapter.chapterContent[id].verse,
+                    color = Color.Black,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W600,
                     style = MaterialTheme.typography.caption,
@@ -301,6 +303,7 @@ fun Verses(
 
                 Text(
                     text = chapter.chapterContent[id].verseMeaning,
+                    color = Color.Black,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.W400,
                     style = MaterialTheme.typography.caption,

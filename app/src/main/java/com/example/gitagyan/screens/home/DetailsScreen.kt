@@ -1,8 +1,10 @@
 package com.example.gitagyan.screens.home
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -29,21 +31,19 @@ import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
-import com.example.gitagyan.screens.components.topbar.TopBottomBar
 
 
 @Composable
 fun DetailsScreen(navController: NavController, chapterId: String?){
     val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
-    TopBottomBar(navController = navController, backgroundColor = Color(0xFFFD950E)){
-        if (chapterId != null) {
-            Details(chapter = chapters[chapterId.toInt()-1]){ chapterId, verseId ->
-                navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.toInt()-1}" + "/$verseId" + "/${true}")
-            }
+    if (chapterId != null) {
+        Details(chapter = chapters[chapterId.toInt()-1]){ chapterId, verseId ->
+            navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.toInt()-1}" + "/$verseId" + "/${true}")
         }
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
     Column(modifier = Modifier
@@ -53,8 +53,9 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Column(
-            modifier = Modifier.padding(10.dp),
-            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
@@ -77,11 +78,13 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
             )
             Text(
                 text = chapter.chapterName,
+                modifier = Modifier.basicMarquee(velocity = 10.dp),
                 color = Color(0xFFFD950E),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
-                style = MaterialTheme.typography.caption,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
+                maxLines = 1,
+                style = MaterialTheme.typography.caption
             )
             Text(buildAnnotatedString {
                 withStyle(style = SpanStyle(color = Color(0xFFFD950E),
@@ -112,12 +115,12 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
                 color = Color.LightGray)
 
             Column(modifier = Modifier
-                .padding(1.dp)
+                .padding(5.dp)
+                .fillMaxWidth()
                 .verticalScroll(state = ScrollState(0)),
                 horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = chapter.description,
-                    modifier = Modifier.padding(5.dp),
                     fontSize = 15.sp,
                     style = MaterialTheme.typography.caption,
                     textAlign = TextAlign.Justify
