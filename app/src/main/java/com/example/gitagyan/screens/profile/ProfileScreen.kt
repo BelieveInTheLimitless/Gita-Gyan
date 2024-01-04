@@ -22,6 +22,7 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.ListItemDefaults.containerColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,15 +41,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.gitagyan.R
 import com.example.gitagyan.model.Language
 import com.example.gitagyan.model.Languages
-import com.example.gitagyan.screens.components.topbar.TopBottomBar
+import com.example.gitagyan.screens.components.TopBar
 
 @Composable
-fun ProfileScreen(navController: NavController){
-    TopBottomBar(navController = navController, Color(0xFFFD950E)){
-        Profile()
+fun ProfileNavHost(rootNavController: NavController) {
+
+    val profileNavController = rememberNavController()
+
+    Scaffold(
+        topBar = {
+            TopBar {
+                rootNavController.popBackStack()
+            }
+        },
+        containerColor = Color(0xFFFD950E)
+    ) {
+        NavHost(navController = profileNavController,
+            startDestination = "profileContent",
+            modifier = Modifier.padding(it)) {
+            composable("profileContent") {
+                Profile()
+            }
+        }
     }
 }
 
@@ -58,7 +78,10 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
     Column(modifier = Modifier
         .padding(15.dp)
         .fillMaxSize()
-        .background(color = Color.White, shape = RoundedCornerShape(corner = CornerSize(40.dp))),
+        .background(
+            color = Color.White,
+            shape = RoundedCornerShape(corner = CornerSize(40.dp))
+        ),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Column(
@@ -71,7 +94,7 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                 contentDescription = "Main Image",
                 modifier = Modifier
                     .padding(top = 50.dp, start = 50.dp, end = 50.dp)
-                    .aspectRatio(640.dp/640.dp),
+                    .aspectRatio(640.dp / 640.dp),
                 contentScale = ContentScale.FillWidth
             )
 
@@ -111,7 +134,6 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                         disabledContainerColor = containerColor,
                     )
                 )
-
                 ExposedDropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
