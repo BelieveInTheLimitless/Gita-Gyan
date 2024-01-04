@@ -1,8 +1,10 @@
 package com.example.gitagyan.screens.favourite
 
-import android.annotation.SuppressLint
 import android.widget.Toast
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,8 +23,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,20 +38,93 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.model.Favourite
 import com.example.gitagyan.navigation.AppScreens
-import com.example.gitagyan.screens.components.topbar.TopBottomBar
+import com.example.gitagyan.screens.components.TopBar
+import com.example.gitagyan.screens.home.VerseScreen
 
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun FavouriteScreen(navController: NavController){
-    TopBottomBar(navController = navController, backgroundColor = Color.White){
-        FavouriteVerseContent(navController = navController)
+fun FavouriteNavHost(rootNavController: NavController, favouriteViewModel: FavouriteViewModel = hiltViewModel()) {
+
+    val favouriteNavController = rememberNavController()
+
+    val isFavouriteScreen = remember {
+        mutableStateOf(true)
     }
+
+    Scaffold(
+        topBar = {
+            TopBar {
+                if (isFavouriteScreen.value){
+                    rootNavController.popBackStack()
+                }
+                else{
+                    favouriteNavController.popBackStack()
+                }
+            }
+        },
+        containerColor = if(isFavouriteScreen.value) Color.White else Color(0xFFFD950E)
+    ) {
+        NavHost(navController = favouriteNavController,
+            startDestination = "favouriteContent",
+            modifier = Modifier.padding(it),
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(350)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(350)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(350)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(350)
+                )
+            }) {
+            composable("favouriteContent") {
+                isFavouriteScreen.value = true
+                FavouriteVerseContent(navController = favouriteNavController)
+            }
+
+            composable(
+                AppScreens.VerseScreen.name+"/{chapter_id}"+"/{verse_id}"+"/{isMainScreen}",
+                arguments = listOf(
+                    navArgument(name = "chapter_id") {type = NavType.StringType},
+                    navArgument(name = "verse_id") { type = NavType.StringType},
+                    navArgument(name = "isMainScreen") { type = NavType.BoolType}
+                )
+            ){ backStackEntry ->
+                isFavouriteScreen.value = false
+                VerseScreen(
+                    favouriteViewModel = favouriteViewModel,
+                    chapterId = backStackEntry.arguments?.getString("chapter_id"),
+                    verseId = backStackEntry.arguments?.getString("verse_id"),
+                    isMainScreen = backStackEntry.arguments?.getBoolean("isMainScreen")
+                )
+            }
+        }
+    }
+
 }
 
 @Composable
@@ -56,7 +134,8 @@ fun FavouriteVerseContent(navController: NavController,
     val favouriteList = favouriteViewModel.favList.collectAsState().value
     if(favouriteList.isEmpty()){
         Column(modifier = Modifier
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(color = Color.White),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
@@ -69,8 +148,8 @@ fun FavouriteVerseContent(navController: NavController,
     }
     else{
         LazyColumn(modifier = Modifier
-            .padding(3.dp)
-            .fillMaxSize(),
+            .fillMaxSize()
+            .background(color = Color.White),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top){
             items(items = favouriteList){
@@ -94,7 +173,7 @@ fun VerseItem(
     val context = LocalContext.current
 
     Card(modifier = Modifier
-        .padding(3.dp)
+        .padding(start = 6.dp, end = 6.dp, top = 3.dp, bottom = 3.dp)
         .fillMaxWidth()
         .clickable {
             onItemClick(
@@ -120,7 +199,7 @@ fun VerseItem(
             ) {
                 Text(
                     text = chapters[favourite.chapterId-1].chapterName,
-                    modifier = Modifier.basicMarquee(),
+                    modifier = Modifier.basicMarquee(velocity = 20.dp),
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
