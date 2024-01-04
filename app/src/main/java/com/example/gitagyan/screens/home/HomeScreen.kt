@@ -1,8 +1,11 @@
 package com.example.gitagyan.screens.home
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,6 +13,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -29,21 +34,98 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.gitagyan.R
 import com.example.gitagyan.data.content.Chapter
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.navigation.AppScreens
-import com.example.gitagyan.screens.components.topbar.TopBottomBar
+import com.example.gitagyan.screens.components.TopBar
+import com.example.gitagyan.screens.favourite.FavouriteViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun HomeScreen(navController: NavController){
-    TopBottomBar(navController = navController, isMainScreen = true, backgroundColor = Color.White){
-        MainContent(navController = navController)
+fun HomeNavHost(favouriteViewModel: FavouriteViewModel = hiltViewModel()) {
+
+    val homeNavController = rememberNavController()
+
+    val isMainScreen = remember {
+        mutableStateOf(true)
+    }
+
+    Scaffold(
+        topBar = {
+            TopBar(isHomeScreen = isMainScreen.value) {
+                homeNavController.popBackStack()
+            }
+        },
+        containerColor = if(isMainScreen.value) Color.White else Color(0xFFFD950E)
+    ) {
+        NavHost(navController = homeNavController,
+            startDestination = "homeContent",
+            modifier = Modifier.padding(it),
+            enterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(350)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(350)
+                )
+            },
+            popEnterTransition = {
+                slideIntoContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(350)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(350)
+                )
+            }) {
+            composable("homeContent") {
+                isMainScreen.value = true
+                MainContent(navController = homeNavController)
+            }
+
+            composable(
+                AppScreens.DetailsScreen.name+"/{chapter_id}",
+                arguments = listOf(navArgument(name = "chapter_id") {type = NavType.StringType})
+            ){ backStackEntry ->
+                isMainScreen.value = false
+                DetailsScreen(navController = homeNavController, chapterId = backStackEntry.arguments?.getString("chapter_id"))
+            }
+
+            composable(
+                AppScreens.VerseScreen.name+"/{chapter_id}"+"/{verse_id}"+"/{isMainScreen}",
+                arguments = listOf(
+                    navArgument(name = "chapter_id") {type = NavType.StringType},
+                    navArgument(name = "verse_id") { type = NavType.StringType},
+                    navArgument(name = "isMainScreen") { type = NavType.BoolType}
+                )
+            ){ backStackEntry ->
+                isMainScreen.value = false
+                VerseScreen(
+                    favouriteViewModel = favouriteViewModel,
+                    chapterId = backStackEntry.arguments?.getString("chapter_id"),
+                    verseId = backStackEntry.arguments?.getString("verse_id"),
+                    isMainScreen = backStackEntry.arguments?.getBoolean("isMainScreen")
+                )
+            }
+        }
     }
 }
+
 
 @Composable
 fun MainContent(
@@ -53,6 +135,7 @@ fun MainContent(
 ){
     Column(modifier = Modifier
         .fillMaxSize()
+        .background(color = Color.White)
         .padding(3.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally) {
@@ -82,7 +165,7 @@ fun MainContent(
                         Image(painter = painterResource(id = R.drawable.krishna_arjuna),
                             contentDescription = "Home Screen Image ",
                             modifier = Modifier
-                                .aspectRatio(640.dp/640.dp)
+                                .aspectRatio(640.dp / 640.dp)
                                 .clip(RoundedCornerShape(20.dp)),
                             alignment = Alignment.CenterStart
                             )
@@ -163,10 +246,10 @@ fun ChapterRow(
                 color = Color(0xFFFFFFFF),
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
-                style = MaterialTheme.typography.caption,
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
-                maxLines = if(expanded) 3 else 1
+                maxLines = if(expanded) 5 else 1,
+                style = MaterialTheme.typography.caption
             )
 
             AnimatedVisibility(visible = expanded) {
