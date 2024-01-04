@@ -21,47 +21,61 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.gitagyan.R
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.components.AppNavigation
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController){
+fun SplashNavHost() {
 
-    val scale = remember {
-        Animatable(1f)
-    }
+    val navController = rememberNavController()
 
-    LaunchedEffect(key1 = true, block = {
-        scale.animateTo(targetValue = 2f,
-            animationSpec = tween(durationMillis = 1000,
-                easing = {
-                    OvershootInterpolator(2f)
-                        .getInterpolation(it)
-                })
-        )
-        delay(1500L)
-        navController.navigate(AppScreens.HomeScreen.name)
-    })
+    NavHost(navController = navController, startDestination = AppScreens.SplashScreen.name){
 
-    Surface(
-        modifier = Modifier
-            .fillMaxSize(),
-        color = Color(0xFFFD950E)
-    ) {
-        Column(modifier = Modifier.scale(scale.value),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
-            Image(painter = painterResource(id = R.drawable.photo3), contentDescription = "sunny icon",
-                modifier = Modifier.size(125.dp)
-            )
-            Text(
-                text = if (Languages.selectedLanguage == "English")  "Gita Gyan" else "गीता ज्ञान",
-                fontFamily = FontFamily.Cursive,
-                fontWeight = FontWeight.ExtraBold
-            )
+        composable(AppScreens.SplashScreen.name){
+            val scale = remember {
+                Animatable(1f)
+            }
+
+            LaunchedEffect(key1 = true, block = {
+                scale.animateTo(targetValue = 2f,
+                    animationSpec = tween(durationMillis = 1000,
+                        easing = {
+                            OvershootInterpolator(2f)
+                                .getInterpolation(it)
+                        })
+                )
+                delay(1500L)
+                navController.navigate(AppScreens.AppNavigation.name)
+            })
+
+            Surface(
+                modifier = Modifier
+                    .fillMaxSize(),
+                color = Color(0xFFFD950E)
+            ) {
+                Column(modifier = Modifier.scale(scale.value),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center) {
+                    Image(painter = painterResource(id = R.drawable.photo3), contentDescription = "splash screen icon",
+                        modifier = Modifier.size(125.dp)
+                    )
+                    Text(
+                        text = if (Languages.selectedLanguage == "English")  "Gita Gyan" else "गीता ज्ञान",
+                        fontFamily = FontFamily.Cursive,
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                }
+            }
+        }
+
+        composable(AppScreens.AppNavigation.name) {
+            AppNavigation()
         }
     }
 }
