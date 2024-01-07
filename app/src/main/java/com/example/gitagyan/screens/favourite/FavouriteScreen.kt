@@ -1,8 +1,6 @@
 package com.example.gitagyan.screens.favourite
 
 import android.widget.Toast
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.basicMarquee
@@ -76,31 +74,8 @@ fun FavouriteNavHost(rootNavController: NavController, favouriteViewModel: Favou
     ) {
         NavHost(navController = favouriteNavController,
             startDestination = "favouriteContent",
-            modifier = Modifier.padding(it),
-            enterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(350)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(350)
-                )
-            },
-            popEnterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(350)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(350)
-                )
-            }) {
+            modifier = Modifier.padding(it)
+        ) {
             composable("favouriteContent") {
                 isFavouriteScreen.value = true
                 FavouriteVerseContent(navController = favouriteNavController)
@@ -152,7 +127,7 @@ fun FavouriteVerseContent(navController: NavController,
             .background(color = Color.White),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top){
-            items(items = favouriteList){
+            items(items = favouriteList, key = {favouriteList -> listOf(favouriteList.chapterId, favouriteList.verseId) }){
                 VerseItem(favourite = it, favouriteViewModel = favouriteViewModel){ chapterId, verseId ->
                     navController.navigate(AppScreens.VerseScreen.name+"/${chapterId}"+"/${verseId}"+"/${false}")
                 }

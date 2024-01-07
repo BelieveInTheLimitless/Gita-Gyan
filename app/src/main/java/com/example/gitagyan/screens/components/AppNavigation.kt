@@ -1,8 +1,6 @@
 package com.example.gitagyan.screens.components
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -32,31 +30,8 @@ fun AppNavigation(){
     ) {
         NavHost(navController = rootNavController,
             startDestination = AppScreens.HomeScreen.name,
-            modifier = Modifier.padding(it),
-            enterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            popEnterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            }) {
+            modifier = Modifier.padding(it)
+        ) {
             composable(AppScreens.HomeScreen.name) {
                 HomeNavHost()
             }

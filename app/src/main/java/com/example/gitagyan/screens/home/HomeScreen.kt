@@ -1,9 +1,7 @@
 package com.example.gitagyan.screens.home
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -68,31 +66,8 @@ fun HomeNavHost(favouriteViewModel: FavouriteViewModel = hiltViewModel()) {
     ) {
         NavHost(navController = homeNavController,
             startDestination = "homeContent",
-            modifier = Modifier.padding(it),
-            enterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(350)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(350)
-                )
-            },
-            popEnterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(350)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(350)
-                )
-            }) {
+            modifier = Modifier.padding(it)
+        ) {
             composable("homeContent") {
                 isMainScreen.value = true
                 MainContent(navController = homeNavController)
@@ -205,7 +180,7 @@ fun MainContent(
             }
         }
         LazyColumn{
-            items(items = chapterList){
+            items(items = chapterList, key = {chapter -> chapter.chapterId}){
                 ChapterRow(chapter = it){ chapterId ->
                     navController.navigate(route = AppScreens.DetailsScreen.name + "/$chapterId")
                 }

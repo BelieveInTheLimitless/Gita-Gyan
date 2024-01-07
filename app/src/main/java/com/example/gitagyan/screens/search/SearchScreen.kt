@@ -1,8 +1,6 @@
 package com.example.gitagyan.screens.search
 
 import android.widget.Toast
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -71,31 +69,8 @@ fun SearchNavHost(rootNavController: NavController, favouriteViewModel: Favourit
     ) {
         NavHost(navController = searchNavController,
             startDestination = "searchContent",
-            modifier = Modifier.padding(it),
-            enterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(350)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(350)
-                )
-            },
-            popEnterTransition = {
-                slideIntoContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(350)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(350)
-                )
-            }) {
+            modifier = Modifier.padding(it)
+        ) {
             composable("searchContent") {
                 isSearchScreen.value = true
                 Search(navController = searchNavController)

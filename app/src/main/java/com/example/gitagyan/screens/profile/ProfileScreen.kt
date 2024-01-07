@@ -64,7 +64,8 @@ fun ProfileNavHost(rootNavController: NavController) {
     ) {
         NavHost(navController = profileNavController,
             startDestination = "profileContent",
-            modifier = Modifier.padding(it)) {
+            modifier = Modifier.padding(it)
+        ) {
             composable("profileContent") {
                 Profile()
             }
