@@ -1,11 +1,9 @@
 package com.example.gitagyan.screens.home
 
 import android.widget.Toast
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
@@ -67,8 +65,6 @@ fun VerseScreen(favouriteViewModel: FavouriteViewModel = hiltViewModel(),
     }
 }
 
-
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Verses(
     favouriteViewModel: FavouriteViewModel,
@@ -137,17 +133,6 @@ fun Verses(
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.caption
             )
-            Text(
-                text = chapter.chapterName,
-                modifier = Modifier.basicMarquee(velocity = 10.dp),
-                color = Color(0xFFFD950E),
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
-                maxLines = 1,
-                style = MaterialTheme.typography.caption
-            )
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -200,6 +185,7 @@ fun Verses(
 
                 Text(
                     text = chapter.chapterContent[id].verseName,
+                    modifier = Modifier.align(alignment = Alignment.CenterVertically),
                     color = Color(0xFFFD950E),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
@@ -294,8 +280,6 @@ fun Verses(
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.padding(5.dp))
 
             Column(
                 modifier = Modifier
