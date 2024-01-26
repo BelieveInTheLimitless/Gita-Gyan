@@ -15,7 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -41,7 +40,7 @@ import com.example.gitagyan.R
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
-import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.AppScreens
 import com.example.gitagyan.screens.components.TopBar
 import com.example.gitagyan.screens.favourite.FavouriteViewModel
 import com.example.gitagyan.screens.home.VerseScreen
@@ -97,7 +96,6 @@ fun SearchNavHost(rootNavController: NavController, favouriteViewModel: Favourit
 
 }
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
     Column(modifier = Modifier
@@ -112,7 +110,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.krishna_arjuna),
+                painter = painterResource(id = R.drawable.main_icon),
                 contentDescription = "Main Image",
                 modifier = Modifier
                     .padding(top = 50.dp, start = 50.dp, end = 50.dp)

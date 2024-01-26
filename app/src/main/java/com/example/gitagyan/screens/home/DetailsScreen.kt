@@ -30,22 +30,23 @@ import com.example.gitagyan.data.content.Chapter
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
-import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.AppScreens
 
 
 @Composable
 fun DetailsScreen(navController: NavController, chapterId: String?){
     val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
     if (chapterId != null) {
-        Details(chapter = chapters[chapterId.toInt()-1]){ chapterId, verseId ->
-            navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.toInt()-1}" + "/$verseId" + "/${true}")
+        Details(chapter = chapters[chapterId.toInt()-1]){ currentChapterId, currentVerseId ->
+            navController.navigate(route = AppScreens.VerseScreen.name + "/${currentChapterId.toInt()-1}" + "/$currentVerseId" + "/${true}")
         }
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
+fun Details(chapter: Chapter,
+            onItemClick: (String, String) -> Unit){
     Column(modifier = Modifier
         .padding(15.dp)
         .fillMaxSize()
@@ -59,7 +60,7 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.krishna_arjuna),
+                painter = painterResource(id = R.drawable.main_icon),
                 contentDescription = "Main Image",
                 modifier = Modifier
                     .padding(top = 50.dp, start = 50.dp, end = 50.dp)
@@ -96,7 +97,7 @@ fun Details(chapter: Chapter, onItemClick: (String, String) -> Unit){
             Card(modifier = Modifier
                 .padding(5.dp)
                 .clickable {
-                    onItemClick(chapter.chapterId, "0")
+                        onItemClick(chapter.chapterId, "0")
                 },
                 shape = RoundedCornerShape(corner = CornerSize(15.dp)),
                 backgroundColor = Color(0xFFFD950E),

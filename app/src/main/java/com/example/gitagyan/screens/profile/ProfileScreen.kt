@@ -91,7 +91,7 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.krishna_arjuna),
+                painter = painterResource(id = R.drawable.main_icon),
                 contentDescription = "Main Image",
                 modifier = Modifier
                     .padding(top = 50.dp, start = 50.dp, end = 50.dp)

@@ -6,6 +6,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Surface
@@ -26,7 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gitagyan.R
 import com.example.gitagyan.model.Languages
-import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.AppScreens
 import com.example.gitagyan.screens.components.AppNavigation
 import kotlinx.coroutines.delay
 
@@ -62,13 +63,17 @@ fun SplashNavHost() {
                 Column(modifier = Modifier.scale(scale.value),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center) {
-                    Image(painter = painterResource(id = R.drawable.photo3), contentDescription = "splash screen icon",
-                        modifier = Modifier.size(125.dp)
+                    Image(painter = painterResource(id = R.drawable.gita_icon),
+                        contentDescription = "splash screen icon",
+                        modifier = Modifier
+                            .size(100.dp)
+                            .aspectRatio(661f / 377f)
                     )
                     Text(
                         text = if (Languages.selectedLanguage == "English")  "Gita Gyan" else "गीता ज्ञान",
-                        fontFamily = FontFamily.Cursive,
-                        fontWeight = FontWeight.ExtraBold
+                        color = Color.White,
+                        fontWeight = FontWeight.Medium,
+                        fontFamily = FontFamily.Default
                     )
                 }
             }
