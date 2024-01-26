@@ -1,6 +1,5 @@
 package com.example.gitagyan.screens.home
 
-import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
@@ -14,8 +13,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowRight
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.*
@@ -41,29 +40,39 @@ import com.example.gitagyan.screens.favourite.FavouriteViewModel
 
 @Composable
 fun VerseScreen(favouriteViewModel: FavouriteViewModel = hiltViewModel(),
+                currentVerseViewModel: CurrentVerseViewModel = hiltViewModel(),
                 chapterId: String?,
                 verseId: String?,
                 isMainScreen: Boolean?) {
 
     val chapters = if (Languages.selectedLanguage == "English") getEnglishChapters() else getHindiChapters()
 
-    if (chapterId != null) {
-        if (verseId != null) {
-            Verses(favouriteViewModel, chapter = chapters[chapterId.toInt()],
-                verseId = verseId,
-                isMainScreen = isMainScreen
-            )
-        }
+    val currentVerseList = currentVerseViewModel.currentVerseList.collectAsState().value
+
+    if(currentVerseList.isNotEmpty() && currentVerseList[0].chapterId-1 == chapterId?.toInt()){
+        Verses(favouriteViewModel = favouriteViewModel,
+            currentVerseViewModel = currentVerseViewModel,
+            chapter = chapters[chapterId.toInt()],
+            verseId = (currentVerseList[0].verseId-1).toString(),
+            isMainScreen = isMainScreen
+        )
+    }
+    else{
+        Verses(favouriteViewModel = favouriteViewModel,
+            currentVerseViewModel = currentVerseViewModel,
+            chapter = chapters[chapterId!!.toInt()],
+            verseId = verseId!!,
+            isMainScreen = isMainScreen
+        )
     }
 }
 
 
 @OptIn(ExperimentalFoundationApi::class)
-@SuppressLint("UnrememberedMutableState")
 @Composable
 fun Verses(
-    favouriteViewModel: FavouriteViewModel = hiltViewModel(),
-    currentVerseViewModel: CurrentVerseViewModel = hiltViewModel(),
+    favouriteViewModel: FavouriteViewModel,
+    currentVerseViewModel: CurrentVerseViewModel,
     chapter: Chapter,
     verseId: String,
     isMainScreen: Boolean?) {
@@ -111,11 +120,11 @@ fun Verses(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                painter = painterResource(id = R.drawable.krishna_arjuna),
+                painter = painterResource(id = R.drawable.main_icon),
                 contentDescription = "Main Image",
                 modifier = Modifier
                     .padding(top = 50.dp, start = 50.dp, end = 50.dp)
-                    .aspectRatio(640.dp/640.dp),
+                    .aspectRatio(640.dp / 640.dp),
                 contentScale = ContentScale.FillWidth
             )
 
@@ -155,7 +164,7 @@ fun Verses(
                         elevation = 5.dp
                     ) {
                         Icon(
-                            imageVector = Icons.Default.KeyboardArrowLeft,
+                            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                             contentDescription = null
                         )
                     }
@@ -165,13 +174,14 @@ fun Verses(
                             .size(35.dp)
                             .clickable(onClick = {
                                 id -= 1
-                                if (isMainScreen == true){
-                                    if (currentVerseList.isEmpty()){
+                                if (isMainScreen == true) {
+                                    if (currentVerseList.isEmpty()) {
                                         currentVerseViewModel.deleteAllCurrentVerses()
                                         currentVerseViewModel.insertCurrentVerse(
                                             CurrentVerse(
                                                 chapterId = chapter.chapterId.toInt(),
-                                                verseId = id + 1)
+                                                verseId = id + 1
+                                            )
                                         )
                                     }
                                 }
@@ -182,7 +192,7 @@ fun Verses(
                         elevation = 5.dp
                     ) {
                         Icon(
-                            imageVector = Icons.Default.KeyboardArrowLeft,
+                            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                             contentDescription = null
                         )
                     }
@@ -206,7 +216,7 @@ fun Verses(
                         elevation = 5.dp
                     ) {
                         Icon(
-                            imageVector = Icons.Default.KeyboardArrowRight,
+                            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                             contentDescription = null
                         )
                     }
@@ -216,13 +226,14 @@ fun Verses(
                             .size(35.dp)
                             .clickable(onClick = {
                                 id += 1
-                                if (isMainScreen == true){
-                                    if (currentVerseList.isEmpty()){
+                                if (isMainScreen == true) {
+                                    if (currentVerseList.isEmpty()) {
                                         currentVerseViewModel.deleteAllCurrentVerses()
                                         currentVerseViewModel.insertCurrentVerse(
                                             CurrentVerse(
                                                 chapterId = chapter.chapterId.toInt(),
-                                                verseId = id + 1)
+                                                verseId = id + 1
+                                            )
                                         )
                                     }
                                 }
@@ -233,7 +244,7 @@ fun Verses(
                         elevation = 5.dp
                     ) {
                         Icon(
-                            imageVector = Icons.Default.KeyboardArrowRight,
+                            imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
                             contentDescription = null
                         )
                     }
