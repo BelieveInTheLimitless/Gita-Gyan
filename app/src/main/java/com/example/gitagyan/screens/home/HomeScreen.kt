@@ -220,6 +220,7 @@ fun ChapterRow(
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,
+                lineHeight = 25.sp,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = if(expanded) 5 else 1,
                 style = MaterialTheme.typography.caption
@@ -242,6 +243,7 @@ fun ChapterRow(
                         modifier = Modifier.padding(5.dp),
                         color = Color.White,
                         fontSize = 15.sp,
+                        lineHeight = 17.sp,
                         style = MaterialTheme.typography.caption,
                         textAlign = TextAlign.Justify)
                 }

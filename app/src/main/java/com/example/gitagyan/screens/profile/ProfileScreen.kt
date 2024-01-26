@@ -13,16 +13,16 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.ListItemDefaults.containerColor
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -175,7 +175,7 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                     text = if (Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishContent else TheGreatnessOfTheGIta.hindiContent,
                     modifier = Modifier.padding(5.dp),
                     fontSize = 15.sp,
-                    style = androidx.compose.material.MaterialTheme.typography.caption,
+                    style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Justify
                 )
             }

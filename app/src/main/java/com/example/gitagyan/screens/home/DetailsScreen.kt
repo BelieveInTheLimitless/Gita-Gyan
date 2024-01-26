@@ -123,6 +123,7 @@ fun Details(chapter: Chapter,
                 Text(
                     text = chapter.description,
                     fontSize = 15.sp,
+                    lineHeight = 17.sp,
                     style = MaterialTheme.typography.caption,
                     textAlign = TextAlign.Justify
                 )

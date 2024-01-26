@@ -308,6 +308,7 @@ fun Verses(
                     color = Color.Black,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W600,
+                    lineHeight = 25.sp,
                     style = MaterialTheme.typography.caption,
                     textAlign = TextAlign.Center
                 )
@@ -317,6 +318,7 @@ fun Verses(
                     color = Color.Black,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.W400,
+                    lineHeight = 20.sp,
                     style = MaterialTheme.typography.caption,
                     textAlign = TextAlign.Center
                 )
