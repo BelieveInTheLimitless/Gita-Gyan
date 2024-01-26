@@ -1,6 +1,5 @@
 package com.example.gitagyan.screens.home
 
-import android.annotation.SuppressLint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -42,11 +41,10 @@ import com.example.gitagyan.data.content.Chapter
 import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
-import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.AppScreens
 import com.example.gitagyan.screens.components.TopBar
 import com.example.gitagyan.screens.favourite.FavouriteViewModel
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HomeNavHost(favouriteViewModel: FavouriteViewModel = hiltViewModel()) {
 
@@ -137,7 +135,7 @@ fun MainContent(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.Start
                     ) {
-                        Image(painter = painterResource(id = R.drawable.krishna_arjuna),
+                        Image(painter = painterResource(id = R.drawable.main_icon),
                             contentDescription = "Home Screen Image ",
                             modifier = Modifier
                                 .aspectRatio(640.dp / 640.dp)

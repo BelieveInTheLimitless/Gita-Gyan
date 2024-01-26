@@ -24,7 +24,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.gitagyan.model.Languages
-import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.AppScreens
 import com.example.gitagyan.screens.profile.LanguageViewModel
 
 @Composable

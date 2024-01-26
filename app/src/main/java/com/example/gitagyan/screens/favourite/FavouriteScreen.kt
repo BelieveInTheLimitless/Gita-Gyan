@@ -45,10 +45,9 @@ import com.example.gitagyan.model.Languages
 import com.example.gitagyan.data.content.english.getEnglishChapters
 import com.example.gitagyan.data.content.hindi.getHindiChapters
 import com.example.gitagyan.model.Favourite
-import com.example.gitagyan.navigation.AppScreens
+import com.example.gitagyan.screens.AppScreens
 import com.example.gitagyan.screens.components.TopBar
 import com.example.gitagyan.screens.home.VerseScreen
-
 
 @Composable
 fun FavouriteNavHost(rootNavController: NavController, favouriteViewModel: FavouriteViewModel = hiltViewModel()) {

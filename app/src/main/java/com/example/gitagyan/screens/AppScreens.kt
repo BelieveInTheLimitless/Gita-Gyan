@@ -1,4 +1,4 @@
-package com.example.gitagyan.navigation
+package com.example.gitagyan.screens
 
 enum class AppScreens {
     SplashScreen,
