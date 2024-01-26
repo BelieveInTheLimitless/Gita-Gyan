@@ -18,11 +18,9 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
-import androidx.compose.material3.ListItemDefaults.containerColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +32,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -109,7 +108,7 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                 modifier = Modifier.padding(10.dp),
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Medium,
-                fontFamily = FontFamily.Serif,
+                fontFamily = FontFamily.Default,
                 style = MaterialTheme.typography.titleMedium
             )
 
@@ -124,28 +123,33 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                     onValueChange = {
                         Languages.selectedLanguage = it
                     },
-                    modifier = Modifier.menuAnchor(),
+                    modifier = Modifier
+                        .menuAnchor(),
                     readOnly = true,
+                    textStyle = TextStyle(color = Color.White, fontSize = 15.sp),
                     trailingIcon = {
                         ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
                     },
-                    colors = TextFieldDefaults.colors(
-                        focusedContainerColor = containerColor,
-                        unfocusedContainerColor = containerColor,
-                        disabledContainerColor = containerColor,
-                    )
+                    shape = RoundedCornerShape(size = 15.dp),
+                    colors = ExposedDropdownMenuDefaults
+                        .outlinedTextFieldColors(focusedTextColor = Color.White, unfocusedTextColor = Color.White,
+                            focusedContainerColor = Color(0xFFFD950E), unfocusedContainerColor = Color(0xFFFD950E),
+                            focusedBorderColor = Color.White, unfocusedBorderColor = Color.White,
+                            focusedTrailingIconColor = Color.White, unfocusedTrailingIconColor = Color.White,
+
+                        )
                 )
                 ExposedDropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
                     modifier = Modifier
                         .background(
-                            Color(0xFFFFFFFF)
+                            Color(0xFFFD950E)
                         )
                 ) {
                     languages.forEach { item ->
                         DropdownMenuItem(
-                            text = { Text(text = item, color = Color.Black, fontSize = 15.sp) },
+                            text = { Text(text = item, color = Color.White, fontSize = 15.sp) },
                             onClick = {
                                 Languages.selectedLanguage = item
                                 expanded = false
