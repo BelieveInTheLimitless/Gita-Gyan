@@ -16,19 +16,21 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavType
@@ -141,6 +143,8 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
 
             val context = LocalContext.current
 
+            val localFocusManager = LocalFocusManager.current
+
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
@@ -159,7 +163,6 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                     modifier = Modifier.padding(top = 10.dp),
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Medium,
-                    fontFamily = FontFamily.Serif,
                     style = MaterialTheme.typography.titleMedium
                 )
 
@@ -170,12 +173,12 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                     onAction = KeyboardActions {
                         if (!chapterValidState) return@KeyboardActions
                         onValChange(chapterId.value.trim())
-                        keyboardController?.hide()
+                        localFocusManager.moveFocus(focusDirection = FocusDirection.Down)
                     }
                 )
 
                 if (chapterId.value.isNotEmpty()) {
-                    if (chapterId.value.toInt() > 0 && (chapterId.value.toInt() <= 18)) {
+                    if (chapterId.value.isDigitsOnly() && chapterId.value.toInt() > 0 && (chapterId.value.toInt() <= 18)) {
                         InputField(valueState = verseId,
                             labelId = enterVerseLanguage,
                             enabled = true,
@@ -196,7 +199,7 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                 }
 
                 if (verseId.value.isNotEmpty()) {
-                    if ((verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt() - 1].chapterContent.size)) {
+                    if (verseId.value.isDigitsOnly() && (verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt() - 1].chapterContent.size)) {
                         Button(
                             onClick = {
                                 navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value.toInt() - 1}" + "/${verseId.value.toInt() - 1}" + "/${false}")
