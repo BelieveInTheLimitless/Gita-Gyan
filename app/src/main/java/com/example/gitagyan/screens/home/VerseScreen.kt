@@ -142,7 +142,7 @@ fun Verses(
                 if (id == 0) {
                     Card(
                         modifier = Modifier
-                            .size(35.dp),
+                            .size(40.dp),
                         shape = RoundedCornerShape(corner = CornerSize(35.dp)),
                         backgroundColor = Color.White,
                         contentColor = Color.LightGray,
@@ -156,7 +156,7 @@ fun Verses(
                 } else {
                     Card(
                         modifier = Modifier
-                            .size(35.dp)
+                            .size(40.dp)
                             .clickable(onClick = {
                                 id -= 1
                                 if (isMainScreen == true) {
@@ -195,7 +195,7 @@ fun Verses(
                 if (id == chapter.chapterContent.size - 1) {
                     Card(
                         modifier = Modifier
-                            .size(35.dp),
+                            .size(40.dp),
                         shape = RoundedCornerShape(corner = CornerSize(35.dp)),
                         backgroundColor = Color.White,
                         contentColor = Color.LightGray,
@@ -209,7 +209,7 @@ fun Verses(
                 } else {
                     Card(
                         modifier = Modifier
-                            .size(35.dp)
+                            .size(40.dp)
                             .clickable(onClick = {
                                 id += 1
                                 if (isMainScreen == true) {

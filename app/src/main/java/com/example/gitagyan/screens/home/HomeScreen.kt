@@ -136,7 +136,7 @@ fun MainContent(
                         horizontalAlignment = Alignment.Start
                     ) {
                         Image(painter = painterResource(id = R.drawable.main_icon),
-                            contentDescription = "Home Screen Image ",
+                            contentDescription = "Home Screen Image",
                             modifier = Modifier
                                 .aspectRatio(640.dp / 640.dp)
                                 .clip(RoundedCornerShape(20.dp)),
@@ -211,6 +211,7 @@ fun ChapterRow(
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = chapter.chapter,
+                modifier = Modifier.padding(5.dp),
                 color = Color(0xFFFFFFFF),
                 fontSize = 15.sp,
                 style = MaterialTheme.typography.caption
@@ -253,7 +254,7 @@ fun ChapterRow(
                 else Icons.Filled.KeyboardArrowDown,
                 contentDescription = "Down Arrow",
                 modifier = Modifier
-                    .size(25.dp)
+                    .size(30.dp)
                     .clickable {
                         expanded = !expanded
                     },
