@@ -106,10 +106,10 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
             Text(
                 text = selectionLanguage,
                 modifier = Modifier.padding(10.dp),
-                fontSize = 20.sp,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.Medium,
                 fontFamily = FontFamily.Default,
-                style = MaterialTheme.typography.titleMedium
+                style = MaterialTheme.typography.titleLarge
             )
 
             ExposedDropdownMenuBox(
@@ -149,7 +149,14 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
                 ) {
                     languages.forEach { item ->
                         DropdownMenuItem(
-                            text = { Text(text = item, color = Color.White, fontSize = 15.sp) },
+                            text = {
+                                Text(
+                                    text = item,
+                                    color = Color.White,
+                                    fontSize = 15.sp,
+                                    style = MaterialTheme.typography.displaySmall
+                                )
+                                   },
                             onClick = {
                                 Languages.selectedLanguage = item
                                 expanded = false
@@ -170,17 +177,20 @@ fun Profile(languageViewModel: LanguageViewModel = hiltViewModel()){
             Column(modifier = Modifier
                 .padding(5.dp)
                 .verticalScroll(state = ScrollState(0)),
-                horizontalAlignment = Alignment.CenterHorizontally) {
+                horizontalAlignment = Alignment.CenterHorizontally)
+            {
                 Text(text = if(Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishTitle else TheGreatnessOfTheGIta.hindiTitle,
                     fontSize = 20.sp,
-                    style = MaterialTheme.typography.titleMedium,
-                    textAlign = TextAlign.Center)
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium)
+
                 Text(
                     text = if (Languages.selectedLanguage == "English") TheGreatnessOfTheGIta.englishContent else TheGreatnessOfTheGIta.hindiContent,
                     modifier = Modifier.padding(5.dp),
-                    fontSize = 15.sp,
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Justify
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Justify,
+                    lineHeight = 20.sp,
+                    style = MaterialTheme.typography.displaySmall
                 )
             }
         }

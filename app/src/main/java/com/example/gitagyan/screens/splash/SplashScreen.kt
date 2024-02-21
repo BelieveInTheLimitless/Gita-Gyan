@@ -9,8 +9,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
@@ -19,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -55,11 +55,9 @@ fun SplashNavHost() {
                 navController.navigate(AppScreens.AppNavigation.name)
             })
 
-            Surface(
-                modifier = Modifier
-                    .fillMaxSize(),
-                color = Color(0xFFFD950E)
-            ) {
+            Surface(modifier = Modifier
+                .fillMaxSize(),
+                color = Color(0xFFFD950E)) {
                 Column(modifier = Modifier.scale(scale.value),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center) {
@@ -69,11 +67,11 @@ fun SplashNavHost() {
                             .size(100.dp)
                             .aspectRatio(661f / 377f)
                     )
-                    Text(
-                        text = if (Languages.selectedLanguage == "English")  "Gita Gyan" else "गीता ज्ञान",
+
+                    Text(text = if (Languages.selectedLanguage == "English")  "Gita Gyan" else "गीता ज्ञान",
                         color = Color.White,
                         fontWeight = FontWeight.Medium,
-                        fontFamily = FontFamily.Default
+                        style = MaterialTheme.typography.titleMedium
                     )
                 }
             }

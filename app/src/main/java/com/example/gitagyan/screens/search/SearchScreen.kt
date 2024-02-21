@@ -3,16 +3,19 @@ package com.example.gitagyan.screens.search
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -161,9 +164,9 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
                 Text(
                     text = searchLanguage,
                     modifier = Modifier.padding(top = 10.dp),
-                    fontSize = 20.sp,
+                    fontSize = 22.sp,
                     fontWeight = FontWeight.Medium,
-                    style = MaterialTheme.typography.titleMedium
+                    style = MaterialTheme.typography.titleLarge
                 )
 
                 InputField(valueState = chapterId,
@@ -200,23 +203,25 @@ fun Search(navController : NavController, onValChange: (String) -> Unit = {}){
 
                 if (verseId.value.isNotEmpty()) {
                     if (verseId.value.isDigitsOnly() && (verseId.value.toInt() > 0) && (verseId.value.toInt() <= chapters[chapterId.value.toInt() - 1].chapterContent.size)) {
-                        Button(
-                            onClick = {
-                                navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value.toInt() - 1}" + "/${verseId.value.toInt() - 1}" + "/${false}")
-                            },
+                        Card(modifier = Modifier
+                            .padding(5.dp)
+                            .clickable(
+                                onClick = {
+                                    navController.navigate(route = AppScreens.VerseScreen.name + "/${chapterId.value.toInt() - 1}" + "/${verseId.value.toInt() - 1}" + "/${false}")
+                                },
+                                onClickLabel = "Search"
+                            ),
                             shape = RoundedCornerShape(corner = CornerSize(15.dp)),
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(
-                                    0xFFFD950E
-                                )
-                            )
-                        ) {
+                            colors = CardDefaults.cardColors(containerColor = Color(0xFFFD950E), contentColor = Color.White))
+                        {
                             Text(
                                 text = proceedLanguage,
-                                modifier = Modifier.padding(3.dp),
+                                modifier = Modifier.padding(10.dp),
                                 color = Color.White,
+                                fontSize = 16.sp,
                                 fontWeight = FontWeight.SemiBold,
-                                textAlign = TextAlign.Center
+                                textAlign = TextAlign.Center,
+                                style = MaterialTheme.typography.titleMedium
                             )
                         }
                     } else {
@@ -256,14 +261,15 @@ fun InputField(
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType, imeAction = imeAction),
         keyboardActions = onAction,
         shape = RoundedCornerShape(15.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            textColor = Color.Black,
+        colors = OutlinedTextFieldDefaults.colors(
+            focusedTextColor = Color.Black,
             disabledTextColor = Color.Black,
-            unfocusedLabelColor = Color.Black,
+            focusedBorderColor = Color(0xFFFD950E),
             unfocusedBorderColor = Color(0xFFFD950E),
             focusedLabelColor = Color.Black,
-            focusedBorderColor = Color(0xFFFD950E),
-            placeholderColor = Color.Black,
-            disabledPlaceholderColor = Color.Black)
+            unfocusedLabelColor = Color.Black,
+            focusedPlaceholderColor = Color.Black,
+            disabledPlaceholderColor = Color.Black,
+        )
     )
 }

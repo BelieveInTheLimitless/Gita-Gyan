@@ -9,12 +9,17 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,7 +52,7 @@ fun VerseScreen(favouriteViewModel: FavouriteViewModel = hiltViewModel(),
 
     val currentVerseList = currentVerseViewModel.currentVerseList.collectAsState().value
 
-    if(currentVerseList.isNotEmpty() && currentVerseList[0].chapterId-1 == chapterId?.toInt()){
+    if(isMainScreen == true && currentVerseList.isNotEmpty() && currentVerseList[0].chapterId-1 == chapterId?.toInt()){
         Verses(favouriteViewModel = favouriteViewModel,
             currentVerseViewModel = currentVerseViewModel,
             chapter = chapters[chapterId.toInt()],
@@ -129,9 +134,9 @@ fun Verses(
             Text(
                 text = chapter.chapter,
                 color = Color(0xFFFD950E),
-                fontSize = 15.sp,
+                fontSize = 17.sp,
                 fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.caption
+                style = MaterialTheme.typography.titleMedium
             )
             Row(
                 modifier = Modifier
@@ -144,13 +149,13 @@ fun Verses(
                         modifier = Modifier
                             .size(40.dp),
                         shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                        backgroundColor = Color.White,
-                        contentColor = Color.LightGray,
-                        elevation = 5.dp
+                        colors = CardDefaults.cardColors(containerColor = Color.White, contentColor = Color.LightGray),
+                        elevation = CardDefaults.cardElevation(5.dp)
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize()
                         )
                     }
                 } else {
@@ -172,13 +177,13 @@ fun Verses(
                                 }
                             }),
                         shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                        backgroundColor = Color.White,
-                        contentColor = Color.Black,
-                        elevation = 5.dp
+                        colors = CardDefaults.cardColors(containerColor = Color.White, contentColor = Color.Black),
+                        elevation = CardDefaults.cardElevation(5.dp)
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft,
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize()
                         )
                     }
                 }
@@ -189,7 +194,7 @@ fun Verses(
                     color = Color(0xFFFD950E),
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.titleMedium
                 )
 
                 if (id == chapter.chapterContent.size - 1) {
@@ -197,13 +202,13 @@ fun Verses(
                         modifier = Modifier
                             .size(40.dp),
                         shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                        backgroundColor = Color.White,
-                        contentColor = Color.LightGray,
-                        elevation = 5.dp
+                        colors = CardDefaults.cardColors(containerColor = Color.White, contentColor = Color.LightGray),
+                        elevation = CardDefaults.cardElevation(5.dp)
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize()
                         )
                     }
                 } else {
@@ -225,13 +230,13 @@ fun Verses(
                                 }
                             }),
                         shape = RoundedCornerShape(corner = CornerSize(35.dp)),
-                        backgroundColor = Color.White,
-                        contentColor = Color.Black,
-                        elevation = 5.dp
+                        colors = CardDefaults.cardColors(containerColor = Color.White, contentColor = Color.Black),
+                        elevation = CardDefaults.cardElevation(5.dp)
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier.fillMaxSize()
                         )
                     }
                 }
@@ -293,7 +298,7 @@ fun Verses(
                     fontSize = 18.sp,
                     fontWeight = FontWeight.W600,
                     lineHeight = 25.sp,
-                    style = MaterialTheme.typography.caption,
+                    style = MaterialTheme.typography.displayMedium,
                     textAlign = TextAlign.Center
                 )
 
@@ -302,8 +307,8 @@ fun Verses(
                     color = Color.Black,
                     fontSize = 17.sp,
                     fontWeight = FontWeight.W400,
-                    lineHeight = 20.sp,
-                    style = MaterialTheme.typography.caption,
+                    lineHeight = 25.sp,
+                    style = MaterialTheme.typography.displayMedium,
                     textAlign = TextAlign.Center
                 )
             }

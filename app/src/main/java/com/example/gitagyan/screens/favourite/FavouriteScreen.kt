@@ -15,13 +15,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
@@ -114,9 +115,9 @@ fun FavouriteVerseContent(navController: NavController,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = if (Languages.selectedLanguage == "English") "Favourites list empty" else "पसंदीदा सूची खाली",
-                fontWeight = FontWeight.W400,
+                fontWeight = FontWeight.SemiBold,
                 fontSize = 20.sp,
-                style = MaterialTheme.typography.caption,
+                style = MaterialTheme.typography.titleMedium,
             )
         }
     }
@@ -156,9 +157,8 @@ fun VerseItem(
             )
         },
         shape = RoundedCornerShape(corner = CornerSize(20.dp)),
-        backgroundColor = Color(0xFFFD950E),
-        contentColor = Color.Black,
-        elevation = 5.dp) {
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFD950E), contentColor = Color.Black),
+        elevation = CardDefaults.cardElevation(5.dp)) {
         Row(modifier = Modifier
             .padding(10.dp)
             .fillMaxSize(),
@@ -177,22 +177,20 @@ fun VerseItem(
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 20.sp,
-                    style = MaterialTheme.typography.caption,
+                    style = MaterialTheme.typography.titleMedium,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
                 Text(
                     text = chapters[favourite.chapterId-1].chapter,
                     color = Color.White,
-                    fontWeight = FontWeight.W400,
-                    fontSize = 15.sp,
-                    style = MaterialTheme.typography.caption
+                    fontSize = 17.sp,
+                    style = MaterialTheme.typography.titleMedium
                 )
                 Text(
                     text = chapters[favourite.chapterId-1].chapterContent[favourite.verseId-1].verseName,
-                    fontWeight = FontWeight.W400,
-                    fontSize = 15.sp,
-                    style = MaterialTheme.typography.caption,
+                    fontSize = 17.sp,
+                    style = MaterialTheme.typography.titleMedium,
                     color = Color.White
                 )
             }

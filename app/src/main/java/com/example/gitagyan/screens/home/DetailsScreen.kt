@@ -10,7 +10,11 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,7 +68,7 @@ fun Details(chapter: Chapter,
                 contentDescription = "Main Image",
                 modifier = Modifier
                     .padding(top = 50.dp, start = 50.dp, end = 50.dp)
-                    .aspectRatio(640.dp/640.dp),
+                    .aspectRatio(640.dp / 640.dp),
                 contentScale = ContentScale.FillWidth
             )
 
@@ -73,9 +77,9 @@ fun Details(chapter: Chapter,
             Text(
                 text = chapter.chapter,
                 color = Color(0xFFFD950E),
-                fontSize = 15.sp,
+                fontSize = 17.sp,
                 fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.caption
+                style = MaterialTheme.typography.titleMedium
             )
             Text(
                 text = chapter.chapterName,
@@ -85,11 +89,11 @@ fun Details(chapter: Chapter,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center,
                 maxLines = 1,
-                style = MaterialTheme.typography.caption
+                style = MaterialTheme.typography.titleMedium
             )
             Text(buildAnnotatedString {
                 withStyle(style = SpanStyle(color = Color(0xFFFD950E),
-                    fontSize = 15.sp)){
+                    fontSize = 15.sp, fontWeight = FontWeight.SemiBold)){
                     append(chapter.totalVerses)
                 }
             }, modifier = Modifier.padding(5.dp))
@@ -97,18 +101,19 @@ fun Details(chapter: Chapter,
             Card(modifier = Modifier
                 .padding(5.dp)
                 .clickable {
-                        onItemClick(chapter.chapterId, "0")
+                    onItemClick(chapter.chapterId, "0")
                 },
                 shape = RoundedCornerShape(corner = CornerSize(15.dp)),
-                backgroundColor = Color(0xFFFD950E),
-                contentColor = Color.White) {
-
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFD950E), contentColor = Color.White))
+            {
                 val readingLanguage = if (Languages.selectedLanguage == "English") "Start Reading" else "पढ़ना शुरू करें"
 
                 Text(text = readingLanguage,
                     modifier = Modifier.padding(10.dp),
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium
                 )
             }
 
@@ -120,13 +125,13 @@ fun Details(chapter: Chapter,
                 .fillMaxWidth()
                 .verticalScroll(state = ScrollState(0)),
                 horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = chapter.description,
-                    fontSize = 15.sp,
-                    lineHeight = 17.sp,
-                    style = MaterialTheme.typography.caption,
-                    textAlign = TextAlign.Justify
-                )
+
+                Text(text = chapter.description,
+                    modifier = Modifier.padding(5.dp),
+                    fontSize = 16.sp,
+                    lineHeight = 20.sp,
+                    style = MaterialTheme.typography.displaySmall,
+                    textAlign = TextAlign.Justify)
             }
         }
     }

@@ -9,12 +9,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,6 +59,7 @@ fun HomeNavHost(favouriteViewModel: FavouriteViewModel = hiltViewModel()) {
     }
 
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
             TopBar(isHomeScreen = isMainScreen.value) {
                 homeNavController.popBackStack()
@@ -107,7 +112,7 @@ fun MainContent(
     currentVerseViewModel: CurrentVerseViewModel = hiltViewModel()
 ){
     Column(modifier = Modifier
-        .fillMaxSize()
+        .fillMaxWidth()
         .background(color = Color.White)
         .padding(3.dp),
         verticalArrangement = Arrangement.Top,
@@ -123,9 +128,8 @@ fun MainContent(
                     }
                 ),
                 shape = RoundedCornerShape(corner = CornerSize(20.dp)),
-                backgroundColor = Color(0xFFFD950E),
-                contentColor = Color.Black,
-                elevation = 5.dp) {
+                colors = CardDefaults.cardColors(containerColor = Color(0xFFFD950E), contentColor = Color.Black),
+                elevation = CardDefaults.cardElevation(5.dp)) {
                 Row(horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically){
                     Column(
@@ -155,29 +159,26 @@ fun MainContent(
                             color = Color(0xFFFFFFFF),
                             fontWeight = FontWeight.SemiBold,
                             fontSize = 20.sp,
-                            style = MaterialTheme.typography.caption,
-                            textAlign = TextAlign.Center
+                            style = MaterialTheme.typography.titleSmall
                         )
 
                         Text(
                             text = chapterList[currentVerse[0].chapterId - 1].chapter,
                             color = Color(0xFFFFFFFF),
                             fontSize = 18.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            style = MaterialTheme.typography.caption
+                            style = MaterialTheme.typography.titleSmall
                         )
                         Text(
                             text = chapterList[currentVerse[0].chapterId - 1].chapterContent[currentVerse[0].verseId - 1].verseName,
                             color = Color(0xFFFFFFFF),
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight.W400,
-                            style = MaterialTheme.typography.caption
+                            fontSize = 17.sp,
+                            style = MaterialTheme.typography.titleSmall
                         )
                     }
                 }
             }
         }
-        LazyColumn{
+        LazyColumn(modifier = Modifier.fillMaxWidth()){
             items(items = chapterList, key = {chapter -> chapter.chapterId}){
                 ChapterRow(chapter = it){ chapterId ->
                     navController.navigate(route = AppScreens.DetailsScreen.name + "/$chapterId")
@@ -195,7 +196,6 @@ fun ChapterRow(
     var expanded by remember{
         mutableStateOf(false)
     }
-
     Card(modifier = Modifier
         .padding(3.dp)
         .fillMaxWidth()
@@ -203,18 +203,21 @@ fun ChapterRow(
             onItemClick(chapter.chapterId)
         },
         shape = RoundedCornerShape(corner = CornerSize(20.dp)),
-        backgroundColor = Color(0xFFFD950E),
-        contentColor = Color.Black,
-        elevation = 5.dp) {
-        Column(modifier = Modifier.padding(10.dp),
+        colors = CardDefaults.cardColors(containerColor = Color(0xFFFD950E), contentColor = Color.Black),
+        elevation = CardDefaults.cardElevation(5.dp)
+    ) {
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally) {
             Text(
                 text = chapter.chapter,
                 modifier = Modifier.padding(5.dp),
                 color = Color(0xFFFFFFFF),
-                fontSize = 15.sp,
-                style = MaterialTheme.typography.caption
+                fontSize = 17.sp,
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleMedium
             )
             Text(text = chapter.chapterName,
                 color = Color(0xFFFFFFFF),
@@ -224,14 +227,15 @@ fun ChapterRow(
                 lineHeight = 25.sp,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = if(expanded) 5 else 1,
-                style = MaterialTheme.typography.caption
+                style = MaterialTheme.typography.titleMedium
             )
 
             AnimatedVisibility(visible = expanded) {
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Column(modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(buildAnnotatedString {
                         withStyle(style = SpanStyle(color = Color.White,
-                            fontSize = 15.sp)){
+                            fontSize = 15.sp, fontWeight = FontWeight.SemiBold)){
                             append(chapter.totalVerses)
                         }
                     },
@@ -243,10 +247,12 @@ fun ChapterRow(
                     Text(text = chapter.description,
                         modifier = Modifier.padding(5.dp),
                         color = Color.White,
-                        fontSize = 15.sp,
-                        lineHeight = 17.sp,
-                        style = MaterialTheme.typography.caption,
+                        fontSize = 16.sp,
+                        lineHeight = 20.sp,
+                        style = MaterialTheme.typography.displaySmall,
                         textAlign = TextAlign.Justify)
+
+
                 }
             }
             Icon(
